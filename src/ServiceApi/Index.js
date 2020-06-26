@@ -1,6 +1,6 @@
 import Axios from 'axios'
 
-const RoothPath = "http://localhost/pmb-amikompwt/server/api/"
+const RoothPath = "http://localhost/pmbamikompwt-server/api/"
 
 const GET = (path) => {
     const promise = new Promise((resolve,reject)=>{
