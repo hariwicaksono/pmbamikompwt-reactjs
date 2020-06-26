@@ -1,7 +1,7 @@
 import React,{Component} from 'react'
 import {Link,Redirect,NavLink} from 'react-router-dom'
 import API from '../../ServiceApi/Index'
-import { Container, Row, Col, Navbar, Nav, NavItem, Button} from 'react-bootstrap'
+import { Navbar, Nav, NavItem} from 'react-bootstrap'
 import { HouseDoorFill, GridFill, PersonFill } from 'react-bootstrap-icons'
 
 class Appbar extends Component{
@@ -10,7 +10,7 @@ class Appbar extends Component{
         this.state = {
             id: '',
             nama: ''
-            
+             
         }
     }
     componentDidMount = () => {
@@ -31,7 +31,7 @@ class Appbar extends Component{
             <div className="pt-4 mt-4">
               
               
-              <Navbar bg="light" fixed="bottom" sticky="bottom" style={{height:'60px'}}>
+              <Navbar id="appbar" bg="light" fixed="bottom" sticky="bottom" style={{height:'60px'}}>
               
               <Nav className="mx-auto text-center">
 
@@ -39,7 +39,7 @@ class Appbar extends Component{
                 <NavLink className="nav-link" to="/user" activeClassName="active" exact><HouseDoorFill size="20"/><br/>Home</NavLink>
               </NavItem>
               <NavItem className="navItem">
-                <NavLink className="nav-link" to="/about" activeClassName="active"><GridFill size="24"/><br/>Panduan</NavLink>
+                <NavLink className="nav-link" to="/about" activeClassName="active"><GridFill size="20"/><br/>Panduan</NavLink>
               </NavItem>
               
               <NavItem className="navItem">

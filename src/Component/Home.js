@@ -5,6 +5,8 @@ import Footer from './Footer'
 import Appbar from './Appbar'
 import TabsProdi from './TabsProdi'
 import SideButton from './SideButton'
+import LoginForm from './Form/LoginForm'
+import PeriksaForm from './Form/PeriksaForm'
 import API from '../ServiceApi/Index'
 import {Container, Form, Row, Col, Carousel, Button, Card} from 'react-bootstrap'
 import {PersonPlus, Search, BoxArrowRight} from 'react-bootstrap-icons'
@@ -118,28 +120,14 @@ class Home extends Component {
                         </Carousel.Item>
                     </Carousel>
                     
-                    <Row className="pt-2 pb-3">
+                    <Row className="pt-1 pb-3">
                     <Col md={7}>
                     <Card className="card-lift--hover shadow border-0 py-1">
                     <Card.Body>
                     <Card.Title><h4>Periksa Status Pendaftaran</h4></Card.Title>
-                    <Form onSubmit={this.handlerSubmit}>
+                   
+                    <PeriksaForm />
                     
-                    <Form.Group>
-                        <Form.Control type="text" name="username" placeholder="Nomor Pendaftaran" onChange={this.handlerChange} required/>
-                    </Form.Group>       
-                        
-                            
-                    <Form.Group>   
-                    <Button variant="success" type="submit" onSubmit={this.handlerSubmit} block>
-                           <Search /> Lihat Hasil
-                    </Button>
-                    <Link to="/register" className="btn btn-default btn-block"><PersonPlus /> Daftar Akun</Link>
-                    </Form.Group>
-                       
-                    </Form>
-                       
-                        
                     </Card.Body>
                     </Card>
                     
@@ -149,25 +137,10 @@ class Home extends Component {
 
                     <Card className="bg-secondary card-lift--hover shadow border-0 py-0">
                     <Card.Body>
-                    <Card.Title><h4>Login</h4></Card.Title>
-                    <Form onSubmit={this.handlerSubmit}>
-                    <input type="hidden" name="level" value="USER" />
-                       
-                    <Form.Group>
-                        <Form.Control type="text" name="username" placeholder="Username" onChange={this.handlerChange} required/>
-                    </Form.Group>       
-                            
-                    <Form.Group>      
-                    <Form.Control type="password" name="password" placeholder="Password" onChange={this.handlerChange} required/>                       
-                    </Form.Group>     
-                            
-                    <Form.Group>   
-                    <Button variant="primary" type="submit" onSubmit={this.handlerSubmit} block>
-                          <BoxArrowRight />  Masuk
-                    </Button>
-                    </Form.Group>
-                       
-                    </Form>
+                    <Card.Title>Masuk</Card.Title>
+
+                    <LoginForm />
+
                     </Card.Body>
                     </Card>
                    
@@ -185,7 +158,7 @@ class Home extends Component {
             <TabsProdi />      
 
             </section>
-                </Container>    
+            </Container>    
                
             <Footer />   
             <Appbar />

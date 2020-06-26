@@ -45,6 +45,7 @@ input.error {
   color: red;
 }
 .navbar{padding: 0.5rem 1rem; }
-.navbar-brand img{height:40px}
+.navbar-brand img{height:100%}
 .navbar-nav a.nav-link{font-size: 1.125rem;font-weight: 500;}
 .dropdown-menu a.dropdown-item{font-size: 1rem}
+#appbar .navbar-nav a.nav-link{font-size: .875rem;font-weight: 500;}
