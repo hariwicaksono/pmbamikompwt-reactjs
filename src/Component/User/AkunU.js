@@ -3,7 +3,12 @@ import NavbarU from './NavbarU'
 import { Link } from 'react-router-dom/cjs/react-router-dom.min'
 import API from '../../ServiceApi/Index'
 import AppbarU from './AppbarU'
+import ContentLoader from '../Layout/PageContentLoader'
+import { Helmet } from 'react-helmet'
+import { Container, Row, Col, Card } from 'react-bootstrap'
+import {Pencil} from 'react-bootstrap-icons'
 
+const TITLE = ' - PMB Universitas Amikom Purwokerto'
 class AkunU extends Component {
     constructor(props) {
         super(props)
@@ -28,35 +33,49 @@ class AkunU extends Component {
             this.setState({
                 id : res.username,
                 nama: res.nama,
-                alamat: res.alamat_user,
-                nohp: res.no_hp_user,
-                email: res.email_user,
-                foto: res.photo_user,
+                telp: res.telp,
+                email: res.email
+               
             })
         })
     }
     render() {
         return (
             <div>
+                <Helmet>
+                <title>{ 'Akun Saya' + TITLE }</title>
+                </Helmet>
                 <NavbarU />
-                <div className="container">
-                    <div className="col-md-4"></div>
-                    <div className="col-md-4">
-                        <div className="panel panel-info">
-                            <div className="panel-body">
-                                <h1>MY ACCOUNT</h1>
-                                <hr />
-                                <p><b>NAMA :</b> {this.state.nama}  </p>
-                                <p><b>ALAMAT :</b> {this.state.alamat}  </p>
-                                <p><b>NO HP :</b> {this.state.nohp}  </p>
-                                <p><b>EMAIL :</b> {this.state.email}  </p>
-                                <p><img src={'http://localhost/api_olsop_fix/server/asset/img/' + this.state.foto} width="250" height="200" alt="test" /></p>
-                                <Link className="btn btn-info" to={'/edituser/' + this.state.id} >EDIT</Link>
-                            </div>
-                        </div>
+                
+
+                <div className="my-3">
+                <Container>
+                <Card className="bg-white py-3 px-4 shadow">
+                  <h2>Akun Saya <Link className="btn btn-info float-right"  to={'/editakunU/' + this.state.id} ><Pencil size="16" /> Edit Profil</Link></h2>
+                    <div className="text-center pt-2">
+                        <a href="#" onClick={e => e.preventDefault()}>
+                          <img
+                            alt="..."
+                            className="rounded-circle"
+                            src={"https://indonesiadentalexpo.com/wp-content/uploads/2019/06/gravatar-60-grey.jpg"}
+                            width="150"
+                          />
+                        </a>
+                     
+                        <h1>{this.state.nama}</h1>
+                        <hr className="mt-2 mb-2" />
+                        <p><b>NAMA :</b> {this.state.nama}  </p>
+                        <p><b>NO HP :</b> {this.state.telp}  </p>
+                        <p><b>EMAIL :</b> {this.state.email}  </p>
+                        
+
                     </div>
+                </Card>
+                    
+                </Container>
                 </div>
-                <AppbarU/>
+           
+            <AppbarU/>
             </div>
         )
     }

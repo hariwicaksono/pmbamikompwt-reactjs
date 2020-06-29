@@ -5,12 +5,12 @@ import API from '../../ServiceApi/Index'
 import { Link } from 'react-router-dom/cjs/react-router-dom.min'
 import ContentLoader from '../../Component/Layout/PageContentLoader'
 import Parser from 'html-react-parser'
-import { Container } from 'react-bootstrap'
+import { Container,Card } from 'react-bootstrap'
 import { Helmet } from 'react-helmet'
 import Loader from 'react-loader'
-
+ 
 const TITLE = ' - PMB Universitas Amikom Purwokerto'
-var options = {
+/*var options = {
     lines: 13,
     length: 20,
     width: 10,
@@ -30,7 +30,7 @@ var options = {
     shadow: false,
     hwaccel: false,
     position: 'absolute'
-};
+};*/
 class Page extends Component {
     constructor(props){
         super(props)
@@ -66,30 +66,24 @@ class Page extends Component {
                 <title>{ Parser(this.state.judul_tupoksi) + TITLE }</title>
                 </Helmet>
                 <NavbarU />
-                 <Container>
+                <div className="my-3">
+                 <Container fluid>
+                 <Card className="bg-white shadow border-0">
+                    <Card.Body>
                     {
                         this.state.loading
                         ?
-                        <Loader options={options} className="spinner" />
+                        <ContentLoader />
                         :
-                       
-                        <div className="panel panel-info">
-                            <div className="panel-body">
+                            <div>
                                 <h1>{Parser(this.state.judul_tupoksi)}</h1>
-                                <hr/>
-                                {Parser(this.state.isi_tupoksi)}
-                                <Link className="btn btn-info disabled">BELI</Link>
-                                <hr/>
-                                <div className="alert alert-danger">
-                                    <p>YOU MUST BE LOGIN</p>
-                                </div>
+                                <>{Parser(this.state.isi_tupoksi)}</>
                             </div>
-                        </div>
-                        
-
                     }
-
+                    </Card.Body>
+                </Card>
                   </Container>  
+                  </div>
                 <AppbarU />
             </div>
         )

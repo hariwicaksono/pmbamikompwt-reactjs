@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import {Redirect,Link} from 'react-router-dom'
 import API from '../../ServiceApi/Index'
 import { NotificationManager } from 'react-notifications'
-import { FormGroup } from 'react-bootstrap'
+import { FormGroup, Spinner } from 'react-bootstrap'
+import {BoxArrowInRight} from 'react-bootstrap-icons'
 import Form from 'react-formal'
 import * as yup from 'yup'
 
@@ -18,7 +19,8 @@ class LoginForm extends Component {
             password: "",
             level: "USER",
             isLogin:false,
-            idLogin:""
+            idLogin:"",
+            loading: false
         }
         this.handlerChange = this.handlerChange.bind(this)
         this.handlerSubmit = this.handlerSubmit.bind(this)
@@ -33,12 +35,14 @@ class LoginForm extends Component {
     }
 
     handlerSubmit = () => {
-        //event.preventDefault()
+        this.setState({ loading: true });
         API.PostLogin(this.state).then(res=>{
+            setTimeout(() => {
             if (res.id === "1" ) {
                 sessionStorage.setItem('isLogin',JSON.stringify(res.data))
                 this.setState({
                     isLogin:true,
+                    loading: false,
                     idLogin:"1"
                 })
                 NotificationManager.success('Berhasil masuk sistem');
@@ -46,13 +50,16 @@ class LoginForm extends Component {
                 sessionStorage.setItem('isAdmin',JSON.stringify(res.data))
                 this.setState({
                     isLogin:true,
+                    loading: false,
                     idLogin:"2"
                 })
                 NotificationManager.success('Berhasil masuk sistem');
             } else {
                 NotificationManager.warning('Login gagal, periksa username dan password anda');
             }
+            }, 100);
         })
+        
     }
 
     
@@ -81,7 +88,12 @@ class LoginForm extends Component {
                         <Form.Field type="password" name="password" placeholder="Password" className="form-control" onChange={this.handlerChange} />
                         <Form.Message for="password" className="error" />
                     </FormGroup>
-                    <Form.Submit type="submit" className="btn btn-primary">Login</Form.Submit>
+                    <Form.Submit type="submit" className="btn btn-primary">
+                        {
+                        this.state.loading
+                        ?
+                        <><Spinner as="span" animation="border" size="sm"  role="status" aria-hidden="true" /> Memuat...</>
+                        :  <><BoxArrowInRight size="16"/> Login</> }</Form.Submit>
                 </Form>                              
   
             </div>

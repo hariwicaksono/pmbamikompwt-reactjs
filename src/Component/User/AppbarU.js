@@ -28,7 +28,7 @@ class Appbar extends Component{
   
         
         return(
-            <div className="pt-4 mt-4">
+            <div className="pt-5 mt-4">
               
               
               <Navbar id="appbar" bg="light" fixed="bottom" sticky="bottom" style={{height:'60px'}}>

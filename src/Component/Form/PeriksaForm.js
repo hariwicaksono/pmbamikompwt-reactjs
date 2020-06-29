@@ -3,7 +3,7 @@ import {Redirect,Link} from 'react-router-dom'
 import API from '../../ServiceApi/Index'
 import SearchResult from './SearchResult'
 import { NotificationManager } from 'react-notifications'
-import { FormGroup } from 'react-bootstrap'
+import { FormGroup, Spinner } from 'react-bootstrap'
 import {PersonPlus, Search} from 'react-bootstrap-icons'
 import Form from 'react-formal'
 import * as yup from 'yup'
@@ -16,13 +16,13 @@ class LoginForm extends Component {
         super(props)
         this.state = {
             query: '',
-            results: []
+            results: [],
+            loading: false
         }
         this.handlerChange = this.handlerChange.bind(this)
         this.handlerSubmit = this.handlerSubmit.bind(this)
         
     }
-
 
     handlerChange = (event) => {
         this.setState({
@@ -31,20 +31,19 @@ class LoginForm extends Component {
     }
 
     handlerSubmit = () => {
-        //event.preventDefault()
-        //console.log(event)
+        this.setState({ loading: true });
         const query=this.state.query
         API.CariOrang(query).then(res=>{
-            this.setState({
-              results: res
-            })
-          
+            setTimeout(() => this.setState({
+              results: res,
+              loading: false,
+            }), 100);
         })
+       
     }
 
     
     render() {
-    
 
         return (
             <div>
@@ -56,8 +55,14 @@ class LoginForm extends Component {
                         <Form.Message for="query" className="error" />
                     </FormGroup>
                     
-                    <Form.Submit type="submit" className="btn btn-success btn-block"><Search /> Lihat Hasil</Form.Submit>
-                    <Link to="/register" className="btn btn-default btn-block"><PersonPlus /> Daftar Akun</Link>
+                    <Form.Submit type="submit" className="btn btn-success btn-block">
+                    {
+                        this.state.loading
+                        ?
+                        <><Spinner as="span" animation="border" size="sm"  role="status" aria-hidden="true" /> Memuat...</>
+                        :   
+                    <><Search size="16" /> Lihat Hasil</>}</Form.Submit>
+                    <Link to="/register" className="btn btn-default btn-block"><PersonPlus size="16" /> Daftar Akun</Link>
                 </Form>   
                 
                 {this.state.results.length > 0 ? (
