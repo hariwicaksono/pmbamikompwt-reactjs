@@ -24,7 +24,7 @@ class Appbar extends Component{
                 <NavLink className="nav-link" to="/" activeClassName="active" exact><HouseDoorFill size="20"/><br/>Home</NavLink>
               </NavItem>
               <NavItem className="navItem">
-                <NavLink className="nav-link" to="/about" activeClassName="active"><GridFill size="20"/><br/>Panduan</NavLink>
+                <NavLink className="nav-link" to="/about" activeClassName="active"><GridFill size="20"/><br/>Petunjuk</NavLink>
               </NavItem>
               <NavItem className="navItem">
                 <NavLink className="nav-link" to="/register" activeClassName="active"><PersonPlusFill size="20"/><br/>Daftar</NavLink>

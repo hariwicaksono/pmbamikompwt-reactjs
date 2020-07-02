@@ -1,17 +1,18 @@
 import React, { Component } from 'react'
-import {Link} from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
 import Navbar from './Navbar'
 import Footer from './Footer'
 import Appbar from './Appbar'
+import LoginForm from './Form/LoginForm'
 import API from '../ServiceApi/Index'
 import { Helmet } from 'react-helmet'
 import { NotificationManager } from 'react-notifications'
 import {Container, FormLabel, FormGroup, Row, Col, Card} from 'react-bootstrap'
+import {Check2} from 'react-bootstrap-icons'
 import Form from 'react-formal'
 import * as yup from 'yup'
 
 const TITLE = ' Daftar - PMB Universitas Amikom Purwokerto'
-
 const schema = yup.object({
     nama: yup.string().required(),
     telp: yup.number().required(),
@@ -33,7 +34,7 @@ class Register extends Component {
             email:"",
             username:"",
             password:"",
-            //foto:"user.jpg",
+            level:"USER",
             err:""
         }
         this.handlerChange = this.handlerChange.bind(this)
@@ -63,6 +64,7 @@ class Register extends Component {
 
 
     render() {
+
     return (
     <div>
     <Helmet>
@@ -75,53 +77,53 @@ class Register extends Component {
         <Col md={8}>
         <Card className="bg-white shadow border-0">
                
-                    <Card.Body>
-                        <h4 className="mb-3"><strong>Daftar Akun</strong> <small>PMB Universitas AMIKOM Purwokerto</small></h4>
-                     
-                        <Form onSubmit={this.handlerSubmit} schema={schema} >
+            <Card.Body>
+                <h4 className="mb-3"><strong>Daftar Akun</strong> <small>PMB Universitas AMIKOM Purwokerto</small></h4>
+                
+                <Form onSubmit={this.handlerSubmit} schema={schema} >
 
-                            <FormGroup>
-                           
-                            <FormLabel>Nama Lengkap*</FormLabel>
-                                
-                                    <Form.Field className="form-control" placeholder="Username"
-                                    name="nama"
-                                    onChange={this.handlerChange} />
-                                    <Form.Message for="nama" className="error" />
-                                   
-                            </FormGroup>
-
-                            <Row>
-                            <FormGroup as={Col}>
-                                <FormLabel>Email*</FormLabel>
-                                <Form.Field type="text" placeholder="Email" name="email" className="form-control" onChange={this.handlerChange}/>
-                                <Form.Message for="email" className="error" />
-                            </FormGroup>
+                    <FormGroup>
+                    
+                    <FormLabel>Nama Lengkap*</FormLabel>
+                        
+                            <Form.Field className="form-control" placeholder="Username"
+                            name="nama"
+                            onChange={this.handlerChange} />
+                            <Form.Message for="nama" className="error" />
                             
-                            
-                            <FormGroup as={Col}>
-                                <FormLabel>Telp/HP*</FormLabel>
-                                <Form.Field type="text" placeholder="Telp/No.HP" name="telp" className="form-control" onChange={this.handlerChange} />
-                                <Form.Message for="telp" className="error" />
-                            </FormGroup>
-                            </Row>
+                    </FormGroup>
 
-                            <FormGroup>
-                                <FormLabel>Username*</FormLabel>
-                                <Form.Field type="text" placeholder="Username" name="username" className="form-control" onChange={this.handlerChange} />
-                                <Form.Message for="username" className="error" />
-                            </FormGroup>
-                            <FormGroup>
-                                <FormLabel>Password*</FormLabel>
-                                <Form.Field type="password" placeholder="Password" name="password" className="form-control" onChange={this.handlerChange} />
-                                <Form.Message for="password" className="error" />
-                            </FormGroup>
+                    <Row>
+                    <FormGroup as={Col}>
+                        <FormLabel>Email*</FormLabel>
+                        <Form.Field type="text" placeholder="Email" name="email" className="form-control" onChange={this.handlerChange}/>
+                        <Form.Message for="email" className="error" />
+                    </FormGroup>
+                    
+                    
+                    <FormGroup as={Col}>
+                        <FormLabel>Telp/HP*</FormLabel>
+                        <Form.Field type="text" placeholder="Telp/No.HP" name="telp" className="form-control" onChange={this.handlerChange} />
+                        <Form.Message for="telp" className="error" />
+                    </FormGroup>
+                    </Row>
 
-                            <Form.Submit type="submit" className="btn btn-primary">Daftar</Form.Submit>
-                        </Form>
-                     
-                       
-                    </Card.Body>
+                    <FormGroup>
+                        <FormLabel>Username*</FormLabel>
+                        <Form.Field type="text" placeholder="Username" name="username" className="form-control" onChange={this.handlerChange} />
+                        <Form.Message for="username" className="error" />
+                    </FormGroup>
+                    <FormGroup>
+                        <FormLabel>Password*</FormLabel>
+                        <Form.Field type="password" placeholder="Password" name="password" className="form-control" onChange={this.handlerChange} />
+                        <Form.Message for="password" className="error" />
+                    </FormGroup>
+
+                    <Form.Submit type="submit" className="btn btn-primary"><Check2 size="16"/> Daftar</Form.Submit>
+                </Form>
+                
+                
+            </Card.Body>
                
             </Card>
         </Col>
@@ -130,29 +132,9 @@ class Register extends Component {
         
         <Card className="bg-secondary shadow border-0">
                 
-                    <Card.Body>
-                    <h4 className="mb-3"><strong>Login</strong></h4>
-        <Form onSubmit={this.handlerSubmit} schema={schemaLog}>
-            <FormGroup>
-                <FormLabel>Username</FormLabel>
-                <Form.Field type="text" name="username" placeholder="Username" className="form-control" onChange={this.handlerChange} />
-                <Form.Message for="username" className="error" />
-            </FormGroup>
-            <FormGroup>
-                <FormLabel>Password</FormLabel>
-                <Form.Field type="password" name="password" placeholder="Password" className="form-control" onChange={this.handlerChange} />
-                <Form.Message for="password" className="error" />
-            </FormGroup>
-            <FormGroup>
-            <Form.Field as="select" name="level" className="form-control" onChange={this.handlerChange} >
-                    <option value={null}>Pilih</option>
-                    <option>USER</option>
-                    <option>ADMIN</option>
-            </Form.Field>
-            <Form.Message for="level" className="error" />
-            </FormGroup>
-            <Form.Submit type="submit" className="btn btn-primary">Masuk</Form.Submit>
-        </Form>
+        <Card.Body>
+            <h4 className="mb-3"><strong>Login</strong></h4>
+            <LoginForm/>
         </Card.Body>
       
         </Card> 
