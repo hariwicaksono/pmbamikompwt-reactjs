@@ -43,7 +43,7 @@ class Appbar extends Component{
               </NavItem>
               
               <NavItem className="navItem">
-                <NavLink className="nav-link" to="/akunU" activeClassName="active"><PersonFill size="20"/><br/>Akun</NavLink>
+                <NavLink className="nav-link" to="/akun/profil" activeClassName="active"><PersonFill size="20"/><br/>Akun</NavLink>
               </NavItem>
 
                 </Nav>

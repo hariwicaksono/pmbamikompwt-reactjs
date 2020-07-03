@@ -5,9 +5,9 @@ import Ujianonline from './Component/User/Ujianonline';
 import Login from './Component/Login';
 import Register from './Component/Register';
 import User from './Component/User/Index';
-import Page from './Component/Page';
-import AkunU from './Component/User/AkunU';
-import EditAkunU from './Component/User/EditUser';
+import Page from './Component/Page'; 
+import AkunSaya from './Component/User/Akun/Profil';
+import AkunEdit from './Component/User/Akun/Edit';
 import PageU from './Component/User/PageU';
 import { NotificationContainer } from 'react-notifications';
 import ScrollToTop from 'react-router-scroll-top';
@@ -21,8 +21,8 @@ function App() {
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
         <Route path="/user" component={User} />
-        <Route path="/akunU" component={AkunU} />
-        <Route path="/editakunU" component={EditAkunU} />
+        <Route path="/akun/profil" component={AkunSaya} />
+        <Route path="/akun/edit/:id" component={AkunEdit} />
         <Route path="/page/:id" exact component={Page} />
         <Route path="/pageU/:id" component={PageU} />
         <NotificationContainer />

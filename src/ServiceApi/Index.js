@@ -35,7 +35,7 @@ const LOGIN = (path,data) => {
     return promise
 }
 
-const PUTPRODUK = (path,data) =>{
+const PUTUSER = (path,data) =>{
     const promise = new Promise((resolve,reject)=>{
          Axios.put(RoothPath+path,data).then(res=>{
              resolve(res.data)
@@ -90,6 +90,19 @@ const POSTSOAL = (path,data) =>{
     return promise
 }
 
+const POSTIMAGE = (path,data,name) => {
+    const promise = new Promise((resolve,reject)=>{
+        const formdata = new FormData()
+        formdata.append('foto',data,name)
+        Axios.post(RoothPath+path,formdata).then(res=>{
+           resolve(res.data.status)
+       },(err)=>{
+           reject(err)
+       })
+    })
+    return promise
+}
+
 const GET_ID_VAL = (path,data) => {
     const promise = new Promise((resolve,reject) => {
         Axios.get(RoothPath+path+data).then(res => {
@@ -112,8 +125,9 @@ const PostLogin = (data) => LOGIN('LoginController',data)
 const PostUser = (data) => POSTUSER('UserController',data)
 const GetUserId = (data) => GET_ID('UserController?id=',data)
 const DeleteUser = (id) => Delete('UserController/index_delete?id=',id)
-const PutUser = (data) => PUTPRODUK('UserController',data)
+const PutUser = (data) => PUTUSER('UserController',data)
 const CariOrang = (data) => GET_ID_VAL('SearchController?id=',data)
+const PostImageP = (data,name) => POSTIMAGE('ImageUpload',data,name)
 
 
 const API = {
@@ -128,7 +142,8 @@ const API = {
     GetUserId,
     DeleteUser,
     PutUser,
-    CariOrang
+    CariOrang,
+    PostImageP
     
 }
 

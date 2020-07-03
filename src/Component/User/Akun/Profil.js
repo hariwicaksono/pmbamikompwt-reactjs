@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
-import NavbarU from './NavbarU'
 import { Link } from 'react-router-dom/cjs/react-router-dom.min'
-import API from '../../ServiceApi/Index'
-import AppbarU from './AppbarU'
-import ContentLoader from '../Layout/PageContentLoader'
+import NavbarU from '../NavbarU'
+import API from '../../../ServiceApi/Index'
+import AppbarU from '../AppbarU'
+import ContentLoader from '../../Layout/PageContentLoader'
 import { Helmet } from 'react-helmet'
 import { Container, Row, Col, Card } from 'react-bootstrap'
 import {Pencil} from 'react-bootstrap-icons'
 
 const TITLE = ' - PMB Universitas Amikom Purwokerto'
-class AkunU extends Component {
+class AkunProfil extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -18,7 +18,9 @@ class AkunU extends Component {
             alamat: '',
             nohp: '',
             email: '',
-            foto: ''
+            foto: '',
+            loading: true,
+            url: 'http://localhost/pmbamikompwt-server/assets/img/'
         }
     }
 
@@ -30,13 +32,14 @@ class AkunU extends Component {
         const data = JSON.parse(sessionStorage.getItem('isLogin'))
         const id = data[0].username
         API.GetUserId(id).then(res=>{
-            this.setState({
+            setTimeout(() => this.setState({
                 id : res.username,
                 nama: res.nama,
                 telp: res.telp,
-                email: res.email
-               
-            })
+                email: res.email,
+                foto: res.foto,
+                loading: false 
+            }), 200);
         })
     }
     render() {
@@ -45,21 +48,36 @@ class AkunU extends Component {
                 <Helmet>
                 <title>{ 'Akun Saya' + TITLE }</title>
                 </Helmet>
-                <NavbarU />
-                
 
+                <NavbarU/>
+              
                 <div className="my-3">
-                <Container>
+                <Container fluid>
                 <Card className="bg-white py-3 px-4 shadow">
-                  <h2>Akun Saya <Link className="btn btn-info float-right"  to={'/editakunU/' + this.state.id} ><Pencil size="16" /> Edit Profil</Link></h2>
-                    <div className="text-center pt-2">
+                  <h2>Akun Saya <Link className="btn btn-info float-right"  to={'/akun/edit/' + this.state.id} ><Pencil size="16" /> Edit Profil</Link></h2>
+
+                  {
+                        this.state.loading
+                        ?
+                        <ContentLoader />
+                        :
+                        <div className="text-center pt-2">
                         <a href="#" onClick={e => e.preventDefault()}>
-                          <img
-                            alt="..."
-                            className="rounded-circle"
-                            src={"https://indonesiadentalexpo.com/wp-content/uploads/2019/06/gravatar-60-grey.jpg"}
-                            width="150"
-                          />
+                        {this.state.foto.length > 0 ? (
+                          <><img
+                          alt=""
+                          className="rounded-circle"
+                          src={this.state.url+this.state.foto}
+                          width="150"
+                        /></>
+                         ) : (
+                        <><img
+                        alt=""
+                        className="rounded-circle"
+                        src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png"
+                        width="150"
+                        /></>
+                         )}
                         </a>
                      
                         <h1>{this.state.nama}</h1>
@@ -68,8 +86,8 @@ class AkunU extends Component {
                         <p><b>NO HP :</b> {this.state.telp}  </p>
                         <p><b>EMAIL :</b> {this.state.email}  </p>
                         
-
                     </div>
+                    }
                 </Card>
                     
                 </Container>
@@ -81,4 +99,4 @@ class AkunU extends Component {
     }
 }
 
-export default AkunU
+export default AkunProfil
