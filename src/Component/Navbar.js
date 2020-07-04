@@ -31,20 +31,16 @@ class NavBar extends Component{
                 <Nav inline="true">
                 <Nav.Link as={Link} to='/' exact="true">Home</Nav.Link>
                 <NavDropdown title="Menu Utama" id="basic-nav-dropdown">
-                <NavDropdown.Item as={Link} to='/page/14'>Jenis Pendaftaran</NavDropdown.Item>
-                <NavDropdown.Item as={Link} to='/page/34'>Syarat Pendaftaran</NavDropdown.Item>
-                <NavDropdown.Item as={Link} to='/page/18'>Prosedur Pendaftaran</NavDropdown.Item>
-                <NavDropdown.Item as={Link} to='/page/31'>Alur Pendaftaran</NavDropdown.Item>
-                <NavDropdown.Item as={Link} to='/page/30/'>Beasiswa</NavDropdown.Item>
+                <NavDropdown.Item href='/page/14'>Jenis Pendaftaran</NavDropdown.Item>
+                <NavDropdown.Item href='/page/34'>Syarat Pendaftaran</NavDropdown.Item>
+                <NavDropdown.Item href='/page/18'>Prosedur Pendaftaran</NavDropdown.Item>
+                <NavDropdown.Item href='/page/30'>Beasiswa</NavDropdown.Item>
+                <NavDropdown.Item href='/page/31'>Alur Pendaftaran</NavDropdown.Item>
+                <NavDropdown.Item href='/page/19'>Kegiatan Pra Kuliah Mahasiswa Baru</NavDropdown.Item>
+                <NavDropdown.Item href='/page/21'>Tata Tertib Penerimaan Mahasiswa Baru</NavDropdown.Item>
                 
               </NavDropdown>
-              <NavDropdown title="Direktori PSU &amp; Kuliah Umum" id="basic-nav-dropdown">
-              <NavDropdown.Item as={Link} to='/page/19'>Kegiatan Pra Kuliah</NavDropdown.Item>
-                <NavDropdown.Item as={Link} to='/page/21'>Tata Tertib Mahasiswa Baru</NavDropdown.Item>
-                <NavDropdown.Item as={Link} to='/page/32'>Jadwal Kegiatan</NavDropdown.Item>
-                <NavDropdown.Item as={Link} to='/page/34'>Perlengkapan</NavDropdown.Item>
-                
-              </NavDropdown>
+              
                 <Nav.Link as={Link} to='/page/33'>FAQ</Nav.Link>
                 {/*<Nav.Link as={Link} to='/register'><Button variant="info" size="sm">Daftar</Button></Nav.Link>
                 <Nav.Link as={Link} to='/login'><Button variant="warning" size="sm">Masuk</Button></Nav.Link>*/}

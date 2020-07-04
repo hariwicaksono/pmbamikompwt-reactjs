@@ -53,40 +53,50 @@ class AkunProfil extends Component {
               
                 <div className="my-3">
                 <Container fluid>
-                <Card className="bg-white py-3 px-4 shadow">
-                  <h2>Akun Saya <Link className="btn btn-info float-right"  to={'/akun/edit/' + this.state.id} ><Pencil size="16" /> Edit Profil</Link></h2>
+                <Card className="bg-white py-4 px-4 shadow">
+                  <h2 className="mb-3">Akun Saya <Link className="btn btn-info float-right"  to={'/akun/edit/' + this.state.id} ><Pencil size="16" /> Edit Profil</Link></h2>
 
                   {
-                        this.state.loading
+                    this.state.loading
                         ?
                         <ContentLoader />
                         :
-                        <div className="text-center pt-2">
+                        <>
+                        <Card>
+                            <Row>
+                                <Col md="4">
+                        
                         <a href="#" onClick={e => e.preventDefault()}>
                         {this.state.foto.length > 0 ? (
                           <><img
                           alt=""
-                          className="rounded-circle"
+                          className="card-img"
                           src={this.state.url+this.state.foto}
-                          width="150"
+                          
                         /></>
                          ) : (
                         <><img
                         alt=""
-                        className="rounded-circle"
+                        className="card-img"
                         src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png"
-                        width="150"
+                        
                         /></>
                          )}
                         </a>
+                        </Col>
                      
+                        <Col md="8">
+                            <Card.Body>
                         <h1>{this.state.nama}</h1>
-                        <hr className="mt-2 mb-2" />
-                        <p><b>NAMA :</b> {this.state.nama}  </p>
-                        <p><b>NO HP :</b> {this.state.telp}  </p>
-                        <p><b>EMAIL :</b> {this.state.email}  </p>
-                        
-                    </div>
+                        <hr className="mt-3 mb-2" />
+                        <p className="lead"><b>NAMA :</b> {this.state.nama} <br/>
+                        <b>NO.TELP/HP :</b> {this.state.telp}  <br/>
+                        <b>EMAIL :</b> {this.state.email}  </p>
+                        </Card.Body>
+                        </Col>
+                    </Row>
+                    </Card>
+                    </>
                     }
                 </Card>
                     

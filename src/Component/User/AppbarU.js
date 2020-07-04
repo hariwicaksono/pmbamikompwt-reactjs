@@ -2,7 +2,7 @@ import React,{Component} from 'react'
 import {Link,Redirect,NavLink} from 'react-router-dom'
 import API from '../../ServiceApi/Index'
 import { Navbar, Nav, NavItem} from 'react-bootstrap'
-import { HouseDoorFill, GridFill, PersonFill } from 'react-bootstrap-icons'
+import { HouseDoorFill, GridFill, PersonFill, FilePostFill } from 'react-bootstrap-icons'
 
 class Appbar extends Component{
     constructor(props) {
@@ -40,6 +40,10 @@ class Appbar extends Component{
               </NavItem>
               <NavItem className="navItem">
                 <NavLink className="nav-link" to="/about" activeClassName="active"><GridFill size="20"/><br/>Panduan</NavLink>
+              </NavItem>
+
+              <NavItem className="navItem">
+                <NavLink className="nav-link" to="/pendaftaran" activeClassName="active"><FilePostFill size="20"/><br/>Pendaftaran</NavLink>
               </NavItem>
               
               <NavItem className="navItem">

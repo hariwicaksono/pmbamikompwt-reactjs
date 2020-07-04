@@ -47,6 +47,6 @@ input.error {
 .navbar{padding: 0.5rem 1rem; }
 .navbar-brand img{height:100%}
 .navbar-nav a.nav-link{font-size: 1.125rem;font-weight: 500;}
-.dropdown-menu a.dropdown-item{font-size: 1rem}
+.dropdown-menu a.dropdown-item{font-size: 1rem;padding: 0.6rem 0.875rem}
 #appbar .navbar-nav a.nav-link{font-size: .875rem;font-weight: 500;}
 svg{margin-top: -4px}

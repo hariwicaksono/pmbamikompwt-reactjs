@@ -4,7 +4,8 @@ import API from '../../../ServiceApi/Index'
 import { Helmet } from 'react-helmet'
 import ContentLoader from '../../Layout/PageContentLoader'
 import AppbarU from '../AppbarU'
-import { Container, Row, Col, Card } from 'react-bootstrap'
+import { Container, Card, Form, FormGroup, FormLabel, Button } from 'react-bootstrap'
+import { NotificationManager } from 'react-notifications'
 
 const TITLE = ' - PMB Universitas Amikom Purwokerto'
 class AkunEdit extends Component {
@@ -20,7 +21,8 @@ class AkunEdit extends Component {
             //password :'',
             file: {
                 fto: ''
-            }
+            },
+            loading: true
         }
         this.handlerData = this.handlerData.bind(this)
         this.handlerImage = this.handlerImage.bind(this)
@@ -63,6 +65,7 @@ class AkunEdit extends Component {
                 }
             })
         }
+        NotificationManager.info('Berhasil menyimpan data profil');
     }
 
 
@@ -72,12 +75,13 @@ class AkunEdit extends Component {
             id : id
         })
         API.GetUserId(id).then(res=>{
-            this.setState({
+            setTimeout(() => this.setState({
                 nama : res.nama,
                 telp : res.telp,
                 email : res.email,
                 foto : res.foto,
-            })
+                loading: false 
+            }), 200);
         })
     }
 
@@ -95,26 +99,37 @@ class AkunEdit extends Component {
                     <Card.Body>
                     
                         <h2 className="mb-3">Edit Profil</h2>
-                        <form onSubmit={this.handlerSubmit}>
-                            <div className="form-group">
+                        {
+                        this.state.loading
+                        ?
+                        <ContentLoader />
+                        :
+                        <Form onSubmit={this.handlerSubmit}>
+                            <FormGroup>
                                 <label>NAMA USER</label>
-                                <input value={this.state.nama} name="nama" className="form-control" onChange={this.handlerData} type="text"></input>
-                            </div>
+                                <Form.Control value={this.state.nama} name="nama" className="text-dark" onChange={this.handlerData} type="text" />
+                            </FormGroup>
 
-                            <div className="form-group">
-                                <label>NO TELP/HP</label>
-                                <input value={this.state.telp} name="telp" className="form-control" onChange={this.handlerData} type="text"></input>
-                            </div>
-                            <div className="form-group">
-                                <label>EMAIL</label>
-                                <input value={this.state.email} name="email" className="form-control" onChange={this.handlerData} type="text" ></input>
-                            </div>
-                            <div className="form-group">
-                                <input name="fotos" className="form-control" type="file" onChange={this.handlerImage} ></input>
-                            </div>
-                            <input value="SIMPAN" className="btn btn-info" type="submit" ></input>
-                        </form>
-                         
+                            <FormGroup>
+                                <FormLabel>NO TELP/HP</FormLabel>
+                                <Form.Control value={this.state.telp} name="telp" className="text-dark" onChange={this.handlerData} type="text" />
+                            </FormGroup>
+                            <FormGroup>
+                                <FormLabel>EMAIL</FormLabel>
+                                <Form.Control value={this.state.email} name="email" className="text-dark" onChange={this.handlerData} type="text" />
+                            </FormGroup>
+                            <FormGroup>
+                                <FormLabel>FOTO</FormLabel>
+                                <Form.File name="fotos" onChange={this.handlerImage} />
+                            </FormGroup>
+                            <FormGroup>
+                            
+                            <Button variant="primary" type="submit">
+                                SIMPAN
+                            </Button>
+                            </FormGroup>
+                        </Form>
+                        }
                      
                     </Card.Body>
                     </Card>

@@ -72,17 +72,13 @@ class NavbarU extends Component {
                 <NavDropdown.Item href='/pageU/14'>Jenis Pendaftaran</NavDropdown.Item>
                 <NavDropdown.Item href='/pageU/34'>Syarat Pendaftaran</NavDropdown.Item>
                 <NavDropdown.Item href='/pageU/18'>Prosedur Pendaftaran</NavDropdown.Item>
-                <NavDropdown.Item href='/pageU/19'>Kegiatan Pra Kuliah Mahasiswa Baru</NavDropdown.Item>
-                <NavDropdown.Item href='/pageU/21'>Tata Tertib Penerimaan Mahasiswa Baru</NavDropdown.Item>
                 <NavDropdown.Item href='/pageU/30'>Beasiswa</NavDropdown.Item>
                 <NavDropdown.Item href='/pageU/31'>Alur Pendaftaran</NavDropdown.Item>
-                <NavDropdown.Item href='/pageU/31'>Calon Mahasiswa</NavDropdown.Item>
-              </NavDropdown>
-              <NavDropdown title="Direktori PSU &amp; Kuliah Umum" id="basic-nav-dropdown">
-                <NavDropdown.Item href='/pageU/32'>Jadwal Kegiatan</NavDropdown.Item>
-                <NavDropdown.Item href='/pageU/34'>Perlengkapan</NavDropdown.Item>
+                <NavDropdown.Item href='/pageU/19'>Kegiatan Pra Kuliah Mahasiswa Baru</NavDropdown.Item>
+                <NavDropdown.Item href='/pageU/21'>Tata Tertib Penerimaan Mahasiswa Baru</NavDropdown.Item>
                 
               </NavDropdown>
+              
                 <Nav.Link href='/pageU/33'>FAQ</Nav.Link>
 
                 <NavDropdown title={'Halo, '+this.state.nama} id="basic-nav-dropdown">
