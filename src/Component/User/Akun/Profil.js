@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom/cjs/react-router-dom.min'
 import NavbarU from '../NavbarU'
 import API from '../../../ServiceApi/Index'
 import AppbarU from '../AppbarU'
-import ContentLoader from '../../Layout/PageContentLoader'
+import ContentLoader from '../../Layout/PageLoader'
+import MainnavU from '../MainnavU'
 import { Helmet } from 'react-helmet'
 import { Container, Row, Col, Card } from 'react-bootstrap'
 import {Pencil} from 'react-bootstrap-icons'
@@ -50,10 +51,12 @@ class AkunProfil extends Component {
                 </Helmet>
 
                 <NavbarU/>
-              
-                <div className="my-3">
+                <MainnavU />
+
+                <div className="my-2 mx-2">
                 <Container fluid>
-                <Card className="bg-white py-4 px-4 shadow">
+                <Card className="shadow">
+                <Card.Body>
                   <h2 className="mb-3">Akun Saya <Link className="btn btn-info float-right"  to={'/akun/edit/' + this.state.id} ><Pencil size="16" /> Edit Profil</Link></h2>
 
                   {
@@ -98,11 +101,10 @@ class AkunProfil extends Component {
                     </Card>
                     </>
                     }
+                   </Card.Body>
                 </Card>
-                    
                 </Container>
                 </div>
-           
             <AppbarU/>
             </div>
         )

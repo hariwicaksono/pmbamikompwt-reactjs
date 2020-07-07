@@ -50,7 +50,7 @@ class NavbarU extends Component {
         }
         return (
             <div>
-            <Navbar variant="dark" expand="lg" style={{backgroundColor:'#482373', marginBottom:'12px'}}>
+            <Navbar variant="dark" expand="lg" style={{backgroundColor:'#482373'}}>
                 <Navbar.Brand as={Link} to='/'> 
                 <img
                     src="/logo.png"
@@ -60,8 +60,17 @@ class NavbarU extends Component {
                     />
                     
                 </Navbar.Brand>
+
+                
+                
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                
               <Navbar.Collapse id="basic-navbar-nav">
+                <Navbar.Toggle className="navbar-toggler float-right" aria-controls="basic-navbar-nav">
+                    <span />
+                    <span />
+                </Navbar.Toggle>
+
                 <Nav className="mr-auto">
                 
                 </Nav>

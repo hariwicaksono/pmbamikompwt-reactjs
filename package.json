@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "argon-design-system-react": "^1.1.0",
+    "argon-free-dashboard": "^1.2.7",
     "axios": "^0.19.0",
     "babel-polyfill": "^6.26.0",
     "bootstrap": "^4.5.0",
@@ -20,6 +21,7 @@
     "react-js-pagination": "^3.0.2",
     "react-js-pagination-bs4": "^3.0.7",
     "react-loader": "^2.4.7",
+    "react-loading-skeleton": "^2.1.1",
     "react-notifications": "^1.6.0",
     "react-quiz-component": "^0.3.4",
     "react-router-dom": "^5.1.2",

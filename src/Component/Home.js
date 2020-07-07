@@ -67,6 +67,12 @@ class Home extends Component {
             <div>
                 <Helmet>
                 <title>{ TITLE }</title>
+                <style type="text/css">{`
+                body {
+                    background-color: #653E91;
+                }
+                `}
+                </style>
                 </Helmet>
 
                 <Navbar />

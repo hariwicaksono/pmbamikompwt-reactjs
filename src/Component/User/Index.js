@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
+import {NavLink} from 'react-router-dom'
 import NavbarU from './NavbarU'
 import API from '../../ServiceApi/Index'
 import { Helmet } from 'react-helmet'
 import AppbarU from './AppbarU'
+import MainnavU from './MainnavU'
 import { Container, Row, Col, Card, CardDeck } from 'react-bootstrap'
 import { NotificationManager } from 'react-notifications'
 
@@ -25,16 +27,21 @@ class Index extends Component {
             <div>
                 <Helmet>
                 <title>{ TITLE }</title>
+                
                 </Helmet>
                 <NavbarU />
-                <div className="my-3">
+
+                <MainnavU />
+
+                <div className="my-3 mx-3">
                 <Container fluid>
-                <Card className="bg-white py-4 px-4 shadow">
+                    
+              
                     <Row>
-                        
                         <Col md="12">
+                    
                         <CardDeck>
-                        <Card bg="primary" text="white">
+                        <Card bg="primary" text="white" className="shadow">
                             <Card.Body>
                             <Card.Title className="text-white">Card title</Card.Title>
                             <Card.Text>
@@ -44,7 +51,7 @@ class Index extends Component {
                             </Card.Body>
                             
                         </Card>
-                        <Card>
+                        <Card className="shadow">
                             
                             <Card.Body>
                             <Card.Title>Card title</Card.Title>
@@ -55,7 +62,7 @@ class Index extends Component {
                             </Card.Body>
                             
                         </Card>
-                        <Card>
+                        <Card className="shadow">
                             
                             <Card.Body>
                             <Card.Title>Card title</Card.Title>
@@ -70,7 +77,7 @@ class Index extends Component {
                         </CardDeck>
                         </Col>
                     </Row>
-                </Card>
+              
                 </Container>
                 </div>
                 <AppbarU />

@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import NavbarU from '../NavbarU'
 import API from '../../../ServiceApi/Index'
 import { Helmet } from 'react-helmet'
-import ContentLoader from '../../Layout/PageContentLoader'
+import ContentLoader from '../../Layout/PageLoader'
 import AppbarU from '../AppbarU'
+import MainnavU from '../MainnavU'
 import { Container, Card, Form, FormGroup, FormLabel, Button } from 'react-bootstrap'
 import { NotificationManager } from 'react-notifications'
 
@@ -93,9 +94,10 @@ class AkunEdit extends Component {
                 <title>{ 'Edit Akun Saya' + TITLE }</title>
                 </Helmet>
                 <NavbarU />
-                <div className="my-3">
+                <MainnavU />
+                <div className="my-2 mx-2">
                 <Container fluid>
-                <Card className="bg-white shadow border-0">
+                <Card className="shadow">
                     <Card.Body>
                     
                         <h2 className="mb-3">Edit Profil</h2>
