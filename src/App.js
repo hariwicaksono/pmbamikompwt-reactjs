@@ -25,6 +25,7 @@ function App() {
         <Route path="/akun/edit/:id" component={AkunEdit} />
         <Route path="/page/:id" exact component={Page} />
         <Route path="/pageU/:id" component={PageU} />
+
         <NotificationContainer />
     </ScrollToTop>
     </BrowserRouter>

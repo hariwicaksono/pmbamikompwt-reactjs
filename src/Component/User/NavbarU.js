@@ -26,17 +26,17 @@ class NavbarU extends Component {
     }
 
     componentDidMount = () => {
-        const data = JSON.parse(sessionStorage.getItem('isLogin'))
-        const id = data[0].username
-        API.GetUserId(id).then(res=>{
-            this.setState({
-                id : res.username,
-                nama: res.nama,
-                
-            })
-        })
+        
         if (sessionStorage.getItem('isLogin')) {
            // console.log('Ok')
+           const data = JSON.parse(sessionStorage.getItem('isLogin'))
+            const id = data[0].username
+            API.GetUserId(id).then(res=>{
+                this.setState({
+                    id : res.username,
+                    nama: res.nama, 
+                })
+            })
         } else {
             this.setState({
                 login:true

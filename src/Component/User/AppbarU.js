@@ -5,25 +5,8 @@ import { Navbar, Nav, NavItem} from 'react-bootstrap'
 import { HouseDoorFill, GridFill, PersonFill, FilePostFill } from 'react-bootstrap-icons'
 
 class Appbar extends Component{
-    constructor(props) {
-        super(props)
-        this.state = {
-            id: '',
-            nama: ''
-             
-        }
-    }
-    componentDidMount = () => {
-        const data = JSON.parse(sessionStorage.getItem('isLogin'))
-        const id = data[0].username
-        API.GetUserId(id).then(res=>{
-            this.setState({
-                id : res.username,
-                nama: res.nama,
-                
-            })
-        })
-    }
+
+
     render(){
   
         
