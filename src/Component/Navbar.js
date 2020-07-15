@@ -12,7 +12,7 @@ class NavBar extends Component{
         }
         return(  
               
-              <Navbar variant="dark" expand="lg" style={{backgroundColor:'#371260',height:'70px'}}>
+              <Navbar variant="dark" expand="lg" style={{backgroundColor:'#371260'}}>
               <Navbar.Brand as={Link} to='/'> 
               <img
                 src="/logo.png"

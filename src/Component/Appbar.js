@@ -16,7 +16,7 @@ class Appbar extends Component{
         return(
             <div className="pt-4 mt-4">
               
-              <Navbar id="appbar" bg="light" fixed="bottom" sticky="bottom" style={{height:'60px'}}>
+              <Navbar id="appbar" variant="dark" fixed="bottom" sticky="bottom" style={{backgroundColor:'#371260',height:'60px'}}>
               
               <Nav className="mx-auto text-center">
 

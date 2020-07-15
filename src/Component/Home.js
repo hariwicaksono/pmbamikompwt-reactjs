@@ -141,7 +141,7 @@ class Home extends Component {
 
                     <Col md={5}>
 
-                    <Card className="bg-secondary card-lift--hover shadow border-0 py-0">
+                    <Card className="bg-light card-lift--hover shadow border-0 py-0">
                     <Card.Body>
                     <Card.Title>Masuk</Card.Title>
 

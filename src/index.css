@@ -44,11 +44,16 @@ input.error {
   font-weight: 300;
   color: red;
 }
-.navbar{padding: 0.5rem 1rem; }
-.navbar-brand img{height:100%}
-.navbar-nav a.nav-link{font-size: 1.1rem;font-weight: 500;}
-.dropdown-menu a.dropdown-item{font-size: 1rem;padding: 0.6rem 0.875rem}
-#appbar .navbar-nav a.nav-link{font-size: .875rem;font-weight: 600;}
+.navbar-brand img{height:100%;margin-top:-5px !important;}
+.navbar-nav a.nav-link{font-family: 'Source Sans Pro', sans-serif;font-size: 1.1rem;font-weight: 600;}
+.dropdown-menu a.dropdown-item{font-size: 0.9rem;padding: 0.6rem 0.875rem}
+#appbar .navbar-nav a.nav-link{font-size: .875rem;font-weight: 400;}
 .navbar2 a.nav-link{font-size: .875rem;font-weight: 600;}
 .navbar2 a.active{border-bottom: 3px solid #5E72E4;background-color: rgba(0, 0, 0, 0.050) ;}
 svg{margin-top: -4px}
+.navbar-dark .navbar-nav .show > .nav-link,
+.navbar-dark .navbar-nav .active > .nav-link,
+.navbar-dark .navbar-nav .nav-link.show,
+.navbar-dark .navbar-nav .nav-link.active {
+  color: #2DCE89;
+}
