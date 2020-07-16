@@ -130,9 +130,8 @@ class Home extends Component {
                     <Col md={7}>
                     <Card className="card-lift--hover shadow border-0 py-1">
                     <Card.Body>
-                    <Card.Title><h4>Periksa Status Pendaftaran</h4></Card.Title>
-                   
-                    <PeriksaForm />
+                    <Card.Title></Card.Title>
+
                     
                     </Card.Body>
                     </Card>
