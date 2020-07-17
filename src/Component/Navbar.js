@@ -2,6 +2,7 @@ import React,{Component} from 'react'
 import {Link,Redirect} from 'react-router-dom'
 import PeriksaForm from './Form/PeriksaForm'
 import {Button, Navbar, Nav, NavDropdown} from 'react-bootstrap'
+import {TextLeft} from 'react-bootstrap-icons'
 
 class NavBar extends Component{
     render(){
@@ -13,11 +14,15 @@ class NavBar extends Component{
         }
         return(  
               
-              <Navbar variant="dark" expand="lg" style={{backgroundColor:'#371260'}}>
+        <Navbar variant="dark" expand="lg" sticky="top" style={{backgroundColor:'#371260'}}>
+
+    <Button type="button" id="sidebarCollapse" className="btn btn-warning">
+    <TextLeft size="20" />
+    </Button>
               <Navbar.Brand as={Link} to='/'> 
               <img
                 src="/logo.png"
-                width="200"
+                width="180"
                 className="d-inline-block align-center"
                 alt="Logo"
                 />
@@ -51,10 +56,11 @@ class NavBar extends Component{
            
             <Nav.Link as={Link} to='/page/33'>FAQ</Nav.Link>
            
+            <Nav.Link as={Link} to='/login' className="btn btn-info btn-sm">Daftar/Masuk</Nav.Link>
             </Nav>
            
            
-            <Button variant="info" as={Link} to='/login'>Daftar/Masuk</Button>
+            
 
               </Navbar.Collapse>
             </Navbar>
