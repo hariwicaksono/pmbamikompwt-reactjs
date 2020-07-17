@@ -1,7 +1,7 @@
 import React,{Component} from 'react'
 import {Link,Redirect} from 'react-router-dom'
 import PeriksaForm from './Form/PeriksaForm'
-import {Button, Navbar, Nav, NavDropdown} from 'react-bootstrap'
+import {Form,Button, Navbar, Nav, NavDropdown} from 'react-bootstrap'
 import {TextLeft} from 'react-bootstrap-icons'
 
 class NavBar extends Component{
@@ -56,10 +56,13 @@ class NavBar extends Component{
            
             <Nav.Link as={Link} to='/page/33'>FAQ</Nav.Link>
            
-            <Nav.Link as={Link} to='/login' className="btn btn-info btn-sm">Daftar/Masuk</Nav.Link>
+            
             </Nav>
            
-           
+           <Form inline>
+
+           <Button as={Link} to='/login' className="btn btn-info">Daftar/Masuk</Button>
+           </Form>
             
 
               </Navbar.Collapse>

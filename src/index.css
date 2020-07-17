@@ -44,8 +44,8 @@ input.error {
   font-weight: 300;
   color: red;
 }
-.navbar-brand img{height:100%;margin-top:-5px !important;}
-.navbar-nav a.nav-link{font-family: 'Source Sans Pro', sans-serif;font-size: 1rem;margin:0px 8px;font-weight: 600;}
+.navbar-brand img{height:100%;margin-top:-5px !important;margin-left: 5px;}
+.navbar-nav a.nav-link{font-family: 'Source Sans Pro', sans-serif;font-size: 1rem;margin:0px 8px;font-weight: 500;}
 .dropdown-menu a.dropdown-item{font-size: 0.9rem;padding: 0.6rem 0.875rem}
 #appbar .navbar-nav a.nav-link{font-size: .875rem;font-weight: 400;}
 .navbar2 a.nav-link{font-size: .875rem;font-weight: 600;}
