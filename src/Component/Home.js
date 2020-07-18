@@ -10,11 +10,12 @@ class Home extends Component {
         return (
             
             <>
+            <Container>
             <Carousel className="mb-3">
                 <Carousel.Item>
                     <img
                     className="d-block w-100"
-                    src="http://pmb.amikompurwokerto.ac.id/files/cover.jpg"
+                    src="http://pmb.amikompurwokerto.ac.id/files/slide_new.jpeg"
                     alt="First slide"
                     />
                     
@@ -49,20 +50,14 @@ class Home extends Component {
             </Carousel>
 
             
-            <Container>
-            <Row className="pt-1 pb-3">
-            <Col md={7}>
-            <Card className="card-lift--hover shadow border-0 py-1">
-            <Card.Body>
-            <Card.Title></Card.Title>
-
             
-            </Card.Body>
-            </Card>
+            <Row className="pt-1 pb-3">
+            <Col md={8}>
+            
             
             </Col>
 
-            <Col md={5}>
+            <Col md={4}>
 
             <Card className="bg-white card-lift--hover shadow border-0 py-0">
             <Card.Body>

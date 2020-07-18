@@ -6,7 +6,7 @@ import {Redirect,Link} from 'react-router-dom'
 import API from '../ServiceApi/Index'
 import { Helmet } from 'react-helmet'
 import { NotificationManager } from 'react-notifications'
-import {Container, FormLabel, FormGroup, Card, Row, Col, Spinner} from 'react-bootstrap'
+import {Container, FormLabel, FormGroup, Card, Row, Col, Spinner, Tabs, Tab} from 'react-bootstrap'
 import {BoxArrowInRight} from 'react-bootstrap-icons'
 import Form from 'react-formal'
 import * as yup from 'yup'
@@ -82,13 +82,26 @@ class Login extends Component {
             <div>
                 <Helmet>
                 <title>{ TITLE }</title>
+                <style type="text/css">{`
+                body {
+                    background: #f2f2f2 url('http://pmb.amikompurwokerto.ac.id/files/4.png') no-repeat center center fixed;-webkit-background-size: cover;
+                    -moz-background-size: cover;
+                    -o-background-size: cover;
+                    background-size: cover;
+                }
+                `}
+                </style>
                 </Helmet>
                 
                 <Container>
+                <Row className="justify-content-center my-4 pt-3">
+                <Col lg="7">
+                <Tabs fill defaultActiveKey="login" className="bg-white" id="uncontrolled-tab-example" variant="tabs">
+            
+            <Tab eventKey="login" title="Masuk">
                     
-                <Row className="justify-content-center my-4">
-                <Col lg="5">
-                    <Card className="bg-white shadow border-0">
+                
+                    <Card className="bg-white border-0">
                       
                     <Card.Body>
                     <h4 className="mb-3"><strong>Masuk</strong></h4>
@@ -105,7 +118,7 @@ class Login extends Component {
                                 <Form.Message for="password" className="error" />
                             </FormGroup>
                            
-                            <Form.Submit type="submit" className="btn btn-primary">
+                            <Form.Submit type="submit" className="btn btn-primary btn-block">
                             {
                             this.state.loading
                             ?
@@ -117,7 +130,15 @@ class Login extends Component {
                     </Card.Body>
                     <Card.Footer className="text-muted"> Belum punya akun PMB? <Link to={'/register'}>Daftar Akun</Link></Card.Footer>
                         </Card>
-                        </Col>
+                      
+
+                </Tab>
+                <Tab eventKey="register" title="Daftar">
+
+
+                </Tab>
+                </Tabs>
+                </Col>
                     </Row>
                 </Container>
 

@@ -1,11 +1,48 @@
 import React,{Component} from 'react'
 import {Link, Redirect, NavLink} from 'react-router-dom'
 import PeriksaForm from './Form/PeriksaForm'
+import API from '../ServiceApi/Index'
 import {Form,Button, Navbar, Nav, NavItem, NavDropdown} from 'react-bootstrap'
-import {TextLeft} from 'react-bootstrap-icons'
+import {TextLeft, BoxArrowRight} from 'react-bootstrap-icons'
+import NotificationManager from 'react-notifications'
  
 class NavBar extends Component{
-    
+  constructor(props) {
+    super(props)
+    this.state = {
+        login:false,
+        id: '',
+        nama: ''
+        
+    }
+  }
+  Logout = () => {
+    sessionStorage.setItem('isLogin','')
+    sessionStorage.clear()
+    this.setState({
+        login:true
+    })
+    NotificationManager.success('Berhasil keluar sistem');
+
+}
+  componentDidMount = () => {
+    if (sessionStorage.getItem('isLogin')) {
+       // console.log('Ok')
+       const data = JSON.parse(sessionStorage.getItem('isLogin'))
+            const id = data[0].username
+            API.GetUserId(id).then(res=>{
+                this.setState({
+                    id : res.username,
+                    nama: res.nama, 
+                })
+            })
+    } else {
+        this.setState({
+            login:true
+        })
+    }
+}
+
     render(){
       /* if (sessionStorage.getItem('isLogin')) {
             return(<Redirect to="/user" />)
@@ -29,10 +66,17 @@ class NavBar extends Component{
               <Navbar.Collapse id="basic-navbar-nav">
 
               <Nav className="mr-auto">
-             
+              {this.state.login ?
+                <NavItem className="navItem">
+                <NavLink className="nav-link" to='/' activeClassName="active" exact>Home</NavLink>
+               </NavItem>
+              :
+
               <NavItem className="navItem">
-             <NavLink className="nav-link" to='/' activeClassName="active" exact>Home</NavLink>
-            </NavItem>
+              <NavLink className="nav-link" to='/user' activeClassName="active" exact>Home</NavLink>
+             </NavItem>
+              }
+
              <NavDropdown title="Menu Utama" id="basic-nav-dropdown">
              <NavDropdown.Item as={Link} to='/page/14'>Jenis Pendaftaran</NavDropdown.Item>
              <NavDropdown.Item as={Link} to='/page/34'>Syarat Pendaftaran</NavDropdown.Item>
@@ -54,12 +98,22 @@ class NavBar extends Component{
            </NavItem>
             
             </Nav>
-           
+
+
+            {this.state.login ?
+
            <Form inline>
 
            <Button as={Link} to='/login' className="btn btn-info py-1" style={{fontWeight: '600'}}>Daftar/Masuk</Button>
            </Form>
-            
+           :
+<Nav>
+           <NavDropdown title={'Halo, '+this.state.nama} id="basic-nav-dropdown">
+                <NavDropdown.Item onClick={this.Logout} href=''><BoxArrowRight/> Keluar</NavDropdown.Item>
+
+                </NavDropdown>
+                </Nav>
+            }
               </Navbar.Collapse>
             </Navbar>
             

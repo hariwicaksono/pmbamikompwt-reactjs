@@ -24,18 +24,18 @@ class Home extends Component {
         this.setState({ showMenu: !this.state.showMenu });
       }
 
-      componentDidMount = () => {
+      //componentDidMount = () => {
         
-        if (sessionStorage.getItem('isLogin')) {
-           this.setState({
-            login:true
-            })
-        } else {
-            this.setState({
-                login:false
-            })
-        }
-    }
+        //if (sessionStorage.getItem('isLogin')) {
+           //this.setState({
+            //login:true
+            //}) 
+        //} else {
+            //this.setState({
+            ///    login:false
+            //})
+       // }
+    //}
 
     render() {
 
@@ -51,13 +51,13 @@ class Home extends Component {
                 `}
                 </style>
                 </Helmet>
-
-{!this.state.login ?
+                <Navbar toggleMenu={this.toggleMenu} />
+{/*!this.state.login ?
     <Navbar toggleMenu={this.toggleMenu} />
 :
 
 <NavbarU toggleMenu={this.toggleMenu} />
-}
+*/}
                 
                 
                 <div className="wrapper">
@@ -71,7 +71,7 @@ class Home extends Component {
                 </div>
                 </div>
             
-            <Appbar />
+            {/*<Appbar />*/}
             </div>
         )
     }

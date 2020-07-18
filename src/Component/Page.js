@@ -83,7 +83,9 @@ class Page extends Component {
                         this.state.loading
                         ?
                         /*<Loader options={options} className="spinner" />*/
+                        <div className="py-4">
                         <ContentLoader />
+                        </div>
                         :
                        
                         <div className="px-3 py-3">
