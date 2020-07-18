@@ -70,19 +70,15 @@ class Page extends Component {
                 <Helmet>
                 <title>{ Parser(this.state.judul_tupoksi) + TITLE }</title>
                 </Helmet>
-                <Navbar />
+             
 
                 <Container fluid>
 
                 <Row>
-                    <Col sm={5} md={4} lg={3} className="py-3" style={{backgroundColor: "#482373"}}>
-                        
-                    <SideButton />
-                   
-                    </Col>
+                
 
-                    <Col sm={7} md={8} lg={9}>
-                    <Container className="bg-white" fluid>
+                    <Col md={12}>
+                    <Container fluid>
                     {
                         this.state.loading
                         ?
@@ -112,7 +108,7 @@ class Page extends Component {
                 </Row>
                 </Container>
                  
-                <Appbar />
+    
             </div>
         )
     }

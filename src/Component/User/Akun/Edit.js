@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import NavbarU from '../NavbarU'
 import API from '../../../ServiceApi/Index'
 import { Helmet } from 'react-helmet'
 import ContentLoader from '../../Layout/PageLoader'
@@ -93,7 +92,7 @@ class AkunEdit extends Component {
                 <Helmet>
                 <title>{ 'Edit Akun Saya' + TITLE }</title>
                 </Helmet>
-                <NavbarU />
+
                 <MainnavU />
                 <div className="my-2 mx-2">
                 <Container fluid>

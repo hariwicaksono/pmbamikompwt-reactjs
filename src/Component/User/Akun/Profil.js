@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom/cjs/react-router-dom.min'
-import NavbarU from '../NavbarU'
 import API from '../../../ServiceApi/Index'
 import AppbarU from '../AppbarU'
 import ContentLoader from '../../Layout/PageLoader'
@@ -50,7 +49,6 @@ class AkunProfil extends Component {
                 <title>{ 'Akun Saya' + TITLE }</title>
                 </Helmet>
 
-                <NavbarU/>
                 <MainnavU />
 
                 <div className="my-2 mx-2">

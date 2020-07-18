@@ -70,11 +70,11 @@ class Register extends Component {
     <Helmet>
     <title>{ TITLE }</title>
     </Helmet>
-    <Navbar />
+
     
     <Container className="py-4" fluid>
         <Row>
-        <Col md={8}>
+        <Col md={12}>
         <Card className="bg-white shadow border-0">
                
             <Card.Body>
@@ -127,26 +127,12 @@ class Register extends Component {
                
             </Card>
         </Col>
-        
-        <Col md={4}>
-        
-        <Card className="bg-secondary shadow border-0">
-                
-        <Card.Body>
-            <h4 className="mb-3"><strong>Login</strong></h4>
-            <LoginForm/>
-        </Card.Body>
-      
-        </Card> 
 
-        </Col>
         
 
         </Row>
     </Container>
 
-    <Footer />
-    <Appbar />
     </div>
     )
     }

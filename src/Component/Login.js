@@ -83,7 +83,6 @@ class Login extends Component {
                 <Helmet>
                 <title>{ TITLE }</title>
                 </Helmet>
-                <Navbar />
                 
                 <Container>
                     
@@ -122,8 +121,6 @@ class Login extends Component {
                     </Row>
                 </Container>
 
-                <Footer />
-                <Appbar />
             </div>
         )
     }

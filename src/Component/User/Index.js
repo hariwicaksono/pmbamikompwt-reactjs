@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import {NavLink} from 'react-router-dom'
-import NavbarU from './NavbarU'
+import {Redirect,NavLink} from 'react-router-dom'
 import API from '../../ServiceApi/Index'
 import { Helmet } from 'react-helmet'
 import AppbarU from './AppbarU'
@@ -13,23 +12,33 @@ class Index extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            login:false,
             mhs: []
         }
     }
 
     componentDidMount = () => {
-        
+        if (sessionStorage.getItem('isLogin')) {
+           // console.log('Ok')
+        } else {
+            this.setState({
+                login:true
+            })
+        }
     }
 
     render() {
-        
+        if (this.state.login) {
+            return( <Redirect to="/login" /> )
+        }
+
         return (
             <div>
                 <Helmet>
                 <title>{ TITLE }</title>
                 
                 </Helmet>
-                <NavbarU />
+
 
                 <MainnavU />
 

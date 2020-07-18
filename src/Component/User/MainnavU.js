@@ -10,7 +10,7 @@ class Mainnav extends Component{
         
         return(
       
-        <Navbar bg="secondary" variant="light" expand="lg" className="navbar2 pt-0 pb-0">
+        <Navbar bg="light" variant="light" expand="lg" className="navbar2 pt-0 pb-0">
 
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
   <Navbar.Collapse id="basic-navbar-nav">
