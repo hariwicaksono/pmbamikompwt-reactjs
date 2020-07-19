@@ -53,7 +53,7 @@ class NavBar extends Component{
         
         return(  
               
-        <Navbar variant="dark" expand="lg" sticky="top" style={{backgroundColor:'#371260'}}>
+        <Navbar variant="dark" expand="lg" sticky="top" style={{backgroundColor:'#482373'}}>
 
         <Button onClick={this.props.toggleMenu} type="button" className="btn btn-warning">
         <TextLeft size="20" />

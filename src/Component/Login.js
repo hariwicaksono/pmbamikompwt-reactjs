@@ -96,15 +96,15 @@ class Login extends Component {
                 <Container>
                 <Row className="justify-content-center my-4 pt-3">
                 <Col lg="7">
-                <Tabs fill defaultActiveKey="login" className="bg-white" id="uncontrolled-tab-example" variant="tabs">
+                <Tabs fill defaultActiveKey="login" className="bg-white" id="uncontrolled-tab-example" variant="tabs" style={{fontSize: '1.125rem', fontWeight: '600'}}>
             
-            <Tab eventKey="login" title="Masuk">
+            <Tab eventKey="login" title="Masuk" >
                     
                 
                     <Card className="bg-white border-0">
                       
                     <Card.Body>
-                    <h4 className="mb-3"><strong>Masuk</strong></h4>
+                    <h4 className="mb-3">Masuk</h4>
                         <Form onSubmit={this.handlerSubmit} schema={schema}>
                         <input type="hidden" name="level" value="USER" />
                             <FormGroup>
