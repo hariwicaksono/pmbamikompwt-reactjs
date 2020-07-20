@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import {Link,Redirect} from 'react-router-dom'
 import Navbar from '../../Component/Navbar'
-import NavbarU from '../../Component/User/NavbarU'
 import Appbar from '../../Component/Appbar'
 import Sidebar from '../../Component/Sidebar'
 import { Helmet } from 'react-helmet'
@@ -41,7 +40,7 @@ class Home extends Component {
 
         return (
             
-            <div>
+            <>
                 <Helmet>
                 <title>{ TITLE }</title>
                 <style type="text/css">{`
@@ -51,6 +50,9 @@ class Home extends Component {
                 `}
                 </style>
                 </Helmet>
+                {/*<div style={{color:'#f5f5f5',backgroundColor:'#653D95'}}>
+                <p className="marquee"><span>Selamat Datang Di UNIVERSITAS AMIKOM PURWOKERTO</span></p>
+                </div>*/}
                 <Navbar toggleMenu={this.toggleMenu} />
 {/*!this.state.login ?
     <Navbar toggleMenu={this.toggleMenu} />
@@ -71,8 +73,8 @@ class Home extends Component {
                 </div>
                 </div>
             
-            {/*<Appbar />*/}
-            </div>
+            <Appbar />
+            </>
         )
     }
 }

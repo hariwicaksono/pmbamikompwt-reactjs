@@ -16,7 +16,7 @@ class Sidebar extends Component {
 <ul className="list-unstyled components">
                 
                 <li>
-                    <NavLink to={'/about'} title="Petunjuk" alt="Petunjuk">
+                    <NavLink to={'/page/37'} title="Petunjuk" alt="Petunjuk">
                     <Grid size={28} /> <span>Petunjuk</span>
                     </NavLink>
                 </li>
@@ -26,12 +26,12 @@ class Sidebar extends Component {
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to={'/page/18'} title="Fakultas &amp; Progdi" alt="Fakultas &amp; Progdi">
+                    <NavLink to={'/page/36'} title="Fakultas &amp; Progdi" alt="Fakultas &amp; Progdi">
                     <Building size={28} /> <span>Fakultas &amp; Progdi</span>
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to={'/page/18'} title="Biaya Pendidikan" alt="Biaya Pendidikan">
+                    <NavLink to={'/page/38'} title="Biaya Pendidikan" alt="Biaya Pendidikan">
                     <FileEarmarkText size={28} /> <span>Biaya Pendidikan</span>
                     </NavLink>
                 </li>
@@ -41,7 +41,7 @@ class Sidebar extends Component {
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to={'/page/18'} title="Fasilitas" alt="Fasilitas">
+                    <NavLink to={'/page/35'} title="Fasilitas" alt="Fasilitas">
                     <Display size={28} /> <span>Fasilitas</span>
                     </NavLink>
                 </li>

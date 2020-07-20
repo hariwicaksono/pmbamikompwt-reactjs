@@ -55,7 +55,7 @@ class AkunProfil extends Component {
                 <Container fluid>
                 <Card className="shadow">
                 <Card.Body>
-                  <h2 className="mb-3">Akun Saya <Link className="btn btn-info float-right"  to={'/akun/edit/' + this.state.id} ><Pencil size="16" /> Edit Profil</Link></h2>
+                  <h2 className="mb-3">Akun Saya <Link className="btn btn-info btn-sm pull-right"  to={'/akun/edit/' + this.state.id} ><Pencil size="16" /> Edit Profil</Link></h2>
 
                   {
                     this.state.loading

@@ -83,7 +83,7 @@ class Page extends Component {
                         this.state.loading
                         ?
                         /*<Loader options={options} className="spinner" />*/
-                        <div className="py-4">
+                        <div className="px-3 py-3">
                         <ContentLoader />
                         </div>
                         :
@@ -93,12 +93,7 @@ class Page extends Component {
                                 <h1>{Parser(this.state.judul_tupoksi)}</h1>
                                 <hr/>
                                 {Parser(this.state.isi_tupoksi)}
-                                <Link className="btn btn-info disabled">BELI</Link>
-                                <hr/>
-                                <div className="alert alert-danger">
-                                    <p>YOU MUST BE LOGIN</p>
-                                </div>
-                            
+
                         </div>
                         
 

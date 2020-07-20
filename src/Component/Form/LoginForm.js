@@ -62,21 +62,19 @@ class LoginForm extends Component {
         
     }
 
-    
-
     render() {
        
 
         if(this.state.isLogin){
             if (this.state.idLogin === "1") {
-                return( <Redirect to="/user" /> )
+                return( <Redirect to="/user" onLoad={window.location.reload()}/> )
             } else {
-                return(<Redirect to="admin" />)
+                return(<Redirect to="/admin" onLoad={window.location.reload()}/>)
             }
         }
 
         return (
-            <div>
+            <>
         
                 <Form onSubmit={this.handlerSubmit} schema={schema}>
                     <input type="hidden" name="level" value="USER" />
@@ -88,7 +86,7 @@ class LoginForm extends Component {
                         <Form.Field type="password" name="password" placeholder="Password" className="form-control" onChange={this.handlerChange} />
                         <Form.Message for="password" className="error" />
                     </FormGroup>
-                    <Form.Submit type="submit" className="btn btn-primary">
+                    <Form.Submit type="submit" className="btn btn-info btn-block">
                         {
                         this.state.loading
                         ?
@@ -96,7 +94,7 @@ class LoginForm extends Component {
                         :  <><BoxArrowInRight size="16"/> Login</> }</Form.Submit>
                 </Form>                              
   
-            </div>
+            </>
         )
     }
 

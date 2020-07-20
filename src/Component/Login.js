@@ -1,82 +1,26 @@
 import React, { Component } from 'react'
-import Navbar from './Navbar'
-import Footer from './Footer'
-import Appbar from './Appbar'
-import {Redirect,Link} from 'react-router-dom'
+import {Redirect,Link,NavLink} from 'react-router-dom'
+import FormLogin from '../Component/Form/LoginForm'
+import RegisterForm from '../Component/Form/RegisterForm'
 import API from '../ServiceApi/Index'
 import { Helmet } from 'react-helmet'
 import { NotificationManager } from 'react-notifications'
 import {Container, FormLabel, FormGroup, Card, Row, Col, Spinner, Tabs, Tab} from 'react-bootstrap'
-import {BoxArrowInRight} from 'react-bootstrap-icons'
-import Form from 'react-formal'
-import * as yup from 'yup'
+import {BoxArrowInRight, Check2} from 'react-bootstrap-icons'
 
 const TITLE = ' Masuk - PMB Universitas Amikom Purwokerto'
-const schema = yup.object({
-    username: yup.string().required(),
-    password: yup.string().required(),
-  }); 
+
 class Login extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            username: "",
-            password: "",
-            level: "USER",
-            isLogin: false,
-            idLogin: "",
-            loading: false
-        }
-        this.handlerChange = this.handlerChange.bind(this)
-        this.handlerSubmit = this.handlerSubmit.bind(this)
-        
-    }
-
-
-    handlerChange = (event) => {
-        this.setState({
-            [event.target.name]: event.target.value
-        })
-    }
-
-    handlerSubmit = () => {
-        this.setState({ loading: true });
-        API.PostLogin(this.state).then(res=>{
-            setTimeout(() => {
-            if (res.id === "1" ) {
-                sessionStorage.setItem('isLogin',JSON.stringify(res.data))
-                this.setState({
-                    isLogin:true,
-                    loading: false,
-                    idLogin:"1"
-                })
-                NotificationManager.success('Berhasil masuk sistem');
-            } else if (res.id === "2" ) {
-                sessionStorage.setItem('isAdmin',JSON.stringify(res.data))
-                this.setState({
-                    isLogin:true,
-                    loading: false,
-                    idLogin:"2"
-                })
-                NotificationManager.success('Berhasil masuk sistem');
-            } else {
-                NotificationManager.warning('Login gagal, periksa username dan password anda');
-            }
-            }, 100);
-        })
-    }
-
-    
 
     render() {
        
-        if(this.state.isLogin){
-            if (this.state.idLogin === "1") {
-                return( <Redirect to="/user" /> )
-            } else {
-                return(<Redirect to="admin" />)
-            }
+         if (sessionStorage.getItem('isLogin')) {
+            return(<Redirect to="/user" />)
         }
+        if (sessionStorage.getItem('isAdmin')) {
+            return(<Redirect to="/admin" />)
+        }
+        
 
         return (
             <div>
@@ -84,7 +28,7 @@ class Login extends Component {
                 <title>{ TITLE }</title>
                 <style type="text/css">{`
                 body {
-                    background: #f2f2f2 url('http://pmb.amikompurwokerto.ac.id/files/4.png') no-repeat center center fixed;-webkit-background-size: cover;
+                    background: #653E91 url('') no-repeat center center fixed;-webkit-background-size: cover;
                     -moz-background-size: cover;
                     -o-background-size: cover;
                     background-size: cover;
@@ -94,50 +38,33 @@ class Login extends Component {
                 </Helmet>
                 
                 <Container>
-                <Row className="justify-content-center my-4 pt-3">
-                <Col lg="7">
-                <Tabs fill defaultActiveKey="login" className="bg-white" id="uncontrolled-tab-example" variant="tabs" style={{fontSize: '1.125rem', fontWeight: '600'}}>
-            
-            <Tab eventKey="login" title="Masuk" >
-                    
+                <Row className="justify-content-center my-3 pt-3">
+                <Col lg="8">
                 
+                <ul className="nav nav-tabs nav-fill bg-white" style={{fontSize: '1.125rem', fontWeight: '600'}}>
+                <li className="nav-item">
+                    <NavLink className="nav-link active" to='/login'>Masuk</NavLink>
+                </li>
+                <li className="nav-item">
+                <NavLink className="nav-link" to='/register'>Daftar</NavLink>
+                </li>
+
+                </ul>
+
+                    
                     <Card className="bg-white border-0">
                       
                     <Card.Body>
-                    <h4 className="mb-3">Masuk</h4>
-                        <Form onSubmit={this.handlerSubmit} schema={schema}>
-                        <input type="hidden" name="level" value="USER" />
-                            <FormGroup>
-                                <FormLabel>Username</FormLabel>
-                                <Form.Field type="text" name="username" placeholder="Username" className="form-control" onChange={this.handlerChange} />
-                                <Form.Message for="username" className="error" />
-                            </FormGroup>
-                            <FormGroup>
-                                <FormLabel>Password</FormLabel>
-                                <Form.Field type="password" name="password" placeholder="Password" className="form-control" onChange={this.handlerChange} />
-                                <Form.Message for="password" className="error" />
-                            </FormGroup>
-                           
-                            <Form.Submit type="submit" className="btn btn-primary btn-block">
-                            {
-                            this.state.loading
-                            ?
-                            <><Spinner as="span" animation="border" size="sm"  role="status" aria-hidden="true" /> Memuat...</>
-                            :  <><BoxArrowInRight size="16"/> Login</> }</Form.Submit>
-                        </Form>                              
-
-                        
+                    <h4 className="mb-3">Masuk <small>PMB Univ. Amikom Purwokerto</small></h4>
+                    <FormLogin />
                     </Card.Body>
                     <Card.Footer className="text-muted"> Belum punya akun PMB? <Link to={'/register'}>Daftar Akun</Link></Card.Footer>
-                        </Card>
+                </Card>
                       
 
-                </Tab>
-                <Tab eventKey="register" title="Daftar">
 
 
-                </Tab>
-                </Tabs>
+ 
                 </Col>
                     </Row>
                 </Container>

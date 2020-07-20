@@ -4,7 +4,7 @@ import PeriksaForm from './Form/PeriksaForm'
 import API from '../ServiceApi/Index'
 import {Form,Button, Navbar, Nav, NavItem, NavDropdown} from 'react-bootstrap'
 import {TextLeft, BoxArrowRight} from 'react-bootstrap-icons'
-import NotificationManager from 'react-notifications'
+import { NotificationManager } from 'react-notifications'
  
 class NavBar extends Component{
   constructor(props) {
@@ -23,6 +23,7 @@ class NavBar extends Component{
         login:true
     })
     NotificationManager.success('Berhasil keluar sistem');
+    window.location.reload();
 
 }
   componentDidMount = () => {
@@ -53,7 +54,7 @@ class NavBar extends Component{
         
         return(  
               
-        <Navbar variant="dark" expand="lg" sticky="top" style={{backgroundColor:'#482373'}}>
+        <Navbar variant="dark" expand="lg" sticky="top" style={{backgroundColor:'#371260'}}>
 
         <Button onClick={this.props.toggleMenu} type="button" className="btn btn-warning">
         <TextLeft size="20" />
@@ -81,11 +82,10 @@ class NavBar extends Component{
              <NavDropdown.Item as={Link} to='/page/14'>Jenis Pendaftaran</NavDropdown.Item>
              <NavDropdown.Item as={Link} to='/page/34'>Syarat Pendaftaran</NavDropdown.Item>
              <NavDropdown.Item as={Link} to='/page/18'>Prosedur Pendaftaran</NavDropdown.Item>
-             <NavDropdown.Item as={Link} to='/page/30'>Beasiswa</NavDropdown.Item>
              <NavDropdown.Item as={Link} to='/page/31'>Alur Pendaftaran</NavDropdown.Item>
-             <NavDropdown.Item as={Link} to='/page/19'>Kegiatan Pra Kuliah Mahasiswa Baru</NavDropdown.Item>
+             <NavDropdown.Item as={Link} to='/page/30'>Beasiswa - Beasiswa</NavDropdown.Item>
              <NavDropdown.Item as={Link} to='/page/21'>Tata Tertib Penerimaan Mahasiswa Baru</NavDropdown.Item>
-             
+             <NavDropdown.Item as={Link} to='/page/19'>Kegiatan Pra Kuliah Mahasiswa Baru</NavDropdown.Item>
            </NavDropdown>
            
              </Nav>
@@ -107,7 +107,7 @@ class NavBar extends Component{
            <Button as={Link} to='/login' className="btn btn-info py-1" style={{fontWeight: '600'}}>Daftar/Masuk</Button>
            </Form>
            :
-<Nav>
+          <Nav>
            <NavDropdown title={'Halo, '+this.state.nama} id="basic-nav-dropdown">
                 <NavDropdown.Item onClick={this.Logout} href=''><BoxArrowRight/> Keluar</NavDropdown.Item>
 

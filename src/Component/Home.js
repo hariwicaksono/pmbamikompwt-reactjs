@@ -6,7 +6,12 @@ import {Container, Row, Col, Carousel, Button, Card} from 'react-bootstrap'
 class Home extends Component {
 
     render() {
-
+        if (sessionStorage.getItem('isLogin')) {
+            return(<Redirect to="/user" />)
+        }
+        if (sessionStorage.getItem('isAdmin')) {
+            return(<Redirect to="/admin" />)
+        }
         return (
             
             <>
