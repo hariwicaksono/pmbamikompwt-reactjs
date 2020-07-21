@@ -55,7 +55,7 @@ class AkunProfil extends Component {
                 <Container fluid>
                 <Card className="shadow">
                 <Card.Body>
-                  <h2 className="mb-3">Akun Saya <Link className="btn btn-info btn-sm pull-right"  to={'/akun/edit/' + this.state.id} ><Pencil size="16" /> Edit Profil</Link></h2>
+                  <h2 className="mb-3">Akun Saya</h2>
 
                   {
                     this.state.loading
@@ -63,9 +63,18 @@ class AkunProfil extends Component {
                         <ContentLoader />
                         :
                         <>
-                        <Card>
-                            <Row>
-                                <Col md="4">
+
+                        <h3>{this.state.nama}</h3>
+                        <Row>
+                                
+                        <Col md="8">
+                        <hr className="mt-2 mb-2" />
+                        <p className="lead"><b>NAMA :</b> {this.state.nama} <br/>
+                        <b>NO.TELP/HP :</b> {this.state.telp}  <br/>
+                        <b>EMAIL :</b> {this.state.email}</p>
+                        
+                        </Col>
+                        <Col md="4">
                         
                         <a href="#" onClick={e => e.preventDefault()}>
                         {this.state.foto.length > 0 ? (
@@ -85,18 +94,9 @@ class AkunProfil extends Component {
                          )}
                         </a>
                         </Col>
-                     
-                        <Col md="8">
-                            <Card.Body>
-                        <h1>{this.state.nama}</h1>
-                        <hr className="mt-3 mb-2" />
-                        <p className="lead"><b>NAMA :</b> {this.state.nama} <br/>
-                        <b>NO.TELP/HP :</b> {this.state.telp}  <br/>
-                        <b>EMAIL :</b> {this.state.email}  </p>
-                        </Card.Body>
-                        </Col>
                     </Row>
-                    </Card>
+
+                    <Link className="btn btn-primary btn-block"  to={'/akun/edit/' + this.state.id} ><Pencil /> Edit Profil</Link>
                     </>
                     }
                    </Card.Body>

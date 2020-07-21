@@ -8,14 +8,16 @@ class Appbar extends Component{
     super(props)
     this.state = {
         login:false,
-        id: '',
-        nama: ''
-        
+        id: ''  
     }
   }
   componentDidMount = () => {
     if (sessionStorage.getItem('isLogin')) {
        // console.log('Ok')
+       const data = JSON.parse(sessionStorage.getItem('isLogin'))
+       this.setState({
+        id : data[0].username
+       })
     } else {
         this.setState({
             login:true
@@ -58,7 +60,7 @@ class Appbar extends Component{
               </NavItem>
               :
               <NavItem className="navItem">
-                <NavLink className="nav-link" to="/akun/profil" activeClassName="active"><PersonFill size="20"/><br/>Akun</NavLink>
+                <NavLink className="nav-link" to={'/akun/edit/' + this.state.id} activeClassName="active"><PersonFill size="20"/><br/>Akun</NavLink>
               </NavItem>
               }
               {this.state.login ?
@@ -67,7 +69,7 @@ class Appbar extends Component{
               </NavItem>
               :
               <NavItem className="navItem">
-                <NavLink className="nav-link" to="/pendaftaran" activeClassName="active"><FilePostFill size="20"/><br/>Pendaftaran</NavLink>
+                <NavLink className="nav-link" to="/pendaftaran" activeClassName="active"><FilePostFill size="20"/><br/>Form</NavLink>
               </NavItem>
               }
               </Nav>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {Link,Redirect} from 'react-router-dom'
 import Navbar from '../../Component/Navbar'
+import NavbarU from '../../Component/User/NavbarU'
 import Appbar from '../../Component/Appbar'
 import Sidebar from '../../Component/Sidebar'
 import { Helmet } from 'react-helmet'
@@ -13,7 +14,8 @@ class Home extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            showMenu: true
+            showMenu: true,
+            login:false
         }
 
         this.toggleMenu = this.toggleMenu.bind(this)
@@ -23,21 +25,19 @@ class Home extends Component {
         this.setState({ showMenu: !this.state.showMenu });
       }
 
-      //componentDidMount = () => {
+      componentDidMount = () => {
         
-        //if (sessionStorage.getItem('isLogin')) {
-           //this.setState({
-            //login:true
-            //}) 
-        //} else {
-            //this.setState({
-            ///    login:false
-            //})
-       // }
-    //}
+        if (sessionStorage.getItem('isLogin')) {
+          
+        } else {
+            this.setState({
+               login:true
+            })
+       }
+    }
 
     render() {
-
+        
         return (
             
             <>
@@ -53,13 +53,13 @@ class Home extends Component {
                 {/*<div style={{color:'#f5f5f5',backgroundColor:'#653D95'}}>
                 <p className="marquee"><span>Selamat Datang Di UNIVERSITAS AMIKOM PURWOKERTO</span></p>
                 </div>*/}
-                <Navbar toggleMenu={this.toggleMenu} />
-{/*!this.state.login ?
+              
+{this.state.login ?
     <Navbar toggleMenu={this.toggleMenu} />
 :
 
 <NavbarU toggleMenu={this.toggleMenu} />
-*/}
+}
                 
                 
                 <div className="wrapper">

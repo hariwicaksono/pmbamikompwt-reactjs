@@ -6,8 +6,8 @@ import Login from '../Component/Login';
 import Register from '../Component/Register';
 import User from '../Component/User/Index';
 import Page from '../Component/Page'; 
-import AkunSaya from '../Component/User/Akun/Profil';
-import AkunEdit from '../Component/User/Akun/Edit';
+import Akun from '../Component/User/Akun/Edit';
+import AkunPassword from '../Component/User/Akun/Password';
 import PageU from '../Component/User/PageU';
 import { NotificationContainer } from 'react-notifications';
 import ScrollToTop from 'react-router-scroll-top';
@@ -21,8 +21,8 @@ const MyRouter = () => {
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
         <Route path="/user" component={User} />
-        <Route path="/akun/profil" component={AkunSaya} />
-        <Route path="/akun/edit/:id" component={AkunEdit} />
+        <Route path="/akun/edit/:id" component={Akun} />
+        <Route path="/akun/password/:id" component={AkunPassword} />
         <Route path="/page/:id" exact component={Page} />
         <Route path="/pageU/:id" component={PageU} />
 

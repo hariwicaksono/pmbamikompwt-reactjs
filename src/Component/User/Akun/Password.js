@@ -92,7 +92,7 @@ render() {
 return (
     <div>
         <Helmet>
-        <title>{ 'Edit Akun' + TITLE }</title>
+        <title>{ 'Ganti Password' + TITLE }</title>
         </Helmet>
 
         <MainnavU />
@@ -107,59 +107,63 @@ return (
                 <NavLink className="nav-link" to={'/akun/password/' + this.state.id} activeClassName="active">Ganti Password</NavLink>
                 
                 </Nav>
-                </Col>  
+                </Col>         
                 <Col md="9">
+            
                 {
                 this.state.loading
                 ?
                 <ContentLoader />
                 :
-      
+  
                 <Form onSubmit={this.handlerSubmit}>
                     <Form.Group as={Row}>
-                    <Form.Label column sm={3} className="text-right font-weight-bold">Foto</Form.Label>
-                        <Col sm={9}>
+                   
+                        <Col sm={3}>
                         <a href="#" onClick={e => e.preventDefault()}>
                         {this.state.foto.length > 0 ? (
                           <><img
                           alt="Foto"
-                          width="100"
-                          className="rounded-circle mb-1"
+                          width="50"
+                          className="rounded-circle mb-1 float-right"
                           src={this.state.url+this.state.foto}
                           
                         /></>
                          ) : (
                         <><img
                         alt="Foto"
-                        width="100"
-                        className="rounded-circle mb-1"
+                        width="50"
+                        className="rounded-circle mb-1 float-right"
                         src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png"
                         
                         /></>
                          )}
                         </a>
-                        <Form.File name="fotos" onChange={this.handlerImage} />
+                        
                         </Col>
+                        <Col sm={9}><strong>{this.state.nama}</strong></Col>
                     </Form.Group>
                     <Form.Group as={Row}>
-                        <Form.Label column sm={3} className="text-right font-weight-bold">Nama Lengkap</Form.Label>
+                        <Form.Label column sm={3} className="text-right font-weight-bold">Password Lama</Form.Label>
                         <Col sm={9}>
-                        <Form.Control value={this.state.nama} name="nama" className="text-dark" onChange={this.handlerData} type="text" />
+                        <Form.Control name="oldpassword" className="text-dark" onChange={this.handlerData} type="password" />
                         </Col>
                     </Form.Group>
 
                     <Form.Group as={Row}>
-                    <Form.Label column sm={3} className="text-right font-weight-bold">No Telp/HP</Form.Label>
-                    <Col sm={9}>
-                        <Form.Control value={this.state.telp} name="telp" className="text-dark" onChange={this.handlerData} type="text" />
+                        <Form.Label column sm={3} className="text-right font-weight-bold">Password</Form.Label>
+                        <Col sm={9}>
+                        <Form.Control name="password" className="text-dark" onChange={this.handlerData} type="password" />
                         </Col>
                     </Form.Group>
-                    <Form.Group as={Row}> 
-                    <Form.Label column sm={3} className="text-right font-weight-bold">E-mail</Form.Label>
+
+                    <Form.Group as={Row}>
+                    <Form.Label column sm={3} className="text-right font-weight-bold">Konfirmasi</Form.Label>
                     <Col sm={9}>
-                        <Form.Control value={this.state.email} name="email" className="text-dark" onChange={this.handlerData} type="text" />
+                        <Form.Control name="password_confirm" className="text-dark" onChange={this.handlerData} type="password" />
                         </Col>
                     </Form.Group>
+                    
                     
                     <Form.Group as={Row}>
                     <Form.Label column sm={3}></Form.Label>
@@ -170,9 +174,9 @@ return (
                     </Form.Group>
 
                 </Form>
-               
+                
                 }
-                </Col>
+               </Col>
             </Row> 
             </Card.Body>
             </Card>

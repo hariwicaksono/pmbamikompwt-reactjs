@@ -45,7 +45,9 @@ class LoginForm extends Component {
                     loading: false,
                     idLogin:"1"
                 })
-                NotificationManager.success('Berhasil masuk sistem');
+                window.location.href = '/user';
+                //NotificationManager.success('Berhasil masuk sistem');
+                
             } else if (res.id === "2" ) {
                 sessionStorage.setItem('isAdmin',JSON.stringify(res.data))
                 this.setState({
@@ -53,7 +55,9 @@ class LoginForm extends Component {
                     loading: false,
                     idLogin:"2"
                 })
-                NotificationManager.success('Berhasil masuk sistem');
+                window.location.href = '/admin';
+                //NotificationManager.success('Berhasil masuk sistem');
+                
             } else {
                 NotificationManager.warning('Login gagal, periksa username dan password anda');
             }
@@ -67,9 +71,9 @@ class LoginForm extends Component {
 
         if(this.state.isLogin){
             if (this.state.idLogin === "1") {
-                return( <Redirect to="/user" onLoad={window.location.reload()}/> )
+                return( <Redirect to="/user" /> )
             } else {
-                return(<Redirect to="/admin" onLoad={window.location.reload()}/>)
+                return(<Redirect to="/admin" />)
             }
         }
 

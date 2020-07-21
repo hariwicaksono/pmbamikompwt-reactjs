@@ -53,7 +53,11 @@ class Index extends Component {
 
                 <div className="my-3 mx-3">
                 <Container fluid>
+
+                    <Row>
+                        <Col>
                     
+                            
                 <Steps  current={this.state.current}
                     labelPlacement={"vertical"}
                     direction={"horizontal"} >
@@ -61,45 +65,7 @@ class Index extends Component {
               <Steps.Step title="Dokumen" onClick={() => this.handleStepClick(1)} />          
               <Steps.Step title="Informasi" onClick={() => this.handleStepClick(2)} />
             </Steps>
-              
-                    <Row>
-                        <Col md="12">
-                    
-                        <CardDeck>
-                        <Card bg="primary" text="white" className="shadow">
-                            <Card.Body>
-                            <Card.Title className="text-white">Card title</Card.Title>
-                            <Card.Text>
-                                This is a wider card with supporting text below as a natural lead-in to
-                                additional content. This content is a little bit longer.
-                            </Card.Text>
-                            </Card.Body>
-                            
-                        </Card>
-                        <Card className="shadow">
-                            
-                            <Card.Body>
-                            <Card.Title>Card title</Card.Title>
-                            <Card.Text>
-                                This card has supporting text below as a natural lead-in to additional
-                                content.{' '}
-                            </Card.Text>
-                            </Card.Body>
-                            
-                        </Card>
-                        <Card className="shadow">
-                            
-                            <Card.Body>
-                            <Card.Title>Card title</Card.Title>
-                            <Card.Text>
-                                This is a wider card with supporting text below as a natural lead-in to
-                                additional content. This card has even longer content than the first to
-                                show that equal height action.
-                            </Card.Text>
-                            </Card.Body>
-                           
-                        </Card>
-                        </CardDeck>
+            
                         </Col>
                     </Row>
               

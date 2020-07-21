@@ -15,16 +15,17 @@ class NavBar extends Component{
         nama: ''
         
     }
+    
   }
   Logout = () => {
-    sessionStorage.setItem('isLogin','')
-    sessionStorage.clear()
+    sessionStorage.setItem('isLogin','');
+    sessionStorage.clear();
     this.setState({
         login:true
     })
-    NotificationManager.success('Berhasil keluar sistem');
-    window.location.reload();
-
+    
+    //NotificationManager.success('Berhasil keluar sistem');
+    
 }
   componentDidMount = () => {
     if (sessionStorage.getItem('isLogin')) {
@@ -37,6 +38,7 @@ class NavBar extends Component{
                     nama: res.nama, 
                 })
             })
+            
     } else {
         this.setState({
             login:true
@@ -45,13 +47,9 @@ class NavBar extends Component{
 }
 
     render(){
-      /* if (sessionStorage.getItem('isLogin')) {
-            return(<Redirect to="/user" />)
-        }
-        if (sessionStorage.getItem('isAdmin')) {
-            return(<Redirect to="/admin" />)
-        }*/
-        
+      if (!this.state.login) {
+        return( <Redirect to="/" /> )
+    }
         return(  
               
         <Navbar variant="dark" expand="lg" sticky="top" style={{backgroundColor:'#371260'}}>
@@ -104,7 +102,7 @@ class NavBar extends Component{
 
            <Form inline>
 
-           <Button as={Link} to='/login' className="btn btn-info py-1" style={{fontWeight: '600'}}>Daftar/Masuk</Button>
+           <Button as={Link} to='/login' className="btn btn-info btn-sm py-2" style={{fontWeight: '600'}}>Daftar/Masuk</Button>
            </Form>
            :
           <Nav>
