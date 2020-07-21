@@ -45,9 +45,9 @@ class NavbarU extends Component {
     }
 
     render() {
-        if (this.state.login) {
-            return( <Redirect to="/login" /> )
-        }
+       // if (this.state.login) {
+            //return( <Redirect to="/login" /> )
+        //}
         return (
             <div>
             <Navbar variant="dark" expand="lg" style={{backgroundColor:'#482373'}}>

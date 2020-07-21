@@ -35,7 +35,7 @@ class LoginForm extends Component {
     }
 
     handlerSubmit = () => {
-        this.setState({ loading: true });
+        //this.setState({ loading: true });
         API.PostLogin(this.state).then(res=>{
             setTimeout(() => {
             if (res.id === "1" ) {

@@ -11,19 +11,21 @@ import AkunPassword from '../Component/User/Akun/Password';
 import PageU from '../Component/User/PageU';
 import { NotificationContainer } from 'react-notifications';
 import ScrollToTop from 'react-router-scroll-top';
+import PrivateRoute from './PrivateRoute';
+import PublicRoute from './PublicRoute';
 
 const MyRouter = () => {
     return(
     <Switch>
     <ScrollToTop>
-        <Route path="/" exact component={Home} />
+        <Route path="/" component={Home} exact />
         <Route path="/ujianonline" component={Ujianonline} />
-        <Route path="/login" component={Login} />
+        <PublicRoute restricted={true} component={Login} path="/login" exact />
         <Route path="/register" component={Register} />
-        <Route path="/user" component={User} />
+        <PrivateRoute path="/user" component={User} exact />
         <Route path="/akun/edit/:id" component={Akun} />
         <Route path="/akun/password/:id" component={AkunPassword} />
-        <Route path="/page/:id" exact component={Page} />
+        <PrivateRoute path="/page/:id" component={Page} exact />
         <Route path="/pageU/:id" component={PageU} />
 
         <NotificationContainer />

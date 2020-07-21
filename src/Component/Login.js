@@ -14,12 +14,12 @@ class Login extends Component {
 
     render() {
        
-         if (sessionStorage.getItem('isLogin')) {
+       {/*if (sessionStorage.getItem('isLogin')) {
             return(<Redirect to="/user" />)
         }
         if (sessionStorage.getItem('isAdmin')) {
             return(<Redirect to="/admin" />)
-        }
+        }*/}
         
 
         return (

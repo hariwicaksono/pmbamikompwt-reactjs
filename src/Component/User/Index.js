@@ -14,32 +14,32 @@ class Index extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            login:false,
+            //login:false,
             mhs: [],
             current: 0
         }
     }
 
-    componentDidMount = () => {
-        if (sessionStorage.getItem('isLogin')) {
+    //componentDidMount = () => {
+        //if (sessionStorage.getItem('isLogin')) {
            // console.log('Ok')
            
-        } else {
-            this.setState({
-                login:true
-            })
-        }
+        //} else {
+            //this.setState({
+               // login:true
+           // })
+        //}
         
-    }
+    //}
 
     handleStepClick = (stepNumber) => {
         this.setState({current: stepNumber})
     };
 
     render() {
-        if (this.state.login) {
-            return( <Redirect to="/login" /> )
-        }
+        //if (this.state.login) {
+            //return( <Redirect to="/login" /> )
+        //}
 
         return (
             <>
