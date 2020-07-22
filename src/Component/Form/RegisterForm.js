@@ -97,7 +97,7 @@ class RegisterForm extends Component {
 
     return (
     <>
-           
+       <Example />
     <Form onSubmit={this.handlerSubmit} schema={schema} >
     <input type="hidden" name="aktivasi" value={this.state.aktivasi} />
     <input type="hidden" name="foto" value={this.state.foto} />
