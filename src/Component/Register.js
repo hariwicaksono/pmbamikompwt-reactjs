@@ -1,25 +1,21 @@
 import React, { Component } from 'react'
-import {Redirect,Link,NavLink} from 'react-router-dom'
-import FormLogin from '../Component/Form/LoginForm'
+import {NavLink} from 'react-router-dom'
 import RegisterForm from '../Component/Form/RegisterForm'
-import API from '../ServiceApi/Index'
 import { Helmet } from 'react-helmet'
-import { NotificationManager } from 'react-notifications'
-import {Container, FormLabel, FormGroup, Card, Row, Col, Spinner, Tabs, Tab} from 'react-bootstrap'
-import {BoxArrowInRight, Check2} from 'react-bootstrap-icons'
+import {Container, Card, Row, Col} from 'react-bootstrap'
 
 const TITLE = ' Masuk - PMB Universitas Amikom Purwokerto'
 
 class Login extends Component {
 
     render() {
-       
-         if (sessionStorage.getItem('isLogin')) {
+        
+         {/*if (sessionStorage.getItem('isLogin')) {
             return(<Redirect to="/user" />)
         }
         if (sessionStorage.getItem('isAdmin')) {
             return(<Redirect to="/admin" />)
-        }
+        */}
         
 
         return (

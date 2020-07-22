@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Link} from 'react-router-dom'
+//import {Link} from 'react-router-dom'
 import {Card} from 'react-bootstrap'
 
 class Soal extends Component {

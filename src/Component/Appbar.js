@@ -1,7 +1,8 @@
 import React,{Component} from 'react'
-import {Link,Redirect,NavLink} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 import { Navbar, Nav, NavItem} from 'react-bootstrap'
 import { HouseDoorFill, GridFill, PersonFill, PersonPlusFill, FilePostFill } from 'react-bootstrap-icons'
+import { isLogin } from '../Utils'
 
 class Appbar extends Component{
   constructor(props) {
@@ -12,7 +13,7 @@ class Appbar extends Component{
     }
   }
   componentDidMount = () => {
-    if (sessionStorage.getItem('isLogin')) {
+    if (isLogin()) {
        // console.log('Ok')
        const data = JSON.parse(sessionStorage.getItem('isLogin'))
        this.setState({
@@ -25,15 +26,9 @@ class Appbar extends Component{
     }
 }
     render(){
-        /*if (sessionStorage.getItem('isLogin')) {
-            return(<Redirect to="/user" />)
-        }
-        if (sessionStorage.getItem('isAdmin')) {
-            return(<Redirect to="/admin" />)
-        }*/
         
         return(
-            <div className="pt-4 mt-4">
+            <div className="pt-4 mt-4 d-xs-block d-sm-block d-md-block d-lg-none d-xl-none">
               
               <Navbar id="appbar" variant="dark" fixed="bottom" sticky="bottom" style={{backgroundColor:'#371260',height:'60px'}}>
               

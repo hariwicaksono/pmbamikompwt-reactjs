@@ -1,10 +1,10 @@
 import React,{Component} from 'react'
-import {Link, Redirect, NavLink} from 'react-router-dom'
+import {Link, NavLink} from 'react-router-dom'
 import PeriksaForm from './Form/PeriksaForm'
 import API from '../ServiceApi/Index'
 import {Form,Button, Navbar, Nav, NavItem, NavDropdown} from 'react-bootstrap'
-import {TextLeft, BoxArrowRight} from 'react-bootstrap-icons'
-import { NotificationManager } from 'react-notifications'
+import {TextLeft, BoxArrowRight, PersonFill} from 'react-bootstrap-icons'
+import { logout, isLogin } from '../Utils'
  
 class NavBar extends Component{
   constructor(props) {
@@ -18,18 +18,19 @@ class NavBar extends Component{
     
   }
   Logout = () => {
-    sessionStorage.setItem('isLogin','');
-    sessionStorage.clear();
-    this.setState({
-        login:true
-    })
+    logout();
+    //sessionStorage.setItem('isLogin','');
+    //sessionStorage.clear();
+    //this.setState({
+        //login:true
+    //})
     
     //NotificationManager.success('Berhasil keluar sistem');
     
 }
   componentDidMount = () => {
-    if (sessionStorage.getItem('isLogin')) {
-       // console.log('Ok')
+    if (isLogin()) {
+       console.log('LOGIN')
        const data = JSON.parse(sessionStorage.getItem('isLogin'))
             const id = data[0].username
             API.GetUserId(id).then(res=>{
@@ -47,9 +48,7 @@ class NavBar extends Component{
 }
 
     render(){
-      if (!this.state.login) {
-        return( <Redirect to="/" /> )
-    }
+
         return(  
               
         <Navbar variant="dark" expand="lg" sticky="top" style={{backgroundColor:'#371260'}}>
@@ -106,7 +105,8 @@ class NavBar extends Component{
            </Form>
            :
           <Nav>
-           <NavDropdown title={'Halo, '+this.state.nama} id="basic-nav-dropdown">
+           <NavDropdown title={this.state.nama} id="basic-nav-dropdown">
+           <NavDropdown.Item as={Link} to={'/akun/edit/' + this.state.id}><PersonFill/> Akun</NavDropdown.Item>
                 <NavDropdown.Item onClick={this.Logout} href=''><BoxArrowRight/> Keluar</NavDropdown.Item>
 
                 </NavDropdown>

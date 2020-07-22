@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import {Link,Redirect} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import API from '../../ServiceApi/Index'
-import { Navbar, Nav, NavDropdown, Button} from 'react-bootstrap'
+import { Navbar, Nav, NavDropdown} from 'react-bootstrap'
 import { NotificationManager } from 'react-notifications'
 import { BoxArrowRight } from 'react-bootstrap-icons'
 

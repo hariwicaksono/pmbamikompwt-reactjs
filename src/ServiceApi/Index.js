@@ -128,7 +128,7 @@ const DeleteUser = (id) => Delete('UserController/index_delete?id=',id)
 const PutUser = (data) => PUTUSER('UserController',data)
 const CariOrang = (data) => GET_ID_VAL('SearchController?id=',data)
 const PostImageP = (data,name) => POSTIMAGE('ImageUpload',data,name)
-
+const PutUserPassword = (data) => PUTUSER('UserPassword',data)
 
 const API = {
     GetPageId,
@@ -143,7 +143,8 @@ const API = {
     DeleteUser,
     PutUser,
     CariOrang,
-    PostImageP
+    PostImageP,
+    PutUserPassword
     
 }
 

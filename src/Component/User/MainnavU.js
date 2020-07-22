@@ -1,7 +1,6 @@
 import React,{Component} from 'react'
 import {NavLink} from 'react-router-dom'
-import API from '../../ServiceApi/Index'
-import {Nav, Navbar, NavDropdown} from 'react-bootstrap'
+import {Nav, Navbar} from 'react-bootstrap'
 
 class Mainnav extends Component{
 

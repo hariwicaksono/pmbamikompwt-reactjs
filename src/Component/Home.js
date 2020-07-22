@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import {Link,Redirect} from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
 import FormLogin from './Form/LoginForm'
-import {Container, Row, Col, Carousel, Button, Card} from 'react-bootstrap'
+import {Container, Row, Col, Carousel, Card} from 'react-bootstrap'
 
 class Home extends Component {
 

@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
-import {Link,Redirect,NavLink} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 import API from '../../../ServiceApi/Index'
 import { Helmet } from 'react-helmet'
 import ContentLoader from '../../Layout/PageLoader'
-import AppbarU from '../AppbarU'
 import MainnavU from '../MainnavU'
-import { Nav,Container, Card, Form, FormGroup, FormLabel, Button, Row, Col } from 'react-bootstrap'
+import { Nav,Container, Card, Form, Button, Row, Col } from 'react-bootstrap'
 import { NotificationManager } from 'react-notifications'
 
 const TITLE = ' - PMB Universitas Amikom Purwokerto'
@@ -67,7 +66,7 @@ if (this.state.fotos === "") {
         }
     })
 }
-NotificationManager.info('Berhasil menyimpan data profil');
+NotificationManager.success('Berhasil menyimpan data profil');
 }
 
 
@@ -83,7 +82,7 @@ API.GetUserId(id).then(res=>{
         email : res.email,
         foto : res.foto,
         loading: false 
-    }), 200);
+    }), 100);
 })
 }
 
@@ -105,7 +104,7 @@ return (
                 <Nav id="nav" className="flex-column">
                 <NavLink className="nav-link" to={'/akun/edit/' + this.state.id} activeClassName="active">Edit Profile</NavLink>
                 <NavLink className="nav-link" to={'/akun/password/' + this.state.id} activeClassName="active">Ganti Password</NavLink>
-                
+                 
                 </Nav>
                 </Col>  
                 <Col md="9">
@@ -117,13 +116,13 @@ return (
       
                 <Form onSubmit={this.handlerSubmit}>
                     <Form.Group as={Row}>
-                    <Form.Label column sm={3} className="text-right font-weight-bold">Foto</Form.Label>
+                    <Form.Label column sm={3} className="text-md-right font-weight-bold">Foto</Form.Label>
                         <Col sm={9}>
                         <a href="#" onClick={e => e.preventDefault()}>
-                        {this.state.foto.length > 0 ? (
+                        {this.state.foto > 0 ? (
                           <><img
                           alt="Foto"
-                          width="100"
+                          width="60"
                           className="rounded-circle mb-1"
                           src={this.state.url+this.state.foto}
                           
@@ -131,9 +130,9 @@ return (
                          ) : (
                         <><img
                         alt="Foto"
-                        width="100"
+                        width="60"
                         className="rounded-circle mb-1"
-                        src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png"
+                        src={this.state.url+'no-photo.jpg'}
                         
                         /></>
                          )}
@@ -142,20 +141,20 @@ return (
                         </Col>
                     </Form.Group>
                     <Form.Group as={Row}>
-                        <Form.Label column sm={3} className="text-right font-weight-bold">Nama Lengkap</Form.Label>
+                        <Form.Label column sm={3} className="text-md-right font-weight-bold">Nama Lengkap</Form.Label>
                         <Col sm={9}>
                         <Form.Control value={this.state.nama} name="nama" className="text-dark" onChange={this.handlerData} type="text" />
                         </Col>
                     </Form.Group>
 
                     <Form.Group as={Row}>
-                    <Form.Label column sm={3} className="text-right font-weight-bold">No Telp/HP</Form.Label>
+                    <Form.Label column sm={3} className="text-md-right font-weight-bold">No Telp/HP</Form.Label>
                     <Col sm={9}>
                         <Form.Control value={this.state.telp} name="telp" className="text-dark" onChange={this.handlerData} type="text" />
                         </Col>
                     </Form.Group>
                     <Form.Group as={Row}> 
-                    <Form.Label column sm={3} className="text-right font-weight-bold">E-mail</Form.Label>
+                    <Form.Label column sm={3} className="text-md-right font-weight-bold">E-mail</Form.Label>
                     <Col sm={9}>
                         <Form.Control value={this.state.email} name="email" className="text-dark" onChange={this.handlerData} type="text" />
                         </Col>
@@ -178,7 +177,7 @@ return (
             </Card>
         </Container>
         </div>
-        <AppbarU/>
+    
     </div>
 )
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Redirect,Link} from 'react-router-dom'
+//import {Redirect,Link} from 'react-router-dom'
 import API from '../../ServiceApi/Index'
 import { NotificationManager } from 'react-notifications'
 import { FormGroup, Spinner } from 'react-bootstrap'
@@ -35,7 +35,7 @@ class LoginForm extends Component {
     }
 
     handlerSubmit = () => {
-        //this.setState({ loading: true });
+        this.setState({ loading: true });
         API.PostLogin(this.state).then(res=>{
             setTimeout(() => {
             if (res.id === "1" ) {
@@ -46,7 +46,7 @@ class LoginForm extends Component {
                     idLogin:"1"
                 })
                 window.location.href = '/user';
-                //NotificationManager.success('Berhasil masuk sistem');
+                NotificationManager.success('Berhasil masuk sistem');
                 
             } else if (res.id === "2" ) {
                 sessionStorage.setItem('isAdmin',JSON.stringify(res.data))
@@ -56,7 +56,7 @@ class LoginForm extends Component {
                     idLogin:"2"
                 })
                 window.location.href = '/admin';
-                //NotificationManager.success('Berhasil masuk sistem');
+                NotificationManager.success('Berhasil masuk sistem');
                 
             } else {
                 NotificationManager.warning('Login gagal, periksa username dan password anda');
@@ -67,16 +67,7 @@ class LoginForm extends Component {
     }
 
     render() {
-       
-
-        if(this.state.isLogin){
-            if (this.state.idLogin === "1") {
-                return( <Redirect to="/user" /> )
-            } else {
-                return(<Redirect to="/admin" />)
-            }
-        }
-
+    
         return (
             <>
         
@@ -95,7 +86,7 @@ class LoginForm extends Component {
                         this.state.loading
                         ?
                         <><Spinner as="span" animation="border" size="sm"  role="status" aria-hidden="true" /> Memuat...</>
-                        :  <><BoxArrowInRight size="16"/> Login</> }</Form.Submit>
+                        :  <><BoxArrowInRight size="18"/> Login</> }</Form.Submit>
                 </Form>                              
   
             </>

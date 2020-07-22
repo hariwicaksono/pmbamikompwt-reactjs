@@ -1,14 +1,10 @@
 import React, { Component } from 'react'
-import Navbar from './Navbar'
-import Appbar from './Appbar'
 import API from '../ServiceApi/Index'
-import { Link } from 'react-router-dom/cjs/react-router-dom.min'
 import ContentLoader from './Layout/PageLoader'
 import Parser from 'html-react-parser'
 import { Container, Row, Col } from 'react-bootstrap'
 import { Helmet } from 'react-helmet'
 //import Loader from 'react-loader'
-import SideButton from './SideButton'
 
 const TITLE = ' - PMB Universitas Amikom Purwokerto'
 //var options = {

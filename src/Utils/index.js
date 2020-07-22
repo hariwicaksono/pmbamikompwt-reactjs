@@ -1,3 +1,5 @@
+import { NotificationManager } from 'react-notifications'
+
 const TOKEN_KEY = 'isLogin';
 
 export const login = () => {
@@ -6,6 +8,8 @@ export const login = () => {
 
 export const logout = () => {
     sessionStorage.removeItem(TOKEN_KEY);
+    window.location.href = '/';
+    NotificationManager.success('Berhasil keluar sistem');
 }
 
 export const isLogin = () => {
