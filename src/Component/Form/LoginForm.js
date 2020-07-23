@@ -74,11 +74,11 @@ class LoginForm extends Component {
                 <Form onSubmit={this.handlerSubmit} schema={schema}>
                     <input type="hidden" name="level" value="USER" />
                     <FormGroup>
-                        <Form.Field type="text" name="username" placeholder="Username" className="form-control" onChange={this.handlerChange} />
+                        <Form.Field type="text" name="username" placeholder="Username" errorClass="error" onChange={this.handlerChange} />
                         <Form.Message for="username" className="error" />
                     </FormGroup>
                     <FormGroup>
-                        <Form.Field type="password" name="password" placeholder="Password" className="form-control" onChange={this.handlerChange} />
+                        <Form.Field type="password" name="password" placeholder="Password" errorClass="error" onChange={this.handlerChange} />
                         <Form.Message for="password" className="error" />
                     </FormGroup>
                     <Form.Submit type="submit" className="btn btn-info btn-block">

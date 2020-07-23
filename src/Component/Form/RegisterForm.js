@@ -7,7 +7,7 @@ import {Check2} from 'react-bootstrap-icons'
 import Form from 'react-formal'
 import * as yup from 'yup'
 import axios from 'axios';
-
+ 
 let schema = yup.object({
     nama: yup.string().required('Nama lengkap harus diisi').min(4),
     telp: yup.number().required('Nomor Telepon atau HP harus diisi'),
@@ -77,7 +77,7 @@ class RegisterForm extends Component {
     render() {
       
     return (
-    <>
+    <div style={{maxHeight:'400px',overflowY: 'auto', overflowX:'hidden'}}>
        
     <Form onSubmit={this.handlerSubmit} schema={schema} >
     <input type="hidden" name="aktivasi" value={this.state.aktivasi} />
@@ -132,7 +132,7 @@ class RegisterForm extends Component {
         </Form.Submit>
     </Form>            
 
-    </>
+    </div>
     )
     }
 }
