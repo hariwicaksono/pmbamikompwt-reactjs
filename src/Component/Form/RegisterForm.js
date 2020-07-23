@@ -6,45 +6,26 @@ import {FormLabel, FormGroup, Row, Col, Spinner} from 'react-bootstrap'
 import {Check2} from 'react-bootstrap-icons'
 import Form from 'react-formal'
 import * as yup from 'yup'
-import { useForm } from "react-hook-form"
+import axios from 'axios';
 
-const Example = () => {
-    const { handleSubmit, register, errors } = useForm();
-    const onSubmit = values => console.log(values);
-  
-    return (
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <input
-          name="email"
-          ref={register({
-            required: "Required",
-            pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: "invalid email address"
-            }
-          })}
-        />
-        {errors.email && errors.email.message}
-  
-        <input
-          name="username"
-          ref={register({
-            validate: value => value !== "admin" || "Nice try!"
-          })}
-        />
-        {errors.username && errors.username.message}
-  
-        <button type="submit">Submit</button>
-      </form>
-    );
-  };
-//const TITLE = ' Daftar - PMB Universitas Amikom Purwokerto'
-const schema = yup.object({
-    nama: yup.string().required(),
-    telp: yup.number().required(),
-    email: yup.string().required(),
-    username: yup.string().required(),
-    password: yup.string().required(),
+let schema = yup.object({
+    nama: yup.string().required('Nama lengkap harus diisi').min(4),
+    telp: yup.number().required('Nomor Telepon atau HP harus diisi'),
+    email: yup.string().email('email harus berupa email yang valid').required('Alamat email harus diisi'),
+    username: yup.string().required('Username harus diisi').test({
+      message: () => 'Username sudah ada',
+      test: async (id) => {
+        try {
+        const res = await axios(`http://localhost/pmbamikompwt-server/api/CheckUsername?id=${id}`);
+        const result = await res.data.results;
+        return !result
+        } catch (error) {
+        console.log(error.response); 
+        return error.response;
+        }
+      },
+    }),
+    password: yup.string().min(6, 'Password terlalu pendek, minimal 6 karakter').required('Password harus diisi'),
   });
 
 class RegisterForm extends Component {
@@ -94,47 +75,50 @@ class RegisterForm extends Component {
 
 
     render() {
-
+      
     return (
     <>
-       <Example />
+       
     <Form onSubmit={this.handlerSubmit} schema={schema} >
     <input type="hidden" name="aktivasi" value={this.state.aktivasi} />
+    <input type="hidden" name="bukti_pembayaran" value={this.state.bukti_pembayaran} />
     <input type="hidden" name="foto" value={this.state.foto} />
         <FormGroup>
+
+      
         
         <FormLabel>Nama Lengkap*</FormLabel>
             
-                <Form.Field className="form-control" placeholder="Nama Lengkap"
-                name="nama"
-                onChange={this.handlerChange} />
-                <Form.Message for="nama" className="error" />
+            <Form.Field errorClass="error" placeholder="Nama Lengkap"
+            name="nama"
+            onChange={this.handlerChange}  />
+            <Form.Message for="nama" className="error" />
                 
         </FormGroup>
 
         <Row>
         <FormGroup as={Col}>
             <FormLabel>Email*</FormLabel>
-            <Form.Field type="text" placeholder="Email" name="email" className="form-control" onChange={this.handlerChange}/>
+            <Form.Field type="text" placeholder="Email" name="email"  errorClass="error" onChange={this.handlerChange}/>
             <Form.Message for="email" className="error" />
         </FormGroup>
         
         
         <FormGroup as={Col}>
             <FormLabel>Telp/HP*</FormLabel>
-            <Form.Field type="text" placeholder="Telp/No.HP" name="telp" className="form-control" onChange={this.handlerChange} />
+            <Form.Field type="text" placeholder="Telp/No.HP" name="telp" errorClass="error" onChange={this.handlerChange} />
             <Form.Message for="telp" className="error" />
         </FormGroup>
         </Row>
 
         <FormGroup>
             <FormLabel>Username*</FormLabel>
-            <Form.Field type="text" placeholder="Username" name="username" className="form-control" onChange={this.handlerChange} />
+            <Form.Field errorClass="error" type="text" placeholder="Username" name="username" onChange={this.handlerChange} validateOn={{ change: true, blur: true }} />
             <Form.Message for="username" className="error" />
         </FormGroup>
         <FormGroup>
             <FormLabel>Password*</FormLabel>
-            <Form.Field type="password" placeholder="Password" name="password" className="form-control" onChange={this.handlerChange} />
+            <Form.Field type="password" placeholder="Password" name="password" errorClass="error" onChange={this.handlerChange} />
             <Form.Message for="password" className="error" />
         </FormGroup>
 

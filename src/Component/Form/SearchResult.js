@@ -1,6 +1,5 @@
 import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
-import {Button} from 'react-bootstrap'
 import {X} from 'react-bootstrap-icons'
 
 const SearchResults = (props) => {
@@ -19,16 +18,17 @@ const SearchResults = (props) => {
   if (show) {
     return (
       <div id="searchResult" className="col-md-5 mt-1" style={{paddingLeft:0}}>
-      <div className="card card-body">
-       {options}
-      
-        <div className="d-flex justify-content-end">
-          <Button size="sm" onClick={() => setShow(false) + window.location.reload(true)} variant="warning">
-            <X size="18" />
-          </Button>
+        
+      <div className="card card-body" style={{maxHeight:'250px',overflowY: 'auto'}}>
+      <div className="d-flex justify-content-end">
+          <a href="#" className="text-dark" onClick={() => setShow(false) + window.location.reload(true)} >
+            <X size="24" />
+          </a>
         </div>
-      </div>
+       {options}
 
+      </div>
+      
    </div>
     );
     

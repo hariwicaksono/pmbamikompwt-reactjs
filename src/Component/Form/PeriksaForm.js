@@ -36,6 +36,7 @@ class LoginForm extends Component {
         this.setState({ loading: true });
         const query=this.state.query;
         API.CariOrang(query).then(res=>{
+            console.log(res)
             setTimeout(() => this.setState({
               results: res,
               loading: false,
@@ -52,7 +53,7 @@ class LoginForm extends Component {
                 <Form className="w-100" onSubmit={this.handlerSubmit} style={{paddingRight: '15px'}} >
                 <Form.Row>
                 <Col lg={11} md={11} xs={10}>
-                        <Form.Control type="text" name="query" placeholder="Cari Nomor Pendaftaran..." onChange={this.handlerChange} required/>
+                        <Form.Control type="text" name="query" placeholder="Cari Nama atau Nomor Daftar..." onChange={this.handlerChange} required/>
                        
                  </Col>
                 <Col>
