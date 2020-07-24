@@ -24,7 +24,7 @@ class Login extends Component {
                 <title>{ TITLE }</title>
                 <style type="text/css">{`
                 body {
-                    background: #653E91 url('') no-repeat center center fixed;-webkit-background-size: cover;
+                    background: #653E92 url('') no-repeat center center fixed;-webkit-background-size: cover;
                     -moz-background-size: cover;
                     -o-background-size: cover;
                     background-size: cover;

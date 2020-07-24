@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 //import {Redirect,Link} from 'react-router-dom'
 import API from '../../ServiceApi/Index'
 import { NotificationManager } from 'react-notifications'
-import { FormGroup, Spinner } from 'react-bootstrap'
+import { FormLabel, FormGroup, Spinner } from 'react-bootstrap'
 import {BoxArrowInRight} from 'react-bootstrap-icons'
 import Form from 'react-formal'
 import * as yup from 'yup'
@@ -74,10 +74,12 @@ class LoginForm extends Component {
                 <Form onSubmit={this.handlerSubmit} schema={schema}>
                     <input type="hidden" name="level" value="USER" />
                     <FormGroup>
+                    <FormLabel>Username*</FormLabel>
                         <Form.Field type="text" name="username" placeholder="Username" errorClass="error" onChange={this.handlerChange} />
                         <Form.Message for="username" className="error" />
                     </FormGroup>
                     <FormGroup>
+                    <FormLabel>Password*</FormLabel>
                         <Form.Field type="password" name="password" placeholder="Password" errorClass="error" onChange={this.handlerChange} />
                         <Form.Message for="password" className="error" />
                     </FormGroup>

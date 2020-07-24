@@ -4,10 +4,36 @@ import React, { Component } from 'react'
 import { Helmet } from 'react-helmet'
 import MainnavU from './MainnavU'
 import { Container, Row, Col } from 'react-bootstrap'
-import Steps from 'awesome-steps'
-import 'awesome-steps/dist/style.css'
+import StepZilla from 'react-stepzilla'
+import 'react-stepzilla/src/css/main.css'
 
 const TITLE = ' User - PMB Universitas Amikom Purwokerto'
+const Step1 = props => {
+    return (
+      <div>
+        <div>Step 1</div>
+      </div>
+    );
+  };
+  const Step2 = props => {
+    return (
+      <div>
+        <div>Step 2</div>
+      </div>
+    );
+  };
+const steps = [
+    {
+      name: "Step 1",
+      component: <Step1 />
+    },
+    {
+        name: "Step 2",
+        component: <Step2 />
+      }
+  ];
+  
+
 class Index extends Component {
     constructor(props) {
         super(props)
@@ -38,7 +64,7 @@ class Index extends Component {
         //if (this.state.login) {
             //return( <Redirect to="/login" /> )
         //}
-
+        
         return (
             <>
                 <Helmet>
@@ -53,17 +79,12 @@ class Index extends Component {
                 <Container fluid>
 
                     <Row>
-                        <Col>
+                        <Col md={12}>
                     
                             
-                <Steps  current={this.state.current}
-                    labelPlacement={"vertical"}
-                    direction={"horizontal"} >
-              <Steps.Step title="Formulir" onClick={() => this.handleStepClick(0)}  />
-              <Steps.Step title="Dokumen" onClick={() => this.handleStepClick(1)} />          
-              <Steps.Step title="Informasi" onClick={() => this.handleStepClick(2)} />
-            </Steps>
-            
+                 <div className='step-progress'>
+        <StepZilla steps={steps} backButtonCls="btn btn-next btn-primary float-left" nextButtonCls="btn btn-prev btn-primary float-md-right"/>
+    </div>
                         </Col>
                     </Row>
               

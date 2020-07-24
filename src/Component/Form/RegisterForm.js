@@ -6,23 +6,22 @@ import {FormLabel, FormGroup, Row, Col, Spinner} from 'react-bootstrap'
 import {Check2} from 'react-bootstrap-icons'
 import Form from 'react-formal'
 import * as yup from 'yup'
-import axios from 'axios';
  
 let schema = yup.object({
     nama: yup.string().required('Nama lengkap harus diisi').min(4),
-    telp: yup.number().required('Nomor Telepon atau HP harus diisi'),
-    email: yup.string().email('email harus berupa email yang valid').required('Alamat email harus diisi'),
+    telp: yup.number().required('Nomor Telepon atau HP harus diisi').typeError("Harus berupa angka"),
+    email: yup.string().email('Harus berupa email yang valid').required('Alamat email harus diisi'),
     username: yup.string().required('Username harus diisi').test({
       message: () => 'Username sudah ada',
-      test: async (id) => {
+      test: async (value) => {
         try {
-        const res = await axios(`http://localhost/pmbamikompwt-server/api/CheckUsername?id=${id}`);
-        const result = await res.data.results;
-        return !result
-        } catch (error) {
-        console.log(error.response); 
-        return error.response;
-        }
+            const res = await API.CheckUsername(value)
+            const result = await res.data.results;
+            return !result
+            } catch (error) {
+            console.log(error.response); 
+            return error.response;
+            }
       },
     }),
     password: yup.string().min(6, 'Password terlalu pendek, minimal 6 karakter').required('Password harus diisi'),
@@ -85,8 +84,6 @@ class RegisterForm extends Component {
     <input type="hidden" name="foto" value={this.state.foto} />
         <FormGroup>
 
-      
-        
         <FormLabel>Nama Lengkap*</FormLabel>
             
             <Form.Field errorClass="error" placeholder="Nama Lengkap"
@@ -110,7 +107,7 @@ class RegisterForm extends Component {
             <Form.Message for="telp" className="error" />
         </FormGroup>
         </Row>
-
+ 
         <FormGroup>
             <FormLabel>Username*</FormLabel>
             <Form.Field errorClass="error" type="text" placeholder="Username" name="username" onChange={this.handlerChange} validateOn={{ change: true, blur: true }} />
@@ -124,10 +121,10 @@ class RegisterForm extends Component {
 
         <Form.Submit type="submit" className="btn btn-info btn-block">
         {
-                        this.state.loading
-                        ?
-                        <><Spinner as="span" animation="border" size="sm"  role="status" aria-hidden="true" /> Memuat...</>
-                        :  <><Check2 size="18"/> Daftar</> }
+        this.state.loading
+        ?
+        <><Spinner as="span" animation="border" size="sm"  role="status" aria-hidden="true" /> Memuat...</>
+        :  <><Check2 size="18"/> Daftar</> }
 
         </Form.Submit>
     </Form>            

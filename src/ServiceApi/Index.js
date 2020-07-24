@@ -114,18 +114,6 @@ const GET_ID_VAL = (path,data) => {
     return promise
 }
 
-const GET_VAL = (path,data) => {
-    const promise = new Promise((resolve) => {
-        Axios.get(RoothPath+path+data).then(res => {
-            resolve(res.data.results)
-        }).catch(err => {
-            console.log(err.response); 
-            return err.response;
-        })
-    })
-    return promise
-}
-
 const GetPageId = (data) => GET_ID('PageController?id=',data)
 const GetSoal = () => GET('SoalController')
 const GetSoalId = (data) => GET_ID('SoalController?id=',data)
@@ -140,7 +128,7 @@ const PutUser = (data) => PUTUSER('UserController',data)
 const CariOrang = (data) => GET_ID_VAL('SearchController?id=',data)
 const PostImageP = (data,name) => POSTIMAGE('ImageUpload',data,name)
 const PutUserPassword = (data) => PUTUSER('UserPassword',data)
-const CheckUsername = (data) => GET_VAL('CheckUsername?id=',data)
+const CheckUsername = (data) => Axios(RoothPath+`CheckUsername?id=${data}`)
 
 const API = {
     GetPageId,

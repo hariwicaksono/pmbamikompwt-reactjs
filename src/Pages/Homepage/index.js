@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Navbar from '../../Component/Navbar'
+import Footer from '../../Component/Footer'
 import Appbar from '../../Component/Appbar'
 import Sidebar from '../../Component/Sidebar'
 import { Helmet } from 'react-helmet'
@@ -69,8 +70,9 @@ class Home extends Component {
                 <MyRouter/>
  
                 </div>
+                
                 </div>
-            
+                <Footer/>
             <Appbar />
             </>
         )

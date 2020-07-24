@@ -1,20 +1,26 @@
 import React, { Component } from 'react'
-import {Redirect} from 'react-router-dom'
+//import {Redirect} from 'react-router-dom'
 import FormLogin from './Form/LoginForm'
+import { Helmet } from 'react-helmet'
 import {Container, Row, Col, Carousel, Card} from 'react-bootstrap'
 
 class Home extends Component {
 
     render() {
-        if (sessionStorage.getItem('isLogin')) {
-            return(<Redirect to="/user" />)
-        }
-        if (sessionStorage.getItem('isAdmin')) {
-            return(<Redirect to="/admin" />)
-        }
         return (
             
             <>
+             <Helmet>
+            <style type="text/css">{`
+                body {
+                    background: #653E92 url('') no-repeat center center fixed;-webkit-background-size: cover;
+                    -moz-background-size: cover;
+                    -o-background-size: cover;
+                    background-size: cover;
+                }
+                `}
+                </style>
+            </Helmet>
             <Container>
             <Carousel className="mb-3">
                 <Carousel.Item>
@@ -58,13 +64,19 @@ class Home extends Component {
             
             <Row className="pt-1 pb-3">
             <Col md={8}>
-            
-            
-            </Col>
+            <Card className="bg-white border-0 py-0">
+            <Card.Body>
+            <Card.Title><h3>Alur Pendaftaran</h3></Card.Title>
 
+            <img src="/images/alur_daftar.png" className="img-fluid" width="600" alt="" />
+
+            </Card.Body>
+            </Card>
+
+            </Col>
             <Col md={4}>
 
-            <Card className="bg-white card-lift--hover shadow border-0 py-0">
+            <Card className="bg-white border-0 py-0">
             <Card.Body>
             <Card.Title>Masuk</Card.Title>
 
@@ -72,10 +84,11 @@ class Home extends Component {
 
             </Card.Body>
             </Card>
-            
-            
+
+
             </Col>
             </Row>
+
             </Container>
             </>
         )

@@ -1,5 +1,5 @@
 <p align="center">
-   <img src="https://raw.githubusercontent.com/hariwicaksono/pmbamikompwt-reactjs/master/2020-07-14_110407_localhost.png" alt="PMB Amikom">
+   <img src="" alt="PMB Amikom">
 </p>
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

@@ -23,6 +23,7 @@
     "react-router-dom": "^5.1.2",
     "react-router-scroll-top": "^0.2.1",
     "react-scripts": "^3.3.1",
+    "react-stepzilla": "^6.0.2",
     "spin.js": "^4.1.0",
     "styled-components": "^5.1.0",
     "yup": "^0.29.1"

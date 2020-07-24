@@ -125,7 +125,7 @@ return (
                     </Form.Group>
 
                     <Form.Group as={Row}>
-                        <Form.Label column sm={3} className="text-md-right font-weight-bold">Password</Form.Label>
+                        <Form.Label column sm={3} className="text-md-right font-weight-bold">Password Baru</Form.Label>
                         <Col sm={9}>
                         <Form.Control name="password" className="text-dark" onChange={this.handlerData} type="password" />
                         </Col>
