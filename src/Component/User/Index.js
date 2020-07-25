@@ -5,16 +5,11 @@ import { Helmet } from 'react-helmet'
 import MainnavU from './MainnavU'
 import { Container, Row, Col } from 'react-bootstrap'
 import StepZilla from 'react-stepzilla'
+import Step1 from "./Step1";
 import 'react-stepzilla/src/css/main.css'
 
 const TITLE = ' User - PMB Universitas Amikom Purwokerto'
-const Step1 = props => {
-    return (
-      <div>
-        <div>Step 1</div>
-      </div>
-    );
-  };
+
   const Step2 = props => {
     return (
       <div>
@@ -82,7 +77,7 @@ class Index extends Component {
                         <Col md={12}>
                     
                             
-                 <div className='step-progress'>
+    <div className='step-progress'>
         <StepZilla steps={steps} backButtonCls="btn btn-next btn-primary float-left" nextButtonCls="btn btn-prev btn-primary float-md-right"/>
     </div>
                         </Col>

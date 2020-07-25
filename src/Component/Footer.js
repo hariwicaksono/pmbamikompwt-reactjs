@@ -1,7 +1,7 @@
 import React,{Component} from 'react'
-import {Link,Redirect,NavLink } from 'react-router-dom'
-import { Card, Container, Row, Col, Navbar, Nav, Button} from 'react-bootstrap'
-
+//import {Link,Redirect } from 'react-router-dom'
+import { Container, Row, Col} from 'react-bootstrap'
+ 
 class Footer extends Component{
     render(){
      
@@ -28,7 +28,7 @@ class Footer extends Component{
                 </Col>
             </Row>
            
-            <div className="text-white mt-3">© 2020. Universitas Amikom Purwokerto</div>
+            <div className="text-white mt-3">© 2020. Universitas Amikom Purwokerto - www.amikompurwokerto.ac.id</div>
             </Container>
             </div>
 
