@@ -7,6 +7,7 @@ import { Container, Row, Col } from 'react-bootstrap'
 import StepZilla from 'react-stepzilla'
 import Step1 from "./Step1";
 import 'react-stepzilla/src/css/main.css'
+import Stepper from 'react-stepper-horizontal';
 
 const TITLE = ' User - PMB Universitas Amikom Purwokerto'
 
@@ -75,7 +76,7 @@ class Index extends Component {
 
                     <Row>
                         <Col md={12}>
-                    
+                        <Stepper steps={ [{title: 'Step One'}, {title: 'Step Two'}, {title: 'Step Three'}, {title: 'Step Four'}] } activeStep={ 0 } />    
                             
     <div className='step-progress'>
         <StepZilla steps={steps} backButtonCls="btn btn-next btn-primary float-left" nextButtonCls="btn btn-prev btn-primary float-md-right"/>
