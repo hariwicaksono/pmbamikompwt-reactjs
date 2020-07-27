@@ -1,6 +1,6 @@
 import React,{Component} from 'react'
 import {Link, NavLink} from 'react-router-dom'
-import PeriksaForm from './Form/PeriksaForm'
+import PeriksaForm from '../Pages/Home/PeriksaForm'
 import API from '../ServiceApi/Index'
 import {Form,Button, Navbar, Nav, NavItem, NavDropdown} from 'react-bootstrap'
 import {TextLeft, BoxArrowRight, PersonFill} from 'react-bootstrap-icons'

@@ -21,7 +21,7 @@ const SearchResults = (props) => {
         
       <div className="card card-body" style={{maxHeight:'250px',overflowY: 'auto'}}>
       <div className="d-flex justify-content-end">
-          <a href="#" className="text-dark" onClick={() => setShow(false) + window.location.reload(true)} >
+          <a href="!#" className="text-dark" onClick={() => setShow(false) + window.location.reload(true)} >
             <X size="24" />
           </a>
         </div>

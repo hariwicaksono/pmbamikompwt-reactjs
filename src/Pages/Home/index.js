@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 //import {Redirect} from 'react-router-dom'
-import FormLogin from './Form/LoginForm'
+import FormLogin from '../Login/LoginForm'
 import { Helmet } from 'react-helmet'
 import {Container, Row, Col, Carousel, Card} from 'react-bootstrap'
 

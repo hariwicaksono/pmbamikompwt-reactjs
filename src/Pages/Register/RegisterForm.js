@@ -7,7 +7,7 @@ import {Check2} from 'react-bootstrap-icons'
 import Form from 'react-formal'
 import * as yup from 'yup'
  
-let schema = yup.object({
+const schema = yup.object({
     nama: yup.string().required('Nama lengkap harus diisi').min(4),
     telp: yup.number().required('Nomor Telepon atau HP harus diisi').typeError("Harus berupa angka"),
     email: yup.string().email('Harus berupa email yang valid').required('Alamat email harus diisi'),

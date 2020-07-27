@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import API from '../ServiceApi/Index'
-import ContentLoader from './Layout/PageLoader'
+import API from '../../ServiceApi/Index'
+import ContentLoader from '../../Component/Loader'
 import Parser from 'html-react-parser'
 import { Container, Row, Col } from 'react-bootstrap'
 import { Helmet } from 'react-helmet'

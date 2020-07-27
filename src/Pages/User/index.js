@@ -4,39 +4,15 @@ import React, { Component } from 'react'
 import { Helmet } from 'react-helmet'
 import MainnavU from './MainnavU'
 import { Container, Row, Col } from 'react-bootstrap'
-import StepZilla from 'react-stepzilla'
-import Step1 from "./Step1";
-import 'react-stepzilla/src/css/main.css'
-import Stepper from 'react-stepper-horizontal';
+import Form from './Form'
 
 const TITLE = ' User - PMB Universitas Amikom Purwokerto'
-
-  const Step2 = props => {
-    return (
-      <div>
-        <div>Step 2</div>
-      </div>
-    );
-  };
-const steps = [
-    {
-      name: "Step 1",
-      component: <Step1 />
-    },
-    {
-        name: "Step 2",
-        component: <Step2 />
-      }
-  ];
-  
-
 class Index extends Component {
     constructor(props) {
         super(props)
         this.state = {
             //login:false,
-            mhs: [],
-            current: 0
+            mhs: []
         }
     }
 
@@ -51,10 +27,6 @@ class Index extends Component {
         //}
         
     //}
-
-    handleStepClick = (stepNumber) => {
-        this.setState({current: stepNumber})
-    };
 
     render() {
         //if (this.state.login) {
@@ -76,11 +48,9 @@ class Index extends Component {
 
                     <Row>
                         <Col md={12}>
-                        <Stepper steps={ [{title: 'Step One'}, {title: 'Step Two'}, {title: 'Step Three'}, {title: 'Step Four'}] } activeStep={ 0 } />    
-                            
-    <div className='step-progress'>
-        <StepZilla steps={steps} backButtonCls="btn btn-next btn-primary float-left" nextButtonCls="btn btn-prev btn-primary float-md-right"/>
-    </div>
+
+                        <Form onSubmit={this.result}/>
+                         
                         </Col>
                     </Row>
               
