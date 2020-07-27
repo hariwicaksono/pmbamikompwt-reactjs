@@ -27,6 +27,9 @@ class Index extends Component {
         //}
         
     //}
+    result = (values) => {
+        console.log('result is', values);
+      }
 
     render() {
         //if (this.state.login) {
