@@ -17,7 +17,7 @@ import {
   FormLabel
 } from 'react-bootstrap';
 
-const PersonalDetailsForm = (props) => {
+const Step2 = (props) => {
   const { handleSubmit, previousPage } = props;
   return (
     <Form onSubmit={handleSubmit}>
@@ -42,7 +42,7 @@ const PersonalDetailsForm = (props) => {
   );
 };
 
-PersonalDetailsForm.propTypes = {
+Step2.propTypes = {
   handleSubmit: PropTypes.func,
   previousPage: PropTypes.func
 };
@@ -52,4 +52,4 @@ export default reduxForm({
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
   validate,
-})(PersonalDetailsForm);
+})(Step2);

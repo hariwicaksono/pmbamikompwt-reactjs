@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 //import API from '../../ServiceApi/Index'
 import { Helmet } from 'react-helmet'
 import MainnavU from './MainnavU'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container } from 'react-bootstrap'
 import Form from './Form'
 
 const TITLE = ' User - PMB Universitas Amikom Purwokerto'
@@ -11,8 +11,7 @@ class Index extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            //login:false,
-            mhs: []
+            //mhs: []
         }
     }
 
@@ -28,13 +27,10 @@ class Index extends Component {
         
     //}
     result = (values) => {
-        console.log('result is', values);
+        console.log(values);
       }
 
     render() {
-        //if (this.state.login) {
-            //return( <Redirect to="/login" /> )
-        //}
         
         return (
             <>
@@ -43,20 +39,13 @@ class Index extends Component {
                 
                 </Helmet>
 
-
                 <MainnavU />
 
-                <div className="my-3 mx-3">
+                <div className="mx-2">
                 <Container fluid>
 
-                    <Row>
-                        <Col md={12}>
+                <Form onSubmit={this.result}/>
 
-                        <Form onSubmit={this.result}/>
-                         
-                        </Col>
-                    </Row>
-              
                 </Container>
                 </div>
     

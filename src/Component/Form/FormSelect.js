@@ -1,27 +1,24 @@
 import React from 'react';
 import { FormGroup, Form, FormControl, FormLabel } from 'react-bootstrap';
 
-const FormInput = ({
+const FormSelect = ({
   input,
   label,
   type,
+  children,
   inputPlaceHolder,
-  maxDate,
-  minDate,
   meta: { error, invalid, touched }
 }) => (
   <FormGroup>
     <FormLabel>{label}</FormLabel>
-    <FormControl
+    <FormControl as="select"
       {...input}
-      type={type}
-      placeholder={inputPlaceHolder}
-      max={maxDate}
-      min={minDate}
       isInvalid={touched && invalid}
-    />
+    >
+        {children}
+    </FormControl>
     {touched &&  <Form.Control.Feedback type="invalid">{error}</Form.Control.Feedback>}
   </FormGroup>
 );
 
-export default FormInput;
+export default FormSelect;

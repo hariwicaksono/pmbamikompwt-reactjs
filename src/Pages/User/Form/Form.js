@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Stepper from 'react-stepper-horizontal';
 import { Card } from 'react-bootstrap';
-import GeneralForm from '../Form/GeneralForm';
-import PersonalDetailsForm from '../Form/PersonalDetailsForm';
-import NomineeDetailsForm from '../Form/NomineeDetailsForm';
+import Step1 from './Step1';
+import Step2 from './Step2';
+import Step3 from './Step3';
+import Step4 from './Step4';
+import Step5 from './Step5';
 
 class Form extends Component {
 
@@ -15,9 +17,11 @@ class Form extends Component {
     this.state = {
       page: 0,
       steps: [
-        {title: 'Visitor Details'},
-        {title: 'Personal Details'},
-        {title: 'Nominee Details'}
+        {title: 'Data Diri'},
+        {title: 'Data Alamat'},
+        {title: 'Data Alamat Orang Tua'},
+        {title: 'Data Sekolah Asal'},
+        {title: 'Data Program Studi'},
       ]
     };
   }
@@ -35,22 +39,36 @@ class Form extends Component {
     const { page, steps } = this.state;
 
     return (
-      <Card>
+      <>
         <Stepper steps={ steps } activeStep={ page } />
-        {page === 0 && <GeneralForm onSubmit={this.nextPage} />}
+       <div className="mt-3">
+        {page === 0 && <Step1 onSubmit={this.nextPage} />}
         {page === 1 && (
-          <PersonalDetailsForm
+          <Step2
             previousPage={this.previousPage}
             onSubmit={this.nextPage}
           />
         )}
         {page === 2 && (
-          <NomineeDetailsForm
+          <Step3
+            previousPage={this.previousPage}
+            onSubmit={this.nextPage}
+          />
+        )}
+        {page === 3 && (
+          <Step4
+            previousPage={this.previousPage}
+            onSubmit={this.nextPage}
+          />
+        )}
+        {page === 4 && (
+          <Step5
             previousPage={this.previousPage}
             onSubmit={onSubmit}
           />
         )}
-      </Card>
+      </div>
+      </>
     );
   }
 

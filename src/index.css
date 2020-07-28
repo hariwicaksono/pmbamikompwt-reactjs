@@ -11,7 +11,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-input[type='radio'] { transform: scale(1.6); }
+input[type='radio'] { transform: scale(1.4); }
 .link-unstyled, .link-unstyled:visited, .link-unstyled:hover, .link-unstyled:active, .link-unstyled:focus, .link-unstyled:active:hover {
  
   text-decoration: none;
@@ -43,7 +43,14 @@ select {
     border-radius: 4px;
     box-sizing: border-box;
   }
-  
+input[type='text']:focus,   
+input[type='password']:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  }  
 .error {
   color: red;
   font-size: 1rem;

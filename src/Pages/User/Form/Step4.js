@@ -1,26 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
-import validate  from '../../../Component/Form/Validation';
+import validate from '../../../Component/Form/Validation';
 import {
-  captialize,
-  age,
-  salary,
+  upper,
+  aadhaar,
+  pan,
+  salary
 } from '../../../Component/Form/Normalize';
 import {
   Button,
-  Card,
   Form,
+  Card,
   Col,
   FormGroup,
   FormLabel
 } from 'react-bootstrap';
 
-const NomineeDetailsForm = (props) => {
-  const { handleSubmit, pristine, previousPage, submitting } = props;
+const Step4 = (props) => {
+  const { handleSubmit, previousPage } = props;
   return (
-    <form onSubmit={handleSubmit}>
-      <Col xs="12" sm="12">
+    <Form onSubmit={handleSubmit}>
+      <Col sm="12">
         <Card className="card-border">
           <Card.Body>
             
@@ -30,27 +31,25 @@ const NomineeDetailsForm = (props) => {
               <i className="fa fa-chevron-left" />
                 &nbsp; Previous
             </Button>
-            <Button color="primary" className="btn-pill pull-right" type="submit" style={{marginRight: '20px'}} disabled={pristine || submitting}>
-               Save &nbsp;
-              <i className="fa fa-check" />
+            <Button color="primary" className="btn-pill pull-right" type="submit" style={{marginRight: '20px'}}>
+               Next &nbsp;
+              <i className="fa fa-chevron-right" />
             </Button>
           </div>
         </Card>
       </Col>
-    </form>
+    </Form>
   );
 };
 
-NomineeDetailsForm.propTypes = {
+Step4.propTypes = {
   handleSubmit: PropTypes.func,
-  pristine: PropTypes.bool,
-  previousPage: PropTypes.func,
-  submitting: PropTypes.bool
+  previousPage: PropTypes.func
 };
 
 export default reduxForm({
   form: 'wizardForm',
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
-  validate
-})(NomineeDetailsForm);
+  validate,
+})(Step4);
