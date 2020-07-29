@@ -1,26 +1,18 @@
 import React from 'react';
-import { FormGroup, Form, FormControl, FormLabel } from 'react-bootstrap';
+import { FormGroup, FormControl, FormLabel } from 'react-bootstrap';
 
 const FormInput = ({
-  input,
+  field,
   label,
-  type,
-  inputPlaceHolder,
-  maxDate,
-  minDate,
-  meta: { error, invalid, touched }
+  type, // { name, value, onChange, onBlur }
+  form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
+  ...props
 }) => (
   <FormGroup>
     <FormLabel>{label}</FormLabel>
-    <FormControl
-      {...input}
-      type={type}
-      placeholder={inputPlaceHolder}
-      max={maxDate}
-      min={minDate}
-      isInvalid={touched && invalid}
-    />
-    {touched &&  <Form.Control.Feedback type="invalid">{error}</Form.Control.Feedback>}
+    <FormControl type={type} {...field} {...props} isInvalid={touched[field.name] && errors[field.name]} />
+    {touched[field.name] &&
+      errors[field.name] && <FormControl.Feedback type="invalid">{errors[field.name]}</FormControl.Feedback>}
   </FormGroup>
 );
 

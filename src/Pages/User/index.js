@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 //import {Redirect,NavLink,Link} from 'react-router-dom'
 //import API from '../../ServiceApi/Index'
 import { Helmet } from 'react-helmet'
-import MainnavU from './MainnavU'
+//import MainnavU from './MainnavU'
 import { Container } from 'react-bootstrap'
 import Form from './Form'
 
@@ -26,9 +26,6 @@ class Index extends Component {
         //}
         
     //}
-    result = (values) => {
-        console.log(values);
-      }
 
     render() {
         
@@ -39,12 +36,10 @@ class Index extends Component {
                 
                 </Helmet>
 
-                <MainnavU />
-
                 <div className="mx-2">
                 <Container fluid>
 
-                <Form onSubmit={this.result}/>
+                <Form/>
 
                 </Container>
                 </div>

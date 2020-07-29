@@ -50,6 +50,7 @@ class Step1 extends Component {
     }
 }
   render(){
+
   const { handleSubmit } = this.props;
   return (
     <Form noValidate onSubmit={handleSubmit}>
@@ -122,6 +123,9 @@ Step1.propTypes = {
 
 export default reduxForm({
   form: 'wizardForm',
+  initialValues: {
+        nama: 'Dan'
+  },
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true,
   validate
