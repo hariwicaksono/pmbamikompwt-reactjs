@@ -1,154 +1,377 @@
-import React, { Component, useState } from "react";
+import React, { Fragment, useState } from "react";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import Stepper from 'react-stepper-horizontal';
 import * as Yup from "yup";
 import FormInput from '../../../Component/Form/FormInput';
-import { Button } from 'react-bootstrap';
+import { Row, Col, FormGroup, FormLabel, Button } from 'react-bootstrap';
 //import { Debug } from './Debug';
 import API from '../../../ServiceApi/Index'
 import { isLogin } from '../../../Utils'
+import classnames from "classnames";
 
-//const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+const Step1Schema = Yup.object().shape({
+  firstName: Yup.string().required("First Name Is Required"),
+  middleName: Yup.string().required("Middle Name Is Required"),
+  sirName: Yup.string().required("Sir Name Is Required"),
+  favoritePet: Yup.string().required("Pet is required"),
+});
+const Step2Schema = Yup.object().shape({
+  email: Yup.string().required("Email Is Required"),
+  favoriteColor: Yup.string().required("Favorite color required"),
+});
+const initialValues = {
+  firstName: "",
+  middleName: "",
+  sirName: "",
+  favoritePet: "",
+  email: "",
+  favoriteColor: "",
+};
 
-const Wizard = ({ children, initialValues, onSubmit }) => {
+const schemaArray = [Step1Schema, Step2Schema];
 
-  const [stepNumber, setStepNumber] = useState(0);
-  const steps = React.Children.toArray(children);
-  const [snapshot, setSnapshot] = useState(initialValues);
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-  const step = steps[stepNumber];
-  const totalSteps = steps.length;
-  const isLastStep = stepNumber === totalSteps - 1;
+const required = value => (value ? undefined : "Required");
 
-  const next = values => {
-    setSnapshot(values);
-    setStepNumber(Math.min(stepNumber + 1, totalSteps - 1));
+class Wizard extends React.Component {
+  static Page = ({ children, parentState }) => {
+    return children(parentState);
   };
 
-  const previous = values => {
-    setSnapshot(values);
-    setStepNumber(Math.max(stepNumber - 1, 0));
+  constructor(props) {
+    super(props);
+    this.state = {
+      page: 0,
+      values: props.initialValues,
+    };
+  }
+
+  next = values =>
+    this.setState(state => ({
+      page: Math.min(state.page + 1, this.props.children.length - 1),
+      values,
+    }));
+
+  previous = () =>
+    this.setState(state => ({
+      page: Math.max(state.page - 1, 0),
+    }));
+
+  validate = values => {
+    const activePage = React.Children.toArray(this.props.children)[
+      this.state.page
+    ];
+    return activePage.props.validate ? activePage.props.validate(values) : {};
   };
 
-  const handleSubmit = async (values, bag) => {
-    if (step.props.onSubmit) {
-      await step.props.onSubmit(values, bag);
-    }
-    if (isLastStep) {
+  handleSubmit = (values, bag) => {
+    const { children, onSubmit } = this.props;
+    const { page } = this.state;
+    const isLastPage = page === React.Children.count(children) - 1;
+    if (isLastPage) {
       return onSubmit(values, bag);
     } else {
       bag.setTouched({});
-      next(values);
+      bag.setSubmitting(false);
+      this.next(values);
     }
   };
 
-  return (
-    <Formik
-      initialValues={snapshot}
-      onSubmit={handleSubmit}
-      validationSchema={step.props.validationSchema}
-    >
-      {formik => (
-        <Form>
-          <h2>Form Pendaftaran</h2>
-          <p className="text-center lead">
-            Langkah {stepNumber + 1} dari {totalSteps}
-          </p>
-          {step}
-          <div style={{ display: "flex" }}>
-            {stepNumber > 0 && (
+  arrayProgress = [
+    {
+      title: "Certificate Request",
+      description: "Your company details & certificate options",
+    },
+    {
+      title: "Domain Verification",
+      description: "Show you have control of your domain",
+    },
+    {
+      title: "Complete",
+      description: "Process complete & next steps",
+    },
+  ];
+  render() {
+    const { children } = this.props;
+    const { page, values } = this.state;
+    const activePage = React.Children.toArray(children)[page];
+    console.log(activePage, "activePage");
+    const isLastPage = page === React.Children.count(children) - 1;
+    return (
+      <Formik
+        initialValues={values}
+        enableReinitialize={false}
+        // validate={this.validate}
+        // validationSchema={this.schemaArray[page]}
+        validationSchema={schemaArray[page]}
+        onSubmit={this.handleSubmit}
+      >
+        {props => {
+          const { handleSubmit, isSubmitting } = props;
+          return (
+            <form onSubmit={handleSubmit}>
+              <div className="progressbar-wrapper">
+                <ol className="progressbar">
+                  {this.arrayProgress.map((item, index) => {
+                    return (
+                      <li className={page >= index ? "active" : ""}>
+                        <h2>
+                          {item.title}
+                        </h2>
+                        <p className="text--size-small">
+                          {item.description}
+                        </p>
+                      </li>
+                    );
+                  })}
+                </ol>
+              </div>
+              {React.cloneElement(activePage, { parentState: { ...props } })}
+              <Row>
+                <Col xs={{ size: 6, offset: 3 }}>
+                  <div className="buttons">
+                    {page > 0 &&
+                      <button
+                        type="button"
+                        className="secondary"
+                        onClick={this.previous}
+                      >
+                        « Previous
+                      </button>}
 
-              <Button onClick={() => previous(formik.values)} color="primary" className="float-right" type="submit" style={{marginRight: '10px'}}>
-              Kembali 
-              </Button>
-            )}
-            <div>
-            <Button disabled={formik.isSubmitting} color="primary" className="float-right" type="submit">
-              {isLastStep ? "Simpan" : "Selanjutnya"} 
-            </Button>
-            </div>
-          </div>
-         
-        </Form>
-      )}
-    </Formik>
+                    {!isLastPage && <button type="submit">Next »</button>}
+                    {isLastPage &&
+                      <button type="submit" disabled={isSubmitting}>
+                        Submit
+                      </button>}
+                  </div>
+                </Col>
+              </Row>
+            </form>
+          );
+        }}
+      </Formik>
+    );
+  }
+}
+
+export const App = () => {
+  return (
+    <div className="App">
+      <h1>Multistep / Form Wizard </h1>
+      <Wizard
+        initialValues={initialValues}
+        onSubmit={(values, actions) => {
+          sleep(300).then(() => {
+            window.alert(JSON.stringify(values, null, 2));
+            actions.setSubmitting(false);
+          });
+        }}
+      >
+        <Wizard.Page>
+          {props => {
+            console.log(props, "this props 1");
+            return (
+              <Fragment>
+                <div>
+                  <Row>
+                    <Col xs={{ size: 6, offset: 3 }}>
+                      <FormGroup>
+                        <FormLabel for="exampleEmail">First Name</FormLabel>
+                        <Field
+                          tag={Field}
+                          name="firstName"
+                          component="input"
+                          type="text"
+                          placeholder="First Name"
+                        />
+                        {props.errors.firstName &&
+                          props.touched.firstName &&
+                          <div className="input-feedback">
+                            {props.errors.firstName}
+                          </div>}
+                      </FormGroup>
+                    </Col>
+                    <Col xs={{ size: 6, offset: 3 }}>
+                      <FormGroup>
+                        <FormLabel for="exampleMiddle">Middle Name</FormLabel>
+                        <Field
+                          tag={Field}
+                          name="middleName"
+                          component="input"
+                          type="text"
+                          placeholder="Middle Name"
+                        />
+                        <ErrorMessage
+                          name="middleName"
+                          component="div"
+                          className="input-feedback"
+                        />
+                      </FormGroup>
+                    </Col>
+                    <Col xs={{ size: 6, offset: 3 }}>
+                      <FormGroup>
+                        <Field
+                          id="sirName"
+                          type="text"
+                          label="Sir Name"
+                          placeholder="John"
+                          error={props.touched.sirName && props.errors.sirName}
+                          value={props.values.sirName}
+                          onChange={props.handleChange}
+                          onBlur={props.handleBlur}
+                        />
+                      </FormGroup>
+                    </Col>
+                    <Col xs={{ size: 6, offset: 3 }}>
+                      <FormGroup>
+                        <div className="dropdown-wrapper">
+                          <FormLabel>Favorite Pet</FormLabel>
+                          <Field
+                            tag={Field}
+                            name="favoritePet"
+                            component="select"
+                          >
+                            <option value="">Select a Pet</option>
+                            <option value="#ff0000">❤️ Dog</option>
+                            <option value="#00ff00">💚 Cat</option>
+                            <option value="#0000ff">💙 Mouse</option>
+                          </Field>
+                        </div>
+                        <ErrorMessage
+                          name="favoritePet"
+                          component="div"
+                          className="input-feedback"
+                        />
+                      </FormGroup>
+                    </Col>
+                  </Row>
+                </div>
+              </Fragment>
+            );
+          }}
+        </Wizard.Page>
+        <Wizard.Page
+          validate={values => {
+            const errors = {};
+            if (!values.email) {
+              errors.email = "Required";
+            }
+            if (!values.favoriteColor) {
+              errors.favoriteColor = "Required";
+            }
+            return errors;
+          }}
+        >
+          {props => {
+            console.log(props, "this props last");
+            return (
+              <Fragment>
+                <div>
+                  <Row>
+                    <Col xs={{ size: 6, offset: 3 }}>
+                      <FormGroup>
+                        <FormLabel for="exampleMiddle">Email Address</FormLabel>
+                        <Field
+                          tag={Field}
+                          name="email"
+                          component="input"
+                          type="text"
+                          placeholder="Email"
+                        />
+                        <ErrorMessage
+                          name="email"
+                          component="div"
+                          className="input-feedback"
+                        />
+                      </FormGroup>
+                    </Col>
+                    <Col xs={{ size: 6, offset: 3 }}>
+                      <FormGroup>
+                        <div className="dropdown-wrapper">
+                          <FormLabel>Favorite Color</FormLabel>
+                          <Field
+                            tag={Field}
+                            name="favoriteColor"
+                            component="select"
+                          >
+                            <option value="">Select a Color</option>
+                            <option value="#ff0000">❤️ Red</option>
+                            <option value="#00ff00">💚 Green</option>
+                            <option value="#0000ff">💙 Blue</option>
+                          </Field>
+                        </div>
+                        <ErrorMessage
+                          name="favoriteColor"
+                          component="div"
+                          className="input-feedback"
+                        />
+                      </FormGroup>
+                    </Col>
+                  </Row>
+                </div>
+              </Fragment>
+            );
+          }}
+        </Wizard.Page>
+      </Wizard>
+    </div>
   );
 };
 
+export default App;
 
-const WizardStep = ({ children }) => children;
+/**
+ * 
+ * Custom Inputs for part 3 onlys
+ */
+const InputFeedback = ({ error }) =>
+  error
+    ? <div className="input-feedback">
+        {error}
+      </div>
+    : null;
 
-const daftar = () => (
-  <div>
-    
-    <Wizard
-      initialValues={{
-        email: "",
-        firstName: "",
-        lastName: ""
-      }}
-      onSubmit={ values =>
-       console.log(values)
-      }
-    >
-      <WizardStep
-        //onSubmit={() => console.log("Step1 onSubmit")}
-        validationSchema={Yup.object({
-          firstName: Yup.string().required("required"),
-          lastName: Yup.string().required("required")
-        })}
-      >
-        <div>
-          
-          <Field
-            component={FormInput}
-            autoComplete="given-name"
-            id="firstName"
-            name="firstName"
-            placeholder="First Name"
-            type="text"
-            label="First Name"
-          />
-         
-        </div>
-        <div>
-         
-          <Field
-            autoComplete="family-name"
-            component={FormInput}
-            id="lastName"
-            name="lastName"
-            placeholder="Last Name"
-            type="text"
-            label="Last Name"
-          />
-    
-        </div>
-      </WizardStep>
-      <WizardStep
-        //onSubmit={() => console.log("Step2 onSubmit")}
-        validationSchema={Yup.object({
-          email: Yup.string()
-            .email("Invalid email address")
-            .required("required")
-        })}
-      >
-        <div>
+const Labely = ({ error, className, children, ...props }) => {
+  return (
+    <label className="label" {...props}>
+      {children}
+    </label>
+  );
+};
 
-          <Field
-            autoComplete="email"
-            component={FormInput}
-            id="email"
-            name="email"
-            placeholder="Email"
-            type="text"
-            label="Email"
-          />
-         
-        </div>
-      </WizardStep>
-    </Wizard>
-  </div>
-);
-
-export default daftar;
+const TextInput = ({
+  type,
+  id,
+  label,
+  error,
+  value,
+  onChange,
+  className,
+  ...props
+}) => {
+  const classes = classnames(
+    "input-group",
+    {
+      "animated shake error": !!error,
+    },
+    className,
+  );
+  return (
+    <div className={classes}>
+      <Labely htmlFor={id} error={error}>
+        {label}
+      </Labely>
+      <input
+        id={id}
+        className="text-input"
+        type={type}
+        value={value}
+        onChange={onChange}
+        {...props}
+      />
+      <InputFeedback error={error} />
+    </div>
+  );
+};
