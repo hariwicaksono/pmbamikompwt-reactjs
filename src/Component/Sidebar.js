@@ -10,7 +10,7 @@ class Sidebar extends Component {
     return(
         <>
      
-<nav id="sidebar" className={!this.props.showMenu ? 'active' : '' }>
+<nav id="sidebar" className={this.props.showMenu ? 'active' : '' }>
 <ul className="list-unstyled components">
                 
                 <li>

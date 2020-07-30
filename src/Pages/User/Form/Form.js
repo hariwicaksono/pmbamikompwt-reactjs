@@ -42,7 +42,7 @@ class Wizard extends React.Component {
   static Page = ({ children, parentState }) => {
     return children(parentState);
   };
-
+ 
   constructor(props) {
     super(props);
     this.state = {

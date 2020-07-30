@@ -37,6 +37,7 @@
     "redux-form-yup": "0.0.5",
     "spin.js": "^4.1.0",
     "styled-components": "^5.1.0",
+    "tailwindcss": "^1.6.0",
     "yup": "^0.29.1"
   },
   "scripts": {
