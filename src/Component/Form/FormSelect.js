@@ -2,22 +2,21 @@ import React from 'react';
 import { FormGroup, Form, FormControl, FormLabel } from 'react-bootstrap';
 
 const FormSelect = ({
-  input,
+  field,
   label,
   type,
   children,
-  inputPlaceHolder,
-  meta: { error, invalid, touched }
+  form: { errors, touched }
 }) => (
   <FormGroup>
-    <FormLabel>{label}</FormLabel>
+    <FormLabel style={{fontWeight:"600"}}>{label}</FormLabel>
     <FormControl as="select"
-      {...input}
-      isInvalid={touched && invalid}
+      {...field}
+      isInvalid={touched[field.name] && errors[field.name]}
     >
         {children}
     </FormControl>
-    {touched &&  <Form.Control.Feedback type="invalid">{error}</Form.Control.Feedback>}
+    {touched[field.name] &&  <Form.Control.Feedback type="invalid">{errors[field.name]}</Form.Control.Feedback>}
   </FormGroup>
 );
 

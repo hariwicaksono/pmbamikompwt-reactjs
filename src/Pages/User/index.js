@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 //import API from '../../ServiceApi/Index'
 import { Helmet } from 'react-helmet'
 //import MainnavU from './MainnavU'
-import { Container } from 'react-bootstrap'
+import { Card, Container } from 'react-bootstrap'
 import Form from './Form'
 
 const TITLE = ' User - PMB Universitas Amikom Purwokerto'
@@ -36,10 +36,10 @@ class Index extends Component {
                 
                 </Helmet>
 
-                <div className="mx-2">
+                <div className="mx-2 my-3">
                 <Container fluid>
-
-                <Form/>
+                
+                <Form />
 
                 </Container>
                 </div>

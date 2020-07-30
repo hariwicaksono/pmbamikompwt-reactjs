@@ -12,6 +12,9 @@ import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './Redux/store';
+import 'offline-js/offline.js';
+import 'offline-js/themes/offline-theme-default.css'
+import 'offline-js/themes/offline-language-english.css'
 
 ReactDOM.render(<BrowserRouter> <Provider store={store}><App /></Provider> </BrowserRouter>, document.getElementById('root')
 );

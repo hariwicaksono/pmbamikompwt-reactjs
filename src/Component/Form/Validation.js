@@ -17,9 +17,9 @@ const validate = (values) => {
   }
 
   if (!values.jk) {
-    errors.jk = 'Jenis Kelamin harus dipilih';
+    errors.jk = 'Jenis kelamin harus dipilih';
   }
-
+  
   if (!values.agama) {
     errors.agama = 'Agama harus dipilih';
   }
@@ -39,19 +39,6 @@ const validate = (values) => {
     errors.email = 'Invalid email address'
   }
 
-  if (!values.aadhaar) {
-    errors.aadhaar = 'Aadhaar Number Required';
-  } else if(values.aadhaar && !/^\d{12}$/i.test(values.aadhaar)) {
-    errors.aadhaar = 'Invalid Aadhaar no';
-  }
-
-  if (!values.pan) {
-    errors.pan = 'Pan Number Required';
-  }
-
-  if (!values.address) {
-    errors.address = 'Address Required';
-  }
 
   return errors;
 };

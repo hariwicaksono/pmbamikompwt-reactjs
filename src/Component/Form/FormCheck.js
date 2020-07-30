@@ -1,18 +1,21 @@
 import React from 'react';
-import { FormGroup, Form, FormControl, FormLabel } from 'react-bootstrap';
+import { FormGroup, FormCheck, Form, FormControl, FormLabel } from 'react-bootstrap';
 
-const FormCheck = ({
-  input,
+const FormCheckbox = ({
+  field,
   label,
   type,
-  meta: { error, invalid, touched }
+  form: { touched, errors },
+  ...props
 }) => (
-    <div className="form-check form-check-inline">
-    <Form.Check  {...input} type={type} label={label} isInvalid={touched && invalid}  />
 
-    {touched &&  <span className="error">{error}</span>}
-</div>
+    <div className="form-check form-check-inline">
+    <Form.Check {...field} {...props} type={type} label={label} isInvalid={touched[field.name] && errors[field.name]}  />
+    
+    {touched[field.name] &&
+      errors[field.name] && <FormControl.Feedback type="invalid">{errors[field.name]}</FormControl.Feedback>}
+    </div>
 
 );
 
-export default FormCheck;
+export default FormCheckbox;

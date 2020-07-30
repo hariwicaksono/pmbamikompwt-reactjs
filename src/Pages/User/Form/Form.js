@@ -1,38 +1,42 @@
 import React, { Fragment, useState } from "react";
-import { ErrorMessage, Field, Form, Formik } from "formik";
-import Stepper from 'react-stepper-horizontal';
+import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import FormInput from '../../../Component/Form/FormInput';
-import { Row, Col, FormGroup, FormLabel, Button } from 'react-bootstrap';
-//import { Debug } from './Debug';
+import FormCheck from '../../../Component/Form/FormCheck';
+import FormSelect from '../../../Component/Form/FormSelect';
+import validation from '../../../Component/Form/Validation';
+import { Row, Col, FormGroup, FormLabel, Card, Button } from 'react-bootstrap';
 import API from '../../../ServiceApi/Index'
 import { isLogin } from '../../../Utils'
-import classnames from "classnames";
 
 const Step1Schema = Yup.object().shape({
   firstName: Yup.string().required("First Name Is Required"),
   middleName: Yup.string().required("Middle Name Is Required"),
   sirName: Yup.string().required("Sir Name Is Required"),
   favoritePet: Yup.string().required("Pet is required"),
+  email: Yup.string().required("Email Is Required"),
 });
 const Step2Schema = Yup.object().shape({
-  email: Yup.string().required("Email Is Required"),
+  
   favoriteColor: Yup.string().required("Favorite color required"),
 });
+
 const initialValues = {
-  firstName: "",
-  middleName: "",
-  sirName: "",
-  favoritePet: "",
+  nama: "",
+  nik: "",
+  tempatlahir: "",
+  tgllahir: "",
+  jk:"",
+  agama:"",
   email: "",
-  favoriteColor: "",
+  telepon: "",
 };
 
 const schemaArray = [Step1Schema, Step2Schema];
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-const required = value => (value ? undefined : "Required");
+//const required = value => (value ? undefined : "Required");
 
 class Wizard extends React.Component {
   static Page = ({ children, parentState }) => {
@@ -44,6 +48,7 @@ class Wizard extends React.Component {
     this.state = {
       page: 0,
       values: props.initialValues,
+      nama: ""
     };
   }
 
@@ -58,12 +63,12 @@ class Wizard extends React.Component {
       page: Math.max(state.page - 1, 0),
     }));
 
-  validate = values => {
-    const activePage = React.Children.toArray(this.props.children)[
-      this.state.page
-    ];
-    return activePage.props.validate ? activePage.props.validate(values) : {};
-  };
+  //validate = values => {
+    //const activePage = React.Children.toArray(this.props.children)[
+      //this.state.page
+    //];
+    //return activePage.props.validate ? activePage.props.validate(values) : {};
+  //};
 
   handleSubmit = (values, bag) => {
     const { children, onSubmit } = this.props;
@@ -80,22 +85,23 @@ class Wizard extends React.Component {
 
   arrayProgress = [
     {
-      title: "Certificate Request",
-      description: "Your company details & certificate options",
+      title: "Data Diri",
+      //description: "Biodata Pendaftar",
     },
     {
-      title: "Domain Verification",
-      description: "Show you have control of your domain",
+      title: "Data Alamat",
+      //description: "Alamat Pendaftar dan Orang Tua",
     },
     {
-      title: "Complete",
-      description: "Process complete & next steps",
+      title: "Data Pendidikan",
+      //description: "Sekolah asal dan Jurusan Pilihan",
     },
   ];
   render() {
     const { children } = this.props;
     const { page, values } = this.state;
     const activePage = React.Children.toArray(children)[page];
+    const totalSteps = React.Children.count(children);
     console.log(activePage, "activePage");
     const isLastPage = page === React.Children.count(children) - 1;
     return (
@@ -104,51 +110,67 @@ class Wizard extends React.Component {
         enableReinitialize={false}
         // validate={this.validate}
         // validationSchema={this.schemaArray[page]}
-        validationSchema={schemaArray[page]}
+        //validationSchema={schemaArray[page]}
         onSubmit={this.handleSubmit}
+        validate={validation}
       >
         {props => {
-          const { handleSubmit, isSubmitting } = props;
+          const { handleSubmit, isSubmitting  } = props;
           return (
-            <form onSubmit={handleSubmit}>
-              <div className="progressbar-wrapper">
-                <ol className="progressbar">
+            <Form onSubmit={handleSubmit}>
+              
+              <div className="c_breadcrumb" >
+              <ul className="nav nav-pills nav-tabs nav-fill">
                   {this.arrayProgress.map((item, index) => {
+                    
                     return (
-                      <li className={page >= index ? "active" : ""}>
-                        <h2>
+                      <li className="nav-item">
+                      <a href="javascript:void(0);" className={page >= index ? "nav-link active" : "nav-link"}>
+                        
                           {item.title}
-                        </h2>
-                        <p className="text--size-small">
-                          {item.description}
-                        </p>
+                          {/*{item.description}*/}
+                       
+                      </a>
                       </li>
                     );
                   })}
-                </ol>
+                </ul>
               </div>
+
+              
+
+            <Card>
+              <Card.Body>
+              <h6 className="text-primary">
+                STEP {page + 1} DARI {totalSteps}
+              </h6>
               {React.cloneElement(activePage, { parentState: { ...props } })}
+              
+              
+
               <Row>
-                <Col xs={{ size: 6, offset: 3 }}>
-                  <div className="buttons">
+                <Col>
+                 
                     {page > 0 &&
-                      <button
-                        type="button"
-                        className="secondary"
+                      <Button
+                        variant="primary"
                         onClick={this.previous}
                       >
                         « Previous
-                      </button>}
+                      </Button>}
 
-                    {!isLastPage && <button type="submit">Next »</button>}
+                    {!isLastPage && <Button variant="primary" className="float-right" type="submit">Next »</Button>}
                     {isLastPage &&
-                      <button type="submit" disabled={isSubmitting}>
+                      <Button variant="primary" type="submit" disabled={isSubmitting}>
                         Submit
-                      </button>}
-                  </div>
+                      </Button>}
+                  
                 </Col>
               </Row>
-            </form>
+              </Card.Body>
+            </Card>
+
+            </Form>
           );
         }}
       </Formik>
@@ -158,8 +180,8 @@ class Wizard extends React.Component {
 
 export const App = () => {
   return (
-    <div className="App">
-      <h1>Multistep / Form Wizard </h1>
+    <>
+    
       <Wizard
         initialValues={initialValues}
         onSubmit={(values, actions) => {
@@ -171,143 +193,75 @@ export const App = () => {
       >
         <Wizard.Page>
           {props => {
+            
             console.log(props, "this props 1");
             return (
+              
               <Fragment>
-                <div>
-                  <Row>
-                    <Col xs={{ size: 6, offset: 3 }}>
-                      <FormGroup>
-                        <FormLabel for="exampleEmail">First Name</FormLabel>
-                        <Field
-                          tag={Field}
-                          name="firstName"
-                          component="input"
-                          type="text"
-                          placeholder="First Name"
-                        />
-                        {props.errors.firstName &&
-                          props.touched.firstName &&
-                          <div className="input-feedback">
-                            {props.errors.firstName}
-                          </div>}
-                      </FormGroup>
-                    </Col>
-                    <Col xs={{ size: 6, offset: 3 }}>
-                      <FormGroup>
-                        <FormLabel for="exampleMiddle">Middle Name</FormLabel>
-                        <Field
-                          tag={Field}
-                          name="middleName"
-                          component="input"
-                          type="text"
-                          placeholder="Middle Name"
-                        />
-                        <ErrorMessage
-                          name="middleName"
-                          component="div"
-                          className="input-feedback"
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col xs={{ size: 6, offset: 3 }}>
-                      <FormGroup>
-                        <Field
-                          id="sirName"
-                          type="text"
-                          label="Sir Name"
-                          placeholder="John"
-                          error={props.touched.sirName && props.errors.sirName}
-                          value={props.values.sirName}
-                          onChange={props.handleChange}
-                          onBlur={props.handleBlur}
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col xs={{ size: 6, offset: 3 }}>
-                      <FormGroup>
-                        <div className="dropdown-wrapper">
-                          <FormLabel>Favorite Pet</FormLabel>
-                          <Field
-                            tag={Field}
-                            name="favoritePet"
-                            component="select"
-                          >
-                            <option value="">Select a Pet</option>
-                            <option value="#ff0000">❤️ Dog</option>
-                            <option value="#00ff00">💚 Cat</option>
-                            <option value="#0000ff">💙 Mouse</option>
-                          </Field>
-                        </div>
-                        <ErrorMessage
-                          name="favoritePet"
-                          component="div"
-                          className="input-feedback"
-                        />
-                      </FormGroup>
-                    </Col>
-                  </Row>
+                <h3 style={{fontWeight:"700"}}>Data Pribadi</h3>
+              <h5 className="mb-3">Isikan data pribadi anda. Semua kolom wajib diisi</h5>
+                <div className="row">
+                <Col md={7}>
+                <Field name="nama" component={FormInput} type="text" label="Nama Lengkap" placeholder="Nama Lengkap anda" />
+                </Col>
+                <Col md={5}>
+                <Field name="nik" component={FormInput} type="text" label="Nomor NIK/KTP" />
+                </Col>
+
+                </div>
+                <div className="row">
+                <Col md={6}>
+                <Field name="tempatlahir" type="text" component={FormInput} label="Tempat Lahir *" />   
+                </Col>
+                <Col md={6}>      
+                <Field name="tgllahir" type="date" component={FormInput} label="Tanggal Lahir *" />
+                </Col>
+                </div>
+
+                <div className="row">
+                <Col md={6}>
+                <div class="form-group">
+                <FormLabel style={{fontWeight:"600"}}>Jenis Kelamin *</FormLabel><br/>
+                <Field name="jk" component={FormCheck} type="radio" value="Pria" label="Laki-Laki" />
+                <Field name="jk" component={FormCheck} type="radio" value="Wanita" label="Perempuan"/>
+                </div>
+                </Col>
+                <Col md={6}>
+                <Field name="agama" component={FormSelect} label="Agama *" >
+                    <option />
+                    <option value="I">Islam</option>
+                    <option value="P">Protestan</option>
+                    <option value="K">Katholik</option>
+                    <option value="B">Budha</option>
+                    <option value="H">Hindu</option>
+                    <option value="L">Lainnya</option>
+                </Field>
+                </Col>
+                </div>
+                <div className="row">
+                <Col md={6}>
+                <Field name="telepon" type="text" component={FormInput} label="Telp/HP *" />
+                </Col>
+                <Col md={6}>  
+                <Field name="email" type="email" component={FormInput} label="Email *" />
+                </Col>
                 </div>
               </Fragment>
             );
           }}
         </Wizard.Page>
-        <Wizard.Page
-          validate={values => {
-            const errors = {};
-            if (!values.email) {
-              errors.email = "Required";
-            }
-            if (!values.favoriteColor) {
-              errors.favoriteColor = "Required";
-            }
-            return errors;
-          }}
-        >
+        <Wizard.Page>
           {props => {
             console.log(props, "this props last");
             return (
               <Fragment>
                 <div>
                   <Row>
-                    <Col xs={{ size: 6, offset: 3 }}>
-                      <FormGroup>
-                        <FormLabel for="exampleMiddle">Email Address</FormLabel>
-                        <Field
-                          tag={Field}
-                          name="email"
-                          component="input"
-                          type="text"
-                          placeholder="Email"
-                        />
-                        <ErrorMessage
-                          name="email"
-                          component="div"
-                          className="input-feedback"
-                        />
-                      </FormGroup>
+                    <Col>
+                      
                     </Col>
-                    <Col xs={{ size: 6, offset: 3 }}>
-                      <FormGroup>
-                        <div className="dropdown-wrapper">
-                          <FormLabel>Favorite Color</FormLabel>
-                          <Field
-                            tag={Field}
-                            name="favoriteColor"
-                            component="select"
-                          >
-                            <option value="">Select a Color</option>
-                            <option value="#ff0000">❤️ Red</option>
-                            <option value="#00ff00">💚 Green</option>
-                            <option value="#0000ff">💙 Blue</option>
-                          </Field>
-                        </div>
-                        <ErrorMessage
-                          name="favoriteColor"
-                          component="div"
-                          className="input-feedback"
-                        />
-                      </FormGroup>
+                    <Col>
+                     
                     </Col>
                   </Row>
                 </div>
@@ -316,62 +270,8 @@ export const App = () => {
           }}
         </Wizard.Page>
       </Wizard>
-    </div>
+    </>
   );
 };
 
 export default App;
-
-/**
- * 
- * Custom Inputs for part 3 onlys
- */
-const InputFeedback = ({ error }) =>
-  error
-    ? <div className="input-feedback">
-        {error}
-      </div>
-    : null;
-
-const Labely = ({ error, className, children, ...props }) => {
-  return (
-    <label className="label" {...props}>
-      {children}
-    </label>
-  );
-};
-
-const TextInput = ({
-  type,
-  id,
-  label,
-  error,
-  value,
-  onChange,
-  className,
-  ...props
-}) => {
-  const classes = classnames(
-    "input-group",
-    {
-      "animated shake error": !!error,
-    },
-    className,
-  );
-  return (
-    <div className={classes}>
-      <Labely htmlFor={id} error={error}>
-        {label}
-      </Labely>
-      <input
-        id={id}
-        className="text-input"
-        type={type}
-        value={value}
-        onChange={onChange}
-        {...props}
-      />
-      <InputFeedback error={error} />
-    </div>
-  );
-};
