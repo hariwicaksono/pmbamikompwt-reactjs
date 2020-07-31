@@ -68,13 +68,14 @@ span.error {
     display: block;
     margin-top: 1px;
   }
-.navbar-brand img{height:100%;margin-top:-5px !important;margin-left: 5px;}
+.navbar-brand img{height:100%;margin-top:-5px !important;margin-left: 10px;margin-right: 5px;}
 .navbar-nav a.nav-link{font-family: 'Source Sans Pro', sans-serif;font-size: 1rem;margin:0px 8px;font-weight: 600;}
 .dropdown-menu a.dropdown-item{font-size: 0.9rem;padding: 0.6rem 0.875rem}
 #appbar .navbar-nav a.nav-link{font-size: .875rem;font-weight: 400;}
 .navbar2 a.nav-link{font-size: .875rem;font-weight: 600;}
 .navbar2 a.active{border-bottom: 3px solid #5E72E4;background-color: rgba(0, 0, 0, 0.050) ;}
-svg{margin-top: -4px}
+svg{margin: -4px auto;}
+#sidebar svg{margin:-7px auto;}
 .navbar-dark .navbar-nav .show > .nav-link,
 .navbar-dark .navbar-nav .active > .nav-link,
 .navbar-dark .navbar-nav .nav-link.show,

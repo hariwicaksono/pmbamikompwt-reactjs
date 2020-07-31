@@ -101,7 +101,7 @@ class NavBar extends Component{
 
            <Form inline>
 
-           <Button as={Link} to='/login' className="btn btn-info btn-sm py-2" style={{fontWeight: '600'}}>Daftar/Masuk</Button>
+           <Button as={Link} to='/login' className="btn btn-secondary btn-sm py-2" style={{fontWeight: '700'}}>Daftar/Masuk</Button>
            </Form>
            :
           <Nav>

@@ -83,7 +83,7 @@ class LoginForm extends Component {
                         <Form.Field type="password" name="password" placeholder="Password" errorClass="error" onChange={this.handlerChange} />
                         <Form.Message for="password" className="error" />
                     </FormGroup>
-                    <Form.Submit type="submit" className="btn btn-info btn-block">
+                    <Form.Submit type="submit" className="btn btn-primary btn-block">
                         {
                         this.state.loading
                         ?

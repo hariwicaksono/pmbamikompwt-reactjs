@@ -119,7 +119,7 @@ class RegisterForm extends Component {
             <Form.Message for="password" className="error" />
         </FormGroup>
 
-        <Form.Submit type="submit" className="btn btn-info btn-block">
+        <Form.Submit type="submit" className="btn btn-primary btn-block">
         {
         this.state.loading
         ?
