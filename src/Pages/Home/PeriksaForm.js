@@ -50,13 +50,13 @@ class LoginForm extends Component {
         return (
             <>
         
-                <Form className="w-50" onSubmit={this.handlerSubmit} style={{paddingRight: '15px'}} >
+                <Form onSubmit={this.handlerSubmit} style={{paddingRight: '0px',minWidth:'350px'}}>
                 <Form.Row>
-                <Col lg={10} md={10} xs={10}>
+                <Col lg={11} md={10} sm={10} xs={10}>
                         <Form.Control type="text" name="query" placeholder="Cari Nama atau Nomor Daftar..." onChange={this.handlerChange} required/>
                        
                  </Col>
-                <Col>
+                <Col lg={1} md="auto" sm="auto" xs="auto">
                     <Button type="submit" variant="warning">
                     {
                         this.state.loading

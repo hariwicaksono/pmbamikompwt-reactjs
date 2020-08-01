@@ -75,7 +75,7 @@ class NavBar extends Component{
              </NavItem>
               }
 
-             <NavDropdown title="Menu Utama" id="basic-nav-dropdown">
+             <NavDropdown title="Menu" id="basic-nav-dropdown">
              <NavDropdown.Item as={Link} to='/page/14'>Jenis Pendaftaran</NavDropdown.Item>
              <NavDropdown.Item as={Link} to='/page/34'>Syarat Pendaftaran</NavDropdown.Item>
              <NavDropdown.Item as={Link} to='/page/18'>Prosedur Pendaftaran</NavDropdown.Item>
@@ -85,16 +85,19 @@ class NavBar extends Component{
              <NavDropdown.Item as={Link} to='/page/19'>Kegiatan Pra Kuliah Mahasiswa Baru</NavDropdown.Item>
            </NavDropdown>
            
-             </Nav>
-            
-            <PeriksaForm />
+        </Nav>
+           
+    
 
-            <Nav className="ml-auto">
+             <PeriksaForm />
+        
+
+             <Nav className="ml-auto">
             <NavItem className="navItem">
-            <NavLink className="nav-link" to='/page/33' activeClassName="active">FAQ</NavLink>
+            <NavLink className="btn btn-outline-light btn-sm py-2 mr-1" to='/page/33' activeClassName="active" style={{fontWeight: '700'}}>Kenapa Amikom?</NavLink>
            </NavItem>
             
-            </Nav>
+           
 
 
             {this.state.login ?
@@ -112,7 +115,9 @@ class NavBar extends Component{
                 </NavDropdown>
                 </Nav>
             }
-              </Navbar.Collapse>
+            </Nav>
+            </Navbar.Collapse>
+
             </Navbar>
             
         )

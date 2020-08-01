@@ -13,7 +13,7 @@ class Home extends Component {
              <Helmet>
             <style type="text/css">{`
                 body {
-                    background: #653E92 url('') no-repeat center center fixed;-webkit-background-size: cover;
+                    background: #2C0E4C url('') no-repeat center center fixed;-webkit-background-size: cover;
                     -moz-background-size: cover;
                     -o-background-size: cover;
                     background-size: cover;
