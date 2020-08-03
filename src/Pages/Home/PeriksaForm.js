@@ -53,7 +53,7 @@ class LoginForm extends Component {
                 <div className="input-group">
                     <Form.Control className="border border-left-0" type="text" name="query" placeholder="Cari Nama atau Nomor Daftar..." onChange={this.handlerChange} required/>
                     <span className="input-group-append">
-                    <Button className="border border-left-0" type="submit" variant="warning">
+                    <Button className="border border-left-0 text-dark" type="submit" variant="warning">
                     {
                         this.state.loading
                         ?
