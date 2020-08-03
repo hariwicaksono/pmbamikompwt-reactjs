@@ -123,7 +123,7 @@ class RegisterForm extends Component {
         {
         this.state.loading
         ?
-        <><Spinner as="span" animation="border" size="sm"  role="status" aria-hidden="true" /> Memuat...</>
+        <><Spinner as="span" animation="grow" size="sm"  role="status" aria-hidden="true" /> Memuat...</>
         :  <><Check2 size="18"/> Daftar</> }
 
         </Form.Submit>

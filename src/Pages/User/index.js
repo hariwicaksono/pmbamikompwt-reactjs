@@ -36,13 +36,17 @@ class Index extends Component {
                 
                 </Helmet>
 
-                <div className="mx-2 my-3">
-                <Container fluid>
                 
+                <Container fluid>
+                <Card className="my-3">
+                    <Card.Body>
+
                 <Form />
 
+                </Card.Body>
+                </Card>
                 </Container>
-                </div>
+             
     
             </>
         )

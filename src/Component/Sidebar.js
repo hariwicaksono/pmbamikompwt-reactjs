@@ -12,7 +12,7 @@ class Sidebar extends Component {
      
 <nav id="sidebar" className={this.props.showMenu ? 'active' : '' }>
 <ul className="list-unstyled components">
-                
+    
                 <li>
                     <NavLink to={'/page/37'} title="Petunjuk" alt="Petunjuk">
                     <Grid size={28} /> <span>Petunjuk</span>
@@ -43,6 +43,7 @@ class Sidebar extends Component {
                     <Display size={28} /> <span>Fasilitas</span>
                     </NavLink>
                 </li>
+                
             </ul>
 </nav>
       

@@ -87,7 +87,7 @@ class LoginForm extends Component {
                         {
                         this.state.loading
                         ?
-                        <><Spinner as="span" animation="border" size="sm"  role="status" aria-hidden="true" /> Memuat...</>
+                        <><Spinner as="span" animation="grow" size="sm"  role="status" aria-hidden="true" /> Memuat...</>
                         :  <><BoxArrowInRight size="18"/> Login</> }</Form.Submit>
                 </Form>                              
   

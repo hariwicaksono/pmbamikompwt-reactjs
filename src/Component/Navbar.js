@@ -2,7 +2,7 @@ import React,{Component} from 'react'
 import {Link, NavLink} from 'react-router-dom'
 import PeriksaForm from '../Pages/Home/PeriksaForm'
 import API from '../ServiceApi/Index'
-import {Form,Button, Navbar, Nav, NavItem, NavDropdown} from 'react-bootstrap'
+import {Container, Form,Button, Navbar, Nav, NavItem, NavDropdown} from 'react-bootstrap'
 import {TextLeft, BoxArrowRight, PersonFill} from 'react-bootstrap-icons'
 import { logout, isLogin } from '../Utils'
  
@@ -12,8 +12,8 @@ class NavBar extends Component{
     this.state = {
         login:false,
         id: '',
-        nama: ''
-        
+        nama: '',
+        url: 'http://localhost/pmbamikompwt-server/assets/img/'
     }
     
   }
@@ -48,34 +48,35 @@ class NavBar extends Component{
 }
 
     render(){
-
+        //const navDropdownTitle = (<> Test Dropdown </>);
         return(  
-              
-        <Navbar variant="dark" expand="lg" sticky="top" style={{backgroundColor:'#371260'}}>
+        <Container className="px-0" fluid style={{backgroundColor:'#371260'}}>
+
+        <Navbar variant="dark" expand="lg" sticky="top" expand="xl">
 
         <Button onClick={this.props.toggleMenu} type="button" className="btn btn-warning">
         <TextLeft size="20" />
         </Button>
     
-            <Navbar.Brand as={Link} className="mx-auto" to='/'> 
+            <Navbar.Brand as={Link} to='/'> 
             <img src="/logo.png" width="180" className="img-fluid" alt="Logo Amikom Purwokerto" />
             </Navbar.Brand>
+
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
 
-              <Nav className="mr-auto">
+              <Nav>
               {this.state.login ?
-                <NavItem className="navItem">
-                <NavLink className="nav-link" to='/' activeClassName="active" exact>Home</NavLink>
-               </NavItem>
+             
+                <Nav.Link as={NavLink} to='/' activeClassName="active" exact>Home</Nav.Link>
+              
               :
 
-              <NavItem className="navItem">
-              <NavLink className="nav-link" to='/user' activeClassName="active" exact>Home</NavLink>
-             </NavItem>
+              <Nav.Link as={NavLink} to='/user' activeClassName="active" exact>Home</Nav.Link>
+          
               }
 
-             <NavDropdown title="Menu" id="basic-nav-dropdown">
+             <NavDropdown title="Menu Utama" id="basic-nav-dropdown">
              <NavDropdown.Item as={Link} to='/page/14'>Jenis Pendaftaran</NavDropdown.Item>
              <NavDropdown.Item as={Link} to='/page/34'>Syarat Pendaftaran</NavDropdown.Item>
              <NavDropdown.Item as={Link} to='/page/18'>Prosedur Pendaftaran</NavDropdown.Item>
@@ -84,42 +85,55 @@ class NavBar extends Component{
              <NavDropdown.Item as={Link} to='/page/21'>Tata Tertib Penerimaan Mahasiswa Baru</NavDropdown.Item>
              <NavDropdown.Item as={Link} to='/page/19'>Kegiatan Pra Kuliah Mahasiswa Baru</NavDropdown.Item>
            </NavDropdown>
-           
-        </Nav>
-           
+           </Nav>     
+
+            <PeriksaForm />
     
-
-             <PeriksaForm />
-        
-
-             <Nav className="ml-auto">
-            <NavItem className="navItem">
-            <NavLink className="btn btn-outline-light btn-sm py-2 mr-1" to='/page/33' activeClassName="active" style={{fontWeight: '700'}}>Kenapa Amikom?</NavLink>
-           </NavItem>
+            <Nav>
             
-           
-
-
             {this.state.login ?
+            <>
+            <NavItem>
+            <NavLink className="nav-link" to='/page/33' activeClassName="active">Kenapa?</NavLink>
+            </NavItem>
 
-           <Form inline>
-
-           <Button as={Link} to='/login' className="btn btn-secondary btn-sm py-2" style={{fontWeight: '700'}}>Daftar/Masuk</Button>
-           </Form>
+            <NavItem>
+            <NavLink className="btn btn-secondary btn-sm py-2" to='/login' activeClassName="active" style={{fontWeight: '700'}}>Daftar/Masuk</NavLink>
+            </NavItem>
+            </>
            :
-          <Nav>
-           <NavDropdown title={this.state.nama} id="basic-nav-dropdown">
+           <NavItem>
+           <NavDropdown title=
+           {this.state.foto > 0 ? (
+            <>
+            <img
+                alt="Foto"
+                width="30"
+                className="rounded-circle"
+                src={this.state.url+this.state.foto} />
+            </>
+                ) : (
+            <>
+            <img
+                alt="Foto"
+                width="30"
+                className="rounded-circle"
+                src={this.state.url+'no-photo.jpg'} />
+            </>
+            )} 
+            id="basic-nav-dropdown" alignRight>
            <NavDropdown.Item as={Link} to={'/akun/edit/' + this.state.id}><PersonFill/> Akun</NavDropdown.Item>
                 <NavDropdown.Item onClick={this.Logout} href=''><BoxArrowRight/> Keluar</NavDropdown.Item>
 
                 </NavDropdown>
-                </Nav>
+            </NavItem>
             }
             </Nav>
-            </Navbar.Collapse>
 
+            </Navbar.Collapse>
             </Navbar>
-            
+        
+        </Container>
         )
     }
 }

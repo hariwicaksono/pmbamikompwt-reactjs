@@ -4,24 +4,32 @@ import * as Yup from "yup";
 import FormInput from '../../../Component/Form/FormInput';
 import FormCheck from '../../../Component/Form/FormCheck';
 import FormSelect from '../../../Component/Form/FormSelect';
+import RadioCustom from '../../../Component/Form/FormRadioCustom';
 import validation from '../../../Component/Form/Validation';
-import { Row, Col, FormGroup, FormLabel, Card, Button } from 'react-bootstrap';
+import { Row, Col, FormLabel, Card, Button } from 'react-bootstrap';
 import API from '../../../ServiceApi/Index'
 import { isLogin } from '../../../Utils'
 
 const Step1Schema = Yup.object().shape({
-  firstName: Yup.string().required("First Name Is Required"),
-  middleName: Yup.string().required("Middle Name Is Required"),
-  sirName: Yup.string().required("Sir Name Is Required"),
-  favoritePet: Yup.string().required("Pet is required"),
-  email: Yup.string().required("Email Is Required"),
+  picked: Yup.string().required("Jenis Pendaftaran harus dipilih"),
 });
+
 const Step2Schema = Yup.object().shape({
-  
-  favoriteColor: Yup.string().required("Favorite color required"),
+  nama: Yup.string().required("First Name Is Required"),
+  nik: Yup.string().required("Middle Name Is Required").typeError("Harus berupa angka"),
+  tempatlahir: Yup.string().required("Sir Name Is Required"),
+  tgllahir: Yup.string().required("Pet is required"),
+  jk: Yup.string().required("Email Is Required"),
+  agama: Yup.string().required("Email Is Required"),
+  telepon: Yup.number().required('Nomor Telepon atau HP harus diisi').typeError("Harus berupa angka"),
+  email: Yup.string().email('Harus berupa email yang valid').required("Email Is Required"),
+});
+const Step3Schema = Yup.object().shape({
+ //favoriteColor: Yup.string().required("Favorite color required"),
 });
 
 const initialValues = {
+  picked: "",
   nama: "",
   nik: "",
   tempatlahir: "",
@@ -85,6 +93,10 @@ class Wizard extends React.Component {
 
   arrayProgress = [
     {
+      title: "Jenis Daftar",
+      //description: "Biodata Pendaftar",
+    },
+    {
       title: "Data Diri",
       //description: "Biodata Pendaftar",
     },
@@ -110,22 +122,22 @@ class Wizard extends React.Component {
         enableReinitialize={false}
         // validate={this.validate}
         // validationSchema={this.schemaArray[page]}
-        //validationSchema={schemaArray[page]}
+        validationSchema={schemaArray[page]}
         onSubmit={this.handleSubmit}
-        validate={validation}
+        //validate={validation}
       >
         {props => {
           const { handleSubmit, isSubmitting  } = props;
           return (
             <Form onSubmit={handleSubmit}>
               
-              <div className="c_breadcrumb" >
+              <div className="c_breadcrumb mb-2" >
               <ul className="nav nav-pills nav-tabs nav-fill">
                   {this.arrayProgress.map((item, index) => {
                     
                     return (
                       <li className="nav-item">
-                      <a href="javascript:void(0);" className={page >= index ? "nav-link active" : "nav-link"}>
+                      <a href="" onClick={(e) => e.preventDefault()} className={page >= index ? "nav-link active" : "nav-link"}>
                         
                           {item.title}
                           {/*{item.description}*/}
@@ -136,17 +148,12 @@ class Wizard extends React.Component {
                   })}
                 </ul>
               </div>
-
-              
-
-            <Card>
-              <Card.Body>
+           
               <h6 className="text-primary">
-                STEP {page + 1} DARI {totalSteps}
+                LANGKAH {page + 1} DARI {totalSteps}
               </h6>
+
               {React.cloneElement(activePage, { parentState: { ...props } })}
-              
-              
 
               <Row>
                 <Col>
@@ -167,8 +174,6 @@ class Wizard extends React.Component {
                   
                 </Col>
               </Row>
-              </Card.Body>
-            </Card>
 
             </Form>
           );
@@ -191,6 +196,37 @@ export const App = () => {
           });
         }}
       >
+         <Wizard.Page>
+          {props => {
+            console.log(props, "this first");
+            return (
+              <Fragment>
+                <h3 style={{fontWeight:"700"}} className="mb-1">Jenis Pendaftaran</h3>
+              <h5 className="mb-3">Jenis Pendaftaran Reguler dan Beasiswa</h5>
+              
+                <FormLabel style={{fontWeight:"600"}}>1. Apakah anda Memiliki Kartu KIP-Kuliah? *</FormLabel>
+                <Row>
+                <Col md="6">
+                <label>
+                <Field name="picked" component={RadioCustom} type="radio" value="Reguler" label="Reguler" className="card-input-element d-none" id="REG" />
+                <div className="card card-body bg-light d-flex flex-row justify-content-between align-items-center" style={{height: "5rem", fontWeight: "600"}}>TIDAK, Daftar Reguler</div>
+                </label>
+                </Col>
+
+                <Col md="6">
+                <label>
+                <Field name="picked" component={RadioCustom} type="radio" value="Bidikmisi" label="KIP-Kuliah" className="card-input-element d-none" id="KIPK" />
+                <div className="card card-body bg-light d-flex flex-row justify-content-between align-items-center" style={{height: "5rem", fontWeight: "600"}}>YA, Ada Kartu KIP-Kuliah</div>
+                </label>
+                </Col>  
+                </Row>
+
+            <div>Picked: {props.values.picked}</div> 
+            </Fragment>
+            );
+          }}
+        </Wizard.Page>
+
         <Wizard.Page>
           {props => {
             
@@ -198,7 +234,7 @@ export const App = () => {
             return (
               
               <Fragment>
-                <h3 style={{fontWeight:"700"}}>Data Pribadi</h3>
+                <h3 style={{fontWeight:"700"}} className="mb-1">Data Pribadi</h3>
               <h5 className="mb-3">Isikan data pribadi anda. Semua kolom wajib diisi</h5>
                 <div className="row">
                 <Col md={7}>
@@ -214,7 +250,7 @@ export const App = () => {
                 <Field name="tempatlahir" type="text" component={FormInput} label="Tempat Lahir *" />   
                 </Col>
                 <Col md={6}>      
-                <Field name="tgllahir" type="date" component={FormInput} label="Tanggal Lahir *" />
+                <Field name="tgllahir" type="text" component={FormInput} label="Tanggal Lahir *" />
                 </Col>
                 </div>
 
@@ -245,6 +281,25 @@ export const App = () => {
                 <Col md={6}>  
                 <Field name="email" type="email" component={FormInput} label="Email *" />
                 </Col>
+                </div>
+              </Fragment>
+            );
+          }}
+        </Wizard.Page>
+        <Wizard.Page>
+          {props => {
+            console.log(props, "this props last");
+            return (
+              <Fragment>
+                <div>
+                  <Row>
+                    <Col>
+                      
+                    </Col>
+                    <Col>
+                     
+                    </Col>
+                  </Row>
                 </div>
               </Fragment>
             );

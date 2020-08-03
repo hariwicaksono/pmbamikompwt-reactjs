@@ -19,7 +19,7 @@ const MyRouter = () => {
         <Route path="/" component={Home} exact />
         <PublicRoute restricted={true} component={Login} path="/login" exact />
         <Route path="/register" component={Register} />
-        <Route path="/user" component={User} exact />
+        <PrivateRoute path="/user" component={User} exact />
         <PrivateRoute path="/akun/edit/:id" component={Akun} exact />
         <PrivateRoute path="/akun/password/:id" component={AkunPassword} exact />
         <Route path="/page/:id" component={Page} exact />

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import API from '../../ServiceApi/Index'
 import ContentLoader from '../../Component/Loader'
 import Parser from 'html-react-parser'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Card, Row, Col } from 'react-bootstrap'
 import { Helmet } from 'react-helmet'
 //import Loader from 'react-loader'
 
@@ -61,48 +61,44 @@ class Page extends Component {
     render() {
          
         return (
-            <div>
-
+            <>
+ 
                 <Helmet>
                 <title>{ Parser(this.state.judul_tupoksi) + TITLE }</title>
                 </Helmet>
              
-
                 <Container fluid>
+                <Card className="my-3">
+                    <Card.Body>
 
-                <Row>
-                
-
-                    <Col md={12}>
-                    <Container fluid>
+                    <div>
                     {
                         this.state.loading
                         ?
                         /*<Loader options={options} className="spinner" />*/
-                        <div className="px-3 py-3">
+                        
                         <ContentLoader />
-                        </div>
+                   
                         :
                        
-                        <div className="px-3 py-3">
+                        <>
                             
                                 <h1>{Parser(this.state.judul_tupoksi)}</h1>
                                 <hr/>
                                 {Parser(this.state.isi_tupoksi)}
-
-                        </div>
+                        </>
+                   
                         
 
                     }
 
-                  </Container>  
+                </div>
 
-                    </Col>
-                </Row>
+                </Card.Body>
+                </Card>
                 </Container>
-                 
     
-            </div>
+            </>
         )
     }
 }

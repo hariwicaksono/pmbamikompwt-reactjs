@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 //import {Redirect} from 'react-router-dom'
 import FormLogin from '../Login/LoginForm'
-import { Helmet } from 'react-helmet'
+//import { Helmet } from 'react-helmet'
 import {Container, Row, Col, Carousel, Card} from 'react-bootstrap'
 
 class Home extends Component {
@@ -10,23 +10,13 @@ class Home extends Component {
         return (
             
             <>
-             <Helmet>
-            <style type="text/css">{`
-                body {
-                    background: #2C0E4C url('') no-repeat center center fixed;-webkit-background-size: cover;
-                    -moz-background-size: cover;
-                    -o-background-size: cover;
-                    background-size: cover;
-                }
-                `}
-                </style>
-            </Helmet>
-            <Container>
-            <Carousel className="mb-3">
+            
+            <Container fluid>
+            <Carousel className="mb-2">
                 <Carousel.Item>
                     <img
                     className="d-block w-100"
-                    src="http://pmb.amikompurwokerto.ac.id/files/slide_new.jpeg"
+                    src="http://pmb.amikompurwokerto.ac.id/files/Slider_.png"
                     alt="First slide"
                     />
                     

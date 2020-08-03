@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 //import 'babel-polyfill';
-import './assets/css/bootstrap.css';
-import './assets/css/styles.css';
+//import 'bootstrap/dist/css/bootstrap.css';
+import './assets/css/theme_1596445881144.css';
 import './index.css';
 import 'react-notifications/lib/notifications.css';
 import 'spin.js/spin.css';
@@ -13,7 +13,7 @@ import 'offline-js/offline.js';
 import 'offline-js/themes/offline-theme-default.css'
 import 'offline-js/themes/offline-language-english.css'
 
-ReactDOM.render(<BrowserRouter> <App /></BrowserRouter>, document.getElementById('root')
+ReactDOM.render(<BrowserRouter> <App /> </BrowserRouter>, document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change

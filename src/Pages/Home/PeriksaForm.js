@@ -49,25 +49,21 @@ class LoginForm extends Component {
 
         return (
             <>
-        
-                <Form onSubmit={this.handlerSubmit} style={{paddingRight: '0px',minWidth:'350px'}}>
-                <Form.Row>
-                <Col lg={11} md={10} sm={10} xs={10}>
-                        <Form.Control type="text" name="query" placeholder="Cari Nama atau Nomor Daftar..." onChange={this.handlerChange} required/>
-                       
-                 </Col>
-                <Col lg={1} md="auto" sm="auto" xs="auto">
-                    <Button type="submit" variant="warning">
+                <Form className="mx-2 my-auto d-inline w-100" onSubmit={this.handlerSubmit}>
+                <div className="input-group">
+                    <Form.Control className="border border-left-0" type="text" name="query" placeholder="Cari Nama atau Nomor Daftar..." onChange={this.handlerChange} required/>
+                    <span className="input-group-append">
+                    <Button className="border border-left-0" type="submit" variant="warning">
                     {
                         this.state.loading
                         ?
-                        <><Spinner as="span" animation="border" size="sm"  role="status" aria-hidden="true" /></>
+                        <><Spinner as="span" animation="grow" size="sm"  role="status" aria-hidden="true" /></>
                         :   
                     <><Search size="18" /></>}
                     </Button>
-                    
-                    </Col>
-                </Form.Row>
+                </span>
+
+                </div>
 
                 {this.state.results.length > 0 && (
                 
