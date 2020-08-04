@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 //import {Redirect,Link} from 'react-router-dom'
 import API from '../../ServiceApi/Index'
 import { NotificationManager } from 'react-notifications'
-import { FormLabel, FormGroup, Spinner } from 'react-bootstrap'
+import { Button, FormLabel, FormGroup, Spinner } from 'react-bootstrap'
 import {BoxArrowInRight} from 'react-bootstrap-icons'
 import Form from 'react-formal'
 import * as yup from 'yup'
@@ -83,12 +83,20 @@ class LoginForm extends Component {
                         <Form.Field type="password" name="password" placeholder="Password" errorClass="error" onChange={this.handlerChange} />
                         <Form.Message for="password" className="error" />
                     </FormGroup>
-                    <Form.Submit type="submit" className="btn btn-primary btn-lg btn-block">
+                    <Form.Submit type="submit" className="btn btn-primary btn-block">
                         {
                         this.state.loading
                         ?
-                        <><Spinner as="span" animation="grow" size="sm"  role="status" aria-hidden="true" /> Memuat...</>
-                        :  <><BoxArrowInRight size="18"/> Login</> }</Form.Submit>
+                       <>
+                            <Spinner
+                            as="span"
+                            animation="grow"
+                            size="sm"
+                            role="status"
+                            aria-hidden="true"
+                            /> Memuat...
+                       </>
+                        :  <><BoxArrowInRight size="20"/> Login</> }</Form.Submit>
                 </Form>                              
   
             </>

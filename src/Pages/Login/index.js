@@ -29,7 +29,7 @@ class Login extends Component {
                 <Row className="justify-content-center my-3 pt-3">
                 <Col lg="8">
                 
-                <ul className="nav nav-tabs nav-fill bg-white" style={{fontSize: '1.125rem', fontWeight: '600'}}>
+                <ul className="nav nav-tabs nav-fill bg-white" style={{fontSize: '1.125rem', fontWeight: '700'}}>
                 <li className="nav-item">
                     <NavLink className="nav-link active" to='/login'>Masuk</NavLink>
                 </li>
@@ -43,7 +43,7 @@ class Login extends Component {
                     <Card className="bg-white border-0">
                       
                     <Card.Body>
-                    <h4 className="mb-3">Masuk <small>PMB Univ. Amikom Purwokerto</small></h4>
+                    <h4><strong>Masuk</strong> <small>PMB Univ. Amikom Purwokerto</small></h4>
                     <FormLogin />
                     </Card.Body>
                     <Card.Footer className="text-muted"> Belum punya akun PMB? <Link to={'/register'}>Daftar Akun</Link></Card.Footer>

@@ -76,7 +76,7 @@ class RegisterForm extends Component {
     render() {
       
     return (
-    <div style={{maxHeight:'400px',overflowY: 'auto', overflowX:'hidden'}}>
+    <div style={{maxHeight:'410px',overflowY: 'auto', overflowX:'hidden'}}>
        
     <Form onSubmit={this.handlerSubmit} schema={schema} >
     <input type="hidden" name="aktivasi" value={this.state.aktivasi} />
@@ -124,7 +124,7 @@ class RegisterForm extends Component {
         this.state.loading
         ?
         <><Spinner as="span" animation="grow" size="sm"  role="status" aria-hidden="true" /> Memuat...</>
-        :  <><Check2 size="18"/> Daftar</> }
+        :  <><Check2 size="20"/> Daftar</> }
 
         </Form.Submit>
     </Form>            

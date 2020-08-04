@@ -28,7 +28,7 @@ class Login extends Component {
                 <Container>
                 <Row className="justify-content-center my-3 pt-3">
                 <Col lg="8">
-                <ul className="nav nav-tabs nav-fill bg-white" style={{fontSize: '1.125rem', fontWeight: '600'}}>
+                <ul className="nav nav-tabs nav-fill bg-white" style={{fontSize: '1.125rem', fontWeight: '700'}}>
                 <li className="nav-item">
                     <NavLink className="nav-link" to='/login'>Masuk</NavLink>
                 </li>
@@ -41,7 +41,7 @@ class Login extends Component {
             
                 <Card className="bg-white border-0"> 
                 <Card.Body>
-                <h4 className="mb-3">Daftar Akun <small>PMB Univ. Amikom Purwokerto</small></h4>
+                <h4><strong>Daftar Akun</strong> <small>PMB Univ. Amikom Purwokerto</small></h4>
                 <RegisterForm />
                 </Card.Body>
                 </Card>

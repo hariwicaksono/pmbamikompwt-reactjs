@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import Navbar from '../../Component/Navbar'
-import Footer from '../../Component/Footer'
-import Appbar from '../../Component/Appbar'
-import Sidebar from '../../Component/Sidebar'
+import Navbar from '../../Components/Navbar'
+import Footer from '../../Components/Footer'
+import Appbar from '../../Components/Appbar'
+import Sidebar from '../../Components/Sidebar'
 import { Helmet } from 'react-helmet'
 import MyRouter from '../../Routes'
 

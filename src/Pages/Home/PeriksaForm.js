@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import API from '../../ServiceApi/Index'
 import SearchResult from './SearchResult'
 //import { NotificationManager } from 'react-notifications'
-import { Form, Button, Col, Spinner } from 'react-bootstrap'
+import { Form, Button, Spinner } from 'react-bootstrap'
 import {Search} from 'react-bootstrap-icons'
 //import Form from 'react-formal'
 //import * as yup from 'yup'
@@ -49,7 +49,7 @@ class LoginForm extends Component {
 
         return (
             <>
-                <Form className="mx-2 my-auto d-inline w-100" onSubmit={this.handlerSubmit}>
+                <Form className="px-2 my-auto w-100" onSubmit={this.handlerSubmit}>
                 <div className="input-group">
                     <Form.Control className="border border-left-0" type="text" name="query" placeholder="Cari Nama atau Nomor Daftar..." onChange={this.handlerChange} required/>
                     <span className="input-group-append">

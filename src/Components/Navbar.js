@@ -3,10 +3,10 @@ import {Link, NavLink} from 'react-router-dom'
 import PeriksaForm from '../Pages/Home/PeriksaForm'
 import API from '../ServiceApi/Index'
 import {Container, Form,Button, Navbar, Nav, NavItem, NavDropdown} from 'react-bootstrap'
-import {TextLeft, BoxArrowRight, PersonFill} from 'react-bootstrap-icons'
+import {TextLeft, BoxArrowRight, PersonFill, QuestionCircle} from 'react-bootstrap-icons'
 import { logout, isLogin } from '../Utils'
  
-class NavBar extends Component{
+class Navigation extends Component{
   constructor(props) {
     super(props)
     this.state = {
@@ -52,7 +52,7 @@ class NavBar extends Component{
         return(  
         <Container className="px-0" fluid style={{backgroundColor:'#371260'}}>
 
-        <Navbar variant="dark" expand="lg" sticky="top" expand="xl">
+        <Navbar variant="dark" expand="lg" sticky="top">
 
         <Button onClick={this.props.toggleMenu} type="button" className="btn btn-warning text-dark">
         <TextLeft size="20" />
@@ -63,7 +63,7 @@ class NavBar extends Component{
             </Navbar.Brand>
 
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
-              <Navbar.Collapse id="basic-navbar-nav">
+            <Navbar.Collapse id="basic-navbar-nav">
 
               <Nav>
               {this.state.login ?
@@ -94,11 +94,11 @@ class NavBar extends Component{
             {this.state.login ?
             <>
           
-            <Nav.Link as={NavLink} className="nav-link" to='/page/33' activeClassName="active">Kenapa?</Nav.Link>
+            <Nav.Link as={NavLink} to='/page/33' activeClassName="active" title="Kenapa Amikom?" alt="Kenapa Amikom?"><QuestionCircle size="24" /></Nav.Link>
         
 
             <Form inline>
-            <Button as={NavLink} type="button" className="btn btn-info" to='/login' activeClassName="active" style={{fontWeight: '600'}}>Daftar/Masuk</Button>
+            <Button as={NavLink} type="button" className="btn btn-info btn-sm py-2" to='/login' activeClassName="active" style={{fontWeight: '600'}}>Daftar/Masuk</Button>
             </Form>
             </>
            :
@@ -120,12 +120,10 @@ class NavBar extends Component{
                 className="rounded-circle"
                 src={this.state.url+'no-photo.jpg'} />
             </>
-            )} 
-            id="basic-nav-dropdown" alignRight>
-           <NavDropdown.Item as={Link} to={'/akun/edit/' + this.state.id}><PersonFill/> Akun</NavDropdown.Item>
-                <NavDropdown.Item onClick={this.Logout} href=''><BoxArrowRight/> Keluar</NavDropdown.Item>
-
-                </NavDropdown>
+            )} id="basic-nav-dropdown" alignRight>
+            <NavDropdown.Item as={Link} to={'/akun/edit/' + this.state.id}><PersonFill/> Akun</NavDropdown.Item>
+            <NavDropdown.Item onClick={this.Logout} href=''><BoxArrowRight/> Keluar</NavDropdown.Item>
+            </NavDropdown>
             </NavItem>
             }
             </Nav>
@@ -138,4 +136,4 @@ class NavBar extends Component{
     }
 }
 
-export default NavBar
+export default Navigation

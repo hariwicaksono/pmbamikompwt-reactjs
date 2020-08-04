@@ -1,17 +1,23 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
-import FormInput from '../../../Component/Form/FormInput';
-import FormCheck from '../../../Component/Form/FormCheck';
-import FormSelect from '../../../Component/Form/FormSelect';
-import RadioCustom from '../../../Component/Form/FormRadioCustom';
-import validation from '../../../Component/Form/Validation';
-import { Row, Col, FormLabel, Card, Button } from 'react-bootstrap';
-import API from '../../../ServiceApi/Index'
-import { isLogin } from '../../../Utils'
+import FormInput from '../../../Components/Form/FormInput';
+import FormCheck from '../../../Components/Form/FormCheck';
+import FormSelect from '../../../Components/Form/FormSelect';
+import RadioCustom from '../../../Components/Form/FormRadioCustom';
+import FormikSelect from '../../../Components/Form/FormikSelect';
+//import validation from '../../../Components/Form/Validation';
+import { Row, Col, FormLabel, Button } from 'react-bootstrap';
+//import API from '../../../ServiceApi/Index'
+//import { isLogin } from '../../../Utils'
+import Select from './Select';
 
 const Step1Schema = Yup.object().shape({
-  picked: Yup.string().required("Jenis Pendaftaran harus dipilih"),
+  status_registrasi: Yup.string().required("Jenis Pendaftaran harus dipilih"),
+  jenis_mhs: Yup.object({
+    label: Yup.string().required(),
+    value: Yup.string().required("Name is a required field"),
+  })
 });
 
 const Step2Schema = Yup.object().shape({
@@ -29,7 +35,8 @@ const Step3Schema = Yup.object().shape({
 });
 
 const initialValues = {
-  picked: "",
+  jenis_mhs: '',
+  status_registrasi: "",
   nama: "",
   nik: "",
   tempatlahir: "",
@@ -40,7 +47,7 @@ const initialValues = {
   telepon: "",
 };
 
-const schemaArray = [Step1Schema, Step2Schema];
+const schemaArray = [Step1Schema, Step2Schema, Step3Schema];
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -127,7 +134,7 @@ class Wizard extends React.Component {
         //validate={validation}
       >
         {props => {
-          const { handleSubmit, isSubmitting  } = props;
+          const { handleSubmit, isSubmitting } = props;
           return (
             <Form onSubmit={handleSubmit}>
               
@@ -199,29 +206,43 @@ export const App = () => {
          <Wizard.Page>
           {props => {
             console.log(props, "this first");
+            const options = [
+              {label: "Marcelo Camelo", value: "1"},
+              {label: "Rodrigo Amarante", value: "2"},
+              {label: "Rodrigo Barba", value: "3"},
+              {label: "Bruno Medina", value: "4"}
+            ]
             return (
               <Fragment>
                 <h3 style={{fontWeight:"700"}} className="mb-1">Jenis Pendaftaran</h3>
               <h5 className="mb-3">Jenis Pendaftaran Reguler dan Beasiswa</h5>
-              
+
+              <Select
+              name="jenis_mhs" options={options}
+      
+    />
+
                 <FormLabel style={{fontWeight:"600"}}>1. Apakah anda Memiliki Kartu KIP-Kuliah? *</FormLabel>
                 <Row>
-                <Col md="6">
+               
+                <Col md={6}>
                 <label>
-                <Field name="picked" component={RadioCustom} type="radio" value="Reguler" label="Reguler" className="card-input-element d-none" id="REG" />
+                <Field name="status_registrasi" component={RadioCustom} type="radio" value="Reguler" label="Reguler" className="card-input-element d-none" id="REG" />
                 <div className="card card-body bg-light d-flex flex-row justify-content-between align-items-center" style={{height: "5rem", fontWeight: "600"}}>TIDAK, Daftar Reguler</div>
                 </label>
                 </Col>
-
-                <Col md="6">
+                <Col md={6}>
                 <label>
-                <Field name="picked" component={RadioCustom} type="radio" value="Bidikmisi" label="KIP-Kuliah" className="card-input-element d-none" id="KIPK" />
+                <Field name="status_registrasi" component={RadioCustom} type="radio" value="Bidikmisi" label="KIP-Kuliah" className="card-input-element d-none" id="KIPK" />
                 <div className="card card-body bg-light d-flex flex-row justify-content-between align-items-center" style={{height: "5rem", fontWeight: "600"}}>YA, Ada Kartu KIP-Kuliah</div>
                 </label>
-                </Col>  
+                
+                </Col>
+               
                 </Row>
-
-            <div>Picked: {props.values.picked}</div> 
+                {props.values.status_registrasi == "Bidikmisi" &&
+                <><Field name="no_kipk" component={FormInput} type="number" label="Nomor KIP-Kuliah" /></>}
+            
             </Fragment>
             );
           }}

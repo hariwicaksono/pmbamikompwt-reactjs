@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import API from '../../ServiceApi/Index'
-import ContentLoader from '../../Component/Loader'
+import ContentLoader from '../../Components/Loader'
 import Parser from 'html-react-parser'
-import { Container, Card, Row, Col } from 'react-bootstrap'
+import { Container, Card} from 'react-bootstrap'
 import { Helmet } from 'react-helmet'
 //import Loader from 'react-loader'
 
