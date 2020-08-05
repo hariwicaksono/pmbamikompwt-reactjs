@@ -5,21 +5,22 @@ import FormInput from '../../../Components/Form/FormInput';
 import FormCheck from '../../../Components/Form/FormCheck';
 import FormSelect from '../../../Components/Form/FormSelect';
 import RadioCustom from '../../../Components/Form/FormRadioCustom';
-import FormikSelect from '../../../Components/Form/FormikSelect';
+import FormSelect2 from '../../../Components/Form/FormSelect2';
+import FormikSelect from './Select';
 //import validation from '../../../Components/Form/Validation';
-import { Row, Col, FormLabel, Button } from 'react-bootstrap';
-//import API from '../../../ServiceApi/Index'
+import { Container, Row, Col, FormGroup, FormLabel, Button } from 'react-bootstrap';
+import API from '../../../ServiceApi/Index'
 //import { isLogin } from '../../../Utils'
-import Select from './Select';
+import axios from 'axios';
 
 const Step1Schema = Yup.object().shape({
   status_registrasi: Yup.string().required("Jenis Pendaftaran harus dipilih"),
   jenis_mhs: Yup.object({
     label: Yup.string().required(),
-    value: Yup.string().required("Name is a required field"),
+    value: Yup.string().required("Jenis Mahasiswa harus dipilih"),
   })
 });
-
+ 
 const Step2Schema = Yup.object().shape({
   nama: Yup.string().required("First Name Is Required"),
   nik: Yup.string().required("Middle Name Is Required").typeError("Harus berupa angka"),
@@ -35,7 +36,7 @@ const Step3Schema = Yup.object().shape({
 });
 
 const initialValues = {
-  jenis_mhs: '',
+  jenis_mhs: "",
   status_registrasi: "",
   nama: "",
   nik: "",
@@ -57,7 +58,7 @@ class Wizard extends React.Component {
   static Page = ({ children, parentState }) => {
     return children(parentState);
   };
- 
+  
   constructor(props) {
     super(props);
     this.state = {
@@ -66,6 +67,7 @@ class Wizard extends React.Component {
       nama: ""
     };
   }
+
 
   next = values =>
     this.setState(state => ({
@@ -118,10 +120,10 @@ class Wizard extends React.Component {
   ];
   render() {
     const { children } = this.props;
-    const { page, values } = this.state;
+    const { page, values, selectOptions } = this.state;
     const activePage = React.Children.toArray(children)[page];
     const totalSteps = React.Children.count(children);
-    console.log(activePage, "activePage");
+    console.log(selectOptions);
     const isLastPage = page === React.Children.count(children) - 1;
     return (
       <Formik
@@ -136,9 +138,10 @@ class Wizard extends React.Component {
         {props => {
           const { handleSubmit, isSubmitting } = props;
           return (
+
             <Form onSubmit={handleSubmit}>
               
-              <div className="c_breadcrumb mb-2" >
+              <div className="c_breadcrumb mb-3" >
               <ul className="nav nav-pills nav-tabs nav-fill">
                   {this.arrayProgress.map((item, index) => {
                     
@@ -190,7 +193,50 @@ class Wizard extends React.Component {
   }
 }
 
+class Jenismhs extends React.Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      select : "",
+      id: "",
+      name: ''
+    }
+  }
+
+ async getOptions(){
+    const res = await API.GetJenisMhs()
+    const data = res.data.data
+
+    const options = data.map(item => ({
+      "value" : item.ID_JENISMHS,
+      "label" : item.NAMA
+
+    }))
+
+    this.setState({select: options})
+
+  }
+ 
+   componentDidMount(){
+       this.getOptions()
+   }
+
+  render() {
+    return <>
+    <FormGroup>
+    <FormLabel style={{fontWeight:"600"}}>Jenis Pendaftaran *</FormLabel>
+
+     {/* <FormSelect2 options={this.state.select} name="jenis_mhs" />*/}
+
+
+    </FormGroup>
+    
+    </>;
+  }
+}
+
 export const App = () => {
+ 
   return (
     <>
     
@@ -202,32 +248,25 @@ export const App = () => {
             actions.setSubmitting(false);
           });
         }}
+        
       >
          <Wizard.Page>
           {props => {
-            console.log(props, "this first");
-            const options = [
-              {label: "Marcelo Camelo", value: "1"},
-              {label: "Rodrigo Amarante", value: "2"},
-              {label: "Rodrigo Barba", value: "3"},
-              {label: "Bruno Medina", value: "4"}
-            ]
+
             return (
               <Fragment>
-                <h3 style={{fontWeight:"700"}} className="mb-1">Jenis Pendaftaran</h3>
-              <h5 className="mb-3">Jenis Pendaftaran Reguler dan Beasiswa</h5>
+             
+              <h3 style={{fontWeight:"700"}} className="mb-1">Jenis Pendaftaran</h3>
+              <h5 className="mb-4">Jenis Pendaftaran Reguler dan Beasiswa</h5>
 
-              <Select
-              name="jenis_mhs" options={options}
-      
-    />
-
-                <FormLabel style={{fontWeight:"600"}}>1. Apakah anda Memiliki Kartu KIP-Kuliah? *</FormLabel>
+                <FormGroup>
+                <FormLabel style={{fontWeight:"600"}}>Apakah anda Memiliki Kartu KIP-Kuliah? *</FormLabel>
+                
                 <Row>
                
                 <Col md={6}>
                 <label>
-                <Field name="status_registrasi" component={RadioCustom} type="radio" value="Reguler" label="Reguler" className="card-input-element d-none" id="REG" />
+                <Field name="status_registrasi" component={RadioCustom} type="radio" value="Hanya Daftar" label="Reguler" className="card-input-element d-none" id="REG" />
                 <div className="card card-body bg-light d-flex flex-row justify-content-between align-items-center" style={{height: "5rem", fontWeight: "600"}}>TIDAK, Daftar Reguler</div>
                 </label>
                 </Col>
@@ -242,12 +281,15 @@ export const App = () => {
                 </Row>
                 {props.values.status_registrasi == "Bidikmisi" &&
                 <><Field name="no_kipk" component={FormInput} type="number" label="Nomor KIP-Kuliah" /></>}
-            
+                </FormGroup>
+
+                <Jenismhs />
+
+               
             </Fragment>
             );
           }}
         </Wizard.Page>
-
         <Wizard.Page>
           {props => {
             
@@ -307,44 +349,9 @@ export const App = () => {
             );
           }}
         </Wizard.Page>
-        <Wizard.Page>
-          {props => {
-            console.log(props, "this props last");
-            return (
-              <Fragment>
-                <div>
-                  <Row>
-                    <Col>
-                      
-                    </Col>
-                    <Col>
-                     
-                    </Col>
-                  </Row>
-                </div>
-              </Fragment>
-            );
-          }}
-        </Wizard.Page>
-        <Wizard.Page>
-          {props => {
-            console.log(props, "this props last");
-            return (
-              <Fragment>
-                <div>
-                  <Row>
-                    <Col>
-                      
-                    </Col>
-                    <Col>
-                     
-                    </Col>
-                  </Row>
-                </div>
-              </Fragment>
-            );
-          }}
-        </Wizard.Page>
+        
+
+        
       </Wizard>
     </>
   );

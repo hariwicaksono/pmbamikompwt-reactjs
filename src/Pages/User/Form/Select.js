@@ -1,29 +1,13 @@
-import React from 'react';
-import Select from 'react-select';
-import { useFormikContext, useField } from 'formik'; 
-
-export default function CustomSelect({options, ...props}) {
-    const {setFieldValue, setFieldTouched } = useFormikContext();
-    const [field, meta, form] = useField(props.name);
-    
-    function handleChange(selected) {
-        setFieldValue(props.name, selected);
-    }
-
-    function handleBlur() {
-        setFieldTouched(props.name, true);
-    }
-
+import React from 'react'
+import Select from 'react-select'
+export default function FormikSelect({onChange,name,...props}) {
     return (
-        <>
-            <Select 
-                options={options} 
-                {...field} 
-                {...props} 
-                onChange={handleChange} 
-                onBlur={handleBlur} 
-            />
-            {meta.touched && meta.error ? (<span className="error">{meta.error.value}</span>) : null}
-        </>
+        <Select 
+            {...props}
+            onChange={handleChange}
+        />
     )
+    function handleChange(value) {
+        onChange(name, value)
+    }
 }

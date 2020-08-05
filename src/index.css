@@ -425,7 +425,7 @@ label {
 }
   
 .card-input-element:checked+.card {
-    border: 2px solid var(--primary);
+    border: 2px solid var(--secondary);
     -webkit-transition: border .3s;
     -o-transition: border .3s;
     transition: border .3s;

@@ -31,6 +31,7 @@
     "react-router-scroll-top": "^0.2.1",
     "react-scripts": "^3.3.1",
     "react-select": "^3.1.0",
+    "react-select-plus": "^1.0.0-rc.3.patch12",
     "react-stepper-horizontal": "^1.0.11",
     "react-stepzilla": "^6.0.2",
     "redux": "^4.0.5",

@@ -4,7 +4,6 @@ import { FormGroup, Form, FormControl, FormLabel } from 'react-bootstrap';
 const FormSelect = ({
   field,
   label,
-  type,
   children,
   form: { errors, touched }
 }) => (

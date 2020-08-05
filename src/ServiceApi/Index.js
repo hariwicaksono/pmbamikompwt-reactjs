@@ -129,6 +129,7 @@ const CariOrang = (data) => GET_ID_VAL('SearchController?id=',data)
 const PostImageP = (data,name) => POSTIMAGE('ImageUpload',data,name)
 const PutUserPassword = (data) => PUTUSER('UserPassword',data)
 const CheckUsername = (data) => Axios(RoothPath+`CheckUsername?id=${data}`)
+const GetJenisMhs = () => Axios(RoothPath+`JenisMhsController`)
 
 const API = {
     GetPageId,
@@ -145,7 +146,8 @@ const API = {
     CariOrang,
     PostImageP,
     PutUserPassword,
-    CheckUsername
+    CheckUsername,
+    GetJenisMhs
     
 }
 
