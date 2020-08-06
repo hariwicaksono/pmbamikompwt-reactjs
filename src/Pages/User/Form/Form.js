@@ -1,35 +1,33 @@
 import React, { Fragment } from "react";
 import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
+import { Container, Row, Col, FormGroup, FormLabel, Button } from 'react-bootstrap';
 import FormInput from '../../../Components/Form/FormInput';
 import FormCheck from '../../../Components/Form/FormCheck';
 import FormSelect from '../../../Components/Form/FormSelect';
 import RadioCustom from '../../../Components/Form/FormRadioCustom';
-import FormSelect2 from '../../../Components/Form/FormSelect2';
-import FormikSelect from './Select';
-//import validation from '../../../Components/Form/Validation';
-import { Container, Row, Col, FormGroup, FormLabel, Button } from 'react-bootstrap';
+import SelectJenismhs from '../Form/Select/Jenismhs';
+import SelectProgramstudi from '../Form/Select/Programstudi';
 import API from '../../../ServiceApi/Index'
-//import { isLogin } from '../../../Utils'
-import axios from 'axios';
 
 const Step1Schema = Yup.object().shape({
   status_registrasi: Yup.string().required("Jenis Pendaftaran harus dipilih"),
-  jenis_mhs: Yup.object({
-    label: Yup.string().required(),
-    value: Yup.string().required("Jenis Mahasiswa harus dipilih"),
-  })
+  jenis_mhs: Yup.string().required("Jenis Mahasiswa harus dipilih"),
+  pilihan1: Yup.string().required("Program Studi Pilihan 1 harus dipilih"),
+  pilihan2: Yup.string().required("Program Studi Pilihan 2 harus dipilih"),
+  pilihan3: Yup.string().required("Program Studi Pilihan 3 harus dipilih"),
+  info: Yup.string().required("Info PMB harus dipilih")
 });
  
 const Step2Schema = Yup.object().shape({
-  nama: Yup.string().required("First Name Is Required"),
-  nik: Yup.string().required("Middle Name Is Required").typeError("Harus berupa angka"),
-  tempatlahir: Yup.string().required("Sir Name Is Required"),
-  tgllahir: Yup.string().required("Pet is required"),
-  jk: Yup.string().required("Email Is Required"),
-  agama: Yup.string().required("Email Is Required"),
+  nama: Yup.string().required("Nama Lengkap harus diisi"),
+  nik: Yup.string().required("Nomor NIK/KTP harus diisi").typeError("Harus berupa angka"),
+  tempatlahir: Yup.string().required("Tempat lahir harus diisi"),
+  tgllahir: Yup.string().required("Tanggal lahir harus diisi"),
+  jk: Yup.string().required("Jenis kelamin harus dipilih"),
+  agama: Yup.string().required("Agama harus dipilih"),
   telepon: Yup.number().required('Nomor Telepon atau HP harus diisi').typeError("Harus berupa angka"),
-  email: Yup.string().email('Harus berupa email yang valid').required("Email Is Required"),
+  email: Yup.string().email('Harus berupa email yang valid').required("Email harus diisi"),
 });
 const Step3Schema = Yup.object().shape({
  //favoriteColor: Yup.string().required("Favorite color required"),
@@ -38,6 +36,11 @@ const Step3Schema = Yup.object().shape({
 const initialValues = {
   jenis_mhs: "",
   status_registrasi: "",
+  kelas:"",
+  pilihan1:"",
+  pilihan2:"",
+  pilihan3:"",
+  info:[],
   nama: "",
   nik: "",
   tempatlahir: "",
@@ -140,7 +143,7 @@ class Wizard extends React.Component {
           return (
 
             <Form onSubmit={handleSubmit}>
-              
+               <Container>
               <div className="c_breadcrumb mb-3" >
               <ul className="nav nav-pills nav-tabs nav-fill">
                   {this.arrayProgress.map((item, index) => {
@@ -158,6 +161,8 @@ class Wizard extends React.Component {
                   })}
                 </ul>
               </div>
+
+             
            
               <h6 className="text-primary">
                 LANGKAH {page + 1} DARI {totalSteps}
@@ -172,6 +177,7 @@ class Wizard extends React.Component {
                       <Button
                         variant="primary"
                         onClick={this.previous}
+                        className="mr-2"
                       >
                         « Previous
                       </Button>}
@@ -184,6 +190,7 @@ class Wizard extends React.Component {
                   
                 </Col>
               </Row>
+              </Container>
 
             </Form>
           );
@@ -197,40 +204,74 @@ class Jenismhs extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      select : "",
-      id: "",
-      name: ''
+      select : []
     }
-  }
-
- async getOptions(){
-    const res = await API.GetJenisMhs()
-    const data = res.data.data
-
-    const options = data.map(item => ({
-      "value" : item.ID_JENISMHS,
-      "label" : item.NAMA
-
-    }))
-
-    this.setState({select: options})
-
   }
  
    componentDidMount(){
-       this.getOptions()
+   
+    API.GetJenisMhs().then(res=>{
+      //console.log(res)
+      this.setState({
+        select: res
+      })
+  });  
    }
 
   render() {
     return <>
-    <FormGroup>
-    <FormLabel style={{fontWeight:"600"}}>Jenis Pendaftaran *</FormLabel>
+     <Field name="jenis_mhs" component={FormSelect} label="Jenis Pendaftaran *">
+       <option>Pilih Jenis</option>
+        <SelectJenismhs data={this.state.select} />  
+      </Field>
 
-     {/* <FormSelect2 options={this.state.select} name="jenis_mhs" />*/}
+    </>;
+  }
+}
 
+class Programstudi extends React.Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      select : []
+    }
+  }
+ 
+   componentDidMount(){
+   
+    API.GetProdi().then(res=>{
+      //console.log(res)
+      this.setState({
+        select: res
+      })
+  });  
+   }
 
-    </FormGroup>
-    
+  render() {
+    return <>
+    <Row>
+    <Col>
+    <Field name="pilihan1" component={FormSelect} label="Pilihan 1 *">
+       <option>Pilih Program Studi</option>
+        <SelectProgramstudi data={this.state.select} />  
+      </Field>
+    </Col>
+    <Col>
+    <Field name="pilihan2" component={FormSelect} label="Pilihan 2 *">
+       <option>Pilih Program Studi</option>
+        <SelectProgramstudi data={this.state.select} />  
+      </Field>
+    </Col>
+<Col>
+<Field name="pilihan3" component={FormSelect} label="Pilihan 3 *">
+       <option>Pilih Program Studi</option>
+        <SelectProgramstudi data={this.state.select} />  
+      </Field>
+</Col>
+
+    </Row>
+     
+
     </>;
   }
 }
@@ -250,6 +291,69 @@ export const App = () => {
         }}
         
       >
+        <Wizard.Page>
+          {props => {
+            
+           console.log(props, "this props 1");
+            return (
+              
+              <Fragment>
+                <h3 style={{fontWeight:"700"}} className="mb-1">Data Alamat</h3>
+              <h5 className="mb-3">Isikan data Alamat dan Orang tua anda. Semua kolom wajib diisi</h5>
+              <Row>
+
+              <Col>
+
+                <Row>
+                <Col md={12}>
+                <Field name="alamat" component={FormInput} type="text" label="Alamat Lengkap *" placeholder="Alamat lengkap anda" />
+                </Col>
+                </Row>
+
+                <Row>
+                <Col md={3}>
+                <Field name="rt" type="text" component={FormInput} label="RT *" placeholder="RT" maxlength="2" />   
+                </Col>
+                <Col md={3}>
+                <Field name="rw" type="text" component={FormInput} label="RW *" placeholder="RW" maxlength="2" />   
+                </Col>
+                <Col md={6}>      
+                <Field name="kelurahan" type="text" component={FormInput} label="Desa/Kelurahan *" placeholder="Desa/Kelurahan" />
+                </Col>
+                </Row>
+
+                <Row>
+                <Col md={6}>
+                <Field name="kecamatan" type="text" component={FormInput} label="Kecamatan *" placeholder="Kecamatan" />
+                </Col>
+                <Col md={6}>
+                <Field name="kodepos" type="text" component={FormInput} label="Kode Pos *" placeholder="Kode Pos" />
+                </Col>
+                </Row>
+
+                <Row>
+                <Col md={6}>
+                
+                </Col>
+                <Col md={6}>  
+               
+                </Col>
+                </Row>
+
+
+                </Col>
+
+                <Col>
+                
+                
+                </Col>
+                </Row>
+
+              </Fragment>
+            );
+          }}
+        </Wizard.Page>
+
          <Wizard.Page>
           {props => {
 
@@ -279,12 +383,52 @@ export const App = () => {
                 </Col>
                
                 </Row>
-                {props.values.status_registrasi == "Bidikmisi" &&
+                {props.values.status_registrasi === "Bidikmisi" &&
                 <><Field name="no_kipk" component={FormInput} type="number" label="Nomor KIP-Kuliah" /></>}
                 </FormGroup>
 
-                <Jenismhs />
+                <Row>
+               
+               <Col md={6}>
+               <Jenismhs />
+                </Col>
+         
+               
+                <Col md={6}>
+                <FormGroup>
+                <FormLabel style={{fontWeight:"600"}}>Kelas *</FormLabel>
+                <select name="kelas">
+                {(props.values.jenis_mhs === "1" || props.values.jenis_mhs === "2" ) &&
+                <>
+                <option value="Pagi" label="Pagi" />
+                </>}
+                {props.values.jenis_mhs === "3" &&
+                <>
+                <option value="Transfer" label="Transfer" />
+                </>}
+                {props.values.jenis_mhs === "4" &&
+                <>
+                <option value="Sore" label="Sore" />
+                </>}
+                </select>
+                </FormGroup>
+                </Col>
+                </Row>
 
+            
+                <Programstudi/>
+                  
+
+               
+                <FormGroup>
+                <FormLabel style={{fontWeight:"600"}}>Informasi tentang Universitas Amikom Purwokerto *</FormLabel><br/>
+                    <Field name="info" component={FormCheck} type="checkbox" value="brosur" label="Brosur" />
+                    <Field name="info" component={FormCheck} type="checkbox" value="televisi" label="Televisi"/>
+                    <Field name="info" component={FormCheck} type="checkbox" value="internet" label="Internet"/>
+                    <Field name="info" component={FormCheck} type="checkbox" value="teman/Saudara" label="Teman/Saudara"/>
+                    <Field name="info" component={FormCheck} type="checkbox" value="lainnya" label="Lainnya"/>
+                </FormGroup>
+               
                
             </Fragment>
             );
@@ -293,7 +437,7 @@ export const App = () => {
         <Wizard.Page>
           {props => {
             
-            console.log(props, "this props 1");
+           console.log(props, "this props 1");
             return (
               
               <Fragment>
@@ -304,13 +448,13 @@ export const App = () => {
                 <Field name="nama" component={FormInput} type="text" label="Nama Lengkap" placeholder="Nama Lengkap anda" />
                 </Col>
                 <Col md={5}>
-                <Field name="nik" component={FormInput} type="text" label="Nomor NIK/KTP" />
+                <Field name="nik" component={FormInput} type="text" label="Nomor NIK/KTP" placeholder="Nomor NIK/KTP" />
                 </Col>
 
                 </div>
                 <div className="row">
                 <Col md={6}>
-                <Field name="tempatlahir" type="text" component={FormInput} label="Tempat Lahir *" />   
+                <Field name="tempatlahir" type="text" component={FormInput} label="Tempat Lahir *" placeholder="Tempat Lahir" />   
                 </Col>
                 <Col md={6}>      
                 <Field name="tgllahir" type="text" component={FormInput} label="Tanggal Lahir *" />
@@ -319,7 +463,7 @@ export const App = () => {
 
                 <div className="row">
                 <Col md={6}>
-                <div class="form-group">
+                <div className="form-group">
                 <FormLabel style={{fontWeight:"600"}}>Jenis Kelamin *</FormLabel><br/>
                 <Field name="jk" component={FormCheck} type="radio" value="Pria" label="Laki-Laki" />
                 <Field name="jk" component={FormCheck} type="radio" value="Wanita" label="Perempuan"/>
@@ -327,7 +471,7 @@ export const App = () => {
                 </Col>
                 <Col md={6}>
                 <Field name="agama" component={FormSelect} label="Agama *" >
-                    <option />
+                    <option>Pilih Agama</option>
                     <option value="I">Islam</option>
                     <option value="P">Protestan</option>
                     <option value="K">Katholik</option>
@@ -339,17 +483,16 @@ export const App = () => {
                 </div>
                 <div className="row">
                 <Col md={6}>
-                <Field name="telepon" type="text" component={FormInput} label="Telp/HP *" />
+                <Field name="telepon" type="text" component={FormInput} label="Telp/HP *" placeholder="Nomor Telepon/HP" />
                 </Col>
                 <Col md={6}>  
-                <Field name="email" type="email" component={FormInput} label="Email *" />
+                <Field name="email" type="email" component={FormInput} label="Email *" placeholder="yourname@mail.com" />
                 </Col>
                 </div>
               </Fragment>
             );
           }}
         </Wizard.Page>
-        
 
         
       </Wizard>

@@ -33,6 +33,7 @@ input[type='radio'] { transform: scale(1.4); }
     -moz-border-radius: 10px;
     border-radius: 10px;
 }
+input[type="checkbox"]{-ms-transform:scale(1.4);-webkit-transform:scale(1.4);transform:scale(1.4)}
 input[type='text'],   
 input[type='password'], 
 select {
