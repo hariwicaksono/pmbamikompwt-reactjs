@@ -413,11 +413,11 @@ label {
 }
   
 .card-input-element+.card {
-    height: calc(36px + 2*1rem);
+    height: calc(86px + 2*1rem);
     color: var(--primary);
     -webkit-box-shadow: none;
     box-shadow: none;
-    border: 2px solid #ced4da;
+    border: 3px solid #ced4da;
     border-radius: 4px;
 }
   
@@ -426,17 +426,19 @@ label {
 }
   
 .card-input-element:checked+.card {
-    border: 2px solid var(--secondary);
+    border: 3px solid var(--secondary);
     -webkit-transition: border .3s;
     -o-transition: border .3s;
     transition: border .3s;
+    font-weight:600;
 }
   
 .card-input-element:checked+.card::after {
-    content: '\e5ca';
+    content:'\2713';
+  display:inline-block;
+  padding:0 6px 0 0;
     color: #59287a;
-    font-family: 'Material Icons';
-    font-size: 24px;
+    font-size: 30px;
     font-weight: 700;
     -webkit-animation-name: fadeInCheckbox;
     animation-name: fadeInCheckbox;

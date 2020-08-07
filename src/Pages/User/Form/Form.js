@@ -12,16 +12,22 @@ import API from '../../../ServiceApi/Index'
 
 const Step1Schema = Yup.object().shape({
   status_registrasi: Yup.string().required("Jenis Pendaftaran harus dipilih"),
-  jenis_mhs: Yup.string().required("Jenis Mahasiswa harus dipilih"),
-  pilihan1: Yup.string().required("Program Studi Pilihan 1 harus dipilih"),
-  pilihan2: Yup.string().required("Program Studi Pilihan 2 harus dipilih"),
-  pilihan3: Yup.string().required("Program Studi Pilihan 3 harus dipilih"),
-  info: Yup.string().required("Info PMB harus dipilih")
+  no_kipk: Yup.number().typeError("Harus berupa angka, boleh menggunakan titik.").transform((_, value) => {
+    if (value.includes(',')) {
+      return null;
+    }
+  })
+  .positive(),
+  //jenis_mhs: Yup.string().required("Jenis Mahasiswa harus dipilih"),
+  //pilihan1: Yup.string().required("Program Studi Pilihan 1 harus dipilih"),
+  //pilihan2: Yup.string().required("Program Studi Pilihan 2 harus dipilih"),
+  //pilihan3: Yup.string().required("Program Studi Pilihan 3 harus dipilih"),
+  //info: Yup.string().required("Info PMB harus dipilih")
 });
  
 const Step2Schema = Yup.object().shape({
   nama: Yup.string().required("Nama Lengkap harus diisi"),
-  nik: Yup.string().required("Nomor NIK/KTP harus diisi").typeError("Harus berupa angka"),
+  nik: Yup.number().required("Nomor NIK/KTP harus diisi").typeError("Harus berupa angka"),
   tempatlahir: Yup.string().required("Tempat lahir harus diisi"),
   tgllahir: Yup.string().required("Tanggal lahir harus diisi"),
   jk: Yup.string().required("Jenis kelamin harus dipilih"),
@@ -49,6 +55,7 @@ const initialValues = {
   agama:"",
   email: "",
   telepon: "",
+  country: "None", region: "None", regions: []
 };
 
 const schemaArray = [Step1Schema, Step2Schema, Step3Schema];
@@ -277,7 +284,27 @@ class Programstudi extends React.Component {
 }
 
 export const App = () => {
- 
+  const getRegions = country => {
+    // Simulate async call
+    return new Promise((resolve, reject) => {
+      switch (country) {
+        case "United States":
+          resolve([
+            { value: "Washington", label: "Washington" },
+            { value: "California", label: "California" }
+          ]);
+          break;
+        case "Canada":
+          resolve([
+            { value: "Alberta", label: "Alberta" },
+            { value: "NovaScotia", label: "Nova Scotia" }
+          ]);
+          break;
+        default:
+          resolve([]);
+      }
+    });
+  };
   return (
     <>
     
@@ -293,7 +320,63 @@ export const App = () => {
       >
         <Wizard.Page>
           {props => {
-            
+            const {
+              values,
+              handleChange,
+              setFieldValue
+            } = props;
+           console.log(props, "this props 1");
+            return (
+              
+              <Fragment>
+              <h3 style={{fontWeight:"700"}} className="mb-1">Jenis Pendaftaran</h3>
+              <h5 className="mb-4">Jenis Pendaftaran Reguler dan Beasiswa</h5>
+
+              <Container>
+                <FormGroup>
+                <h3 className="text-center mb-3">Apakah anda memiliki Kartu KIP-Kuliah? *</h3>
+                
+                <Row>
+                 <Col md={{ span: 8, offset: 2 }}>
+                <Row>
+               
+                <Col md={6}>
+                <label>
+                <Field name="status_registrasi" component={RadioCustom} type="radio" value="Hanya Daftar" label="Reguler" className="card-input-element d-none" id="REG" />
+                <div className="card card-body bg-light d-flex flex-row justify-content-between align-items-center">1. TIDAK ADA<br/>Pendaftaran Reguler</div>
+                </label>
+                </Col>
+                <Col md={6}>
+                <label>
+                <Field name="status_registrasi" component={RadioCustom} type="radio" value="Bidikmisi" label="KIP-Kuliah" className="card-input-element d-none" id="KIPK" />
+                <div className="card card-body bg-light d-flex flex-row justify-content-between align-items-center">2. YA ADA<br/>Punya Kartu KIP-Kuliah</div>
+                </label>
+                
+                </Col>
+               
+                </Row>
+                {props.values.status_registrasi === "Bidikmisi" &&
+                <><Field name="no_kipk" component={FormInput} type="text" label="Masukkan Nomor Kartu KIP-Kuliah *" required /></>}
+                </Col>
+                </Row>
+
+                
+                </FormGroup>
+
+                </Container>
+              </Fragment>
+
+            );
+          }}
+          </Wizard.Page>
+
+        <Wizard.Page>
+          {props => {
+            const {
+              values,
+              handleChange,
+              setFieldValue
+            } = props;
            console.log(props, "this props 1");
             return (
               
@@ -343,10 +426,52 @@ export const App = () => {
 
                 </Col>
 
+
                 <Col>
-                
-                
+
+                <Row>
+                <Col md={12}>
+                <Field name="ibu" component={FormInput} type="text" label="Nama Ibu Kandung *" placeholder="Nama Ibu Kandung" />
                 </Col>
+                </Row>
+                
+                <label htmlFor="country">Country</label>
+              <Field
+                id="country"
+                name="country"
+                as="select"
+                value={values.country}
+                onChange={async e => {
+                  const { value } = e.target;
+                  const _regions = await getRegions(value);
+                  console.log(_regions);
+                  setFieldValue("country", value);
+                  setFieldValue("region", "");
+                  setFieldValue("regions", _regions);
+                }}
+              >
+                <option value="None">Select country</option>
+                <option value="United States">United States</option>
+                <option value="Canada">Canada</option>
+              </Field>
+              <label htmlFor="region">Region</label>
+              <Field
+                value={values.region}
+                id="region"
+                name="region"
+                as="select"
+                onChange={handleChange}
+              >
+                <option value="None">Select region</option>
+                {values.regions &&
+                  values.regions.map(r => (
+                    <option key={r.value} value={r.value}>
+                      {r.label}
+                    </option>
+                  ))}
+              </Field>
+                </Col>
+
                 </Row>
 
               </Fragment>
