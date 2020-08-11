@@ -12,6 +12,7 @@ class Home extends Component {
             <>
             
             <Container fluid>
+                
             <Carousel className="mb-2">
                 <Carousel.Item>
                     <img

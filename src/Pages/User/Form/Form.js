@@ -150,30 +150,31 @@ class Wizard extends React.Component {
           return (
 
             <Form onSubmit={handleSubmit}>
+              
                <Container>
-              <div className="c_breadcrumb mb-3" >
-              <ul className="nav nav-pills nav-tabs nav-fill">
+                 <Row>
+               <div className="progressbar-wrapper">
+              <ul className="progressbar">
                   {this.arrayProgress.map((item, index) => {
                     
                     return (
-                      <li className="nav-item">
-                      <a href="" onClick={(e) => e.preventDefault()} className={page >= index ? "nav-link active" : "nav-link"}>
+                      <li className={page >= index ? "active" : ""}>
                         
                           {item.title}
                           {/*{item.description}*/}
-                       
-                      </a>
+
                       </li>
                     );
                   })}
                 </ul>
               </div>
+              </Row>
 
-             
-           
+              <div>
               <h6 className="text-primary">
                 LANGKAH {page + 1} DARI {totalSteps}
               </h6>
+              </div>
 
               {React.cloneElement(activePage, { parentState: { ...props } })}
 
@@ -395,10 +396,10 @@ export const App = () => {
 
                 <Row>
                 <Col md={3}>
-                <Field name="rt" type="text" component={FormInput} label="RT *" placeholder="RT" maxlength="2" />   
+                <Field name="rt" type="text" component={FormInput} label="RT *" placeholder="RT" maxLength="2" />   
                 </Col>
                 <Col md={3}>
-                <Field name="rw" type="text" component={FormInput} label="RW *" placeholder="RW" maxlength="2" />   
+                <Field name="rw" type="text" component={FormInput} label="RW *" placeholder="RW" maxLength="2" />   
                 </Col>
                 <Col md={6}>      
                 <Field name="kelurahan" type="text" component={FormInput} label="Desa/Kelurahan *" placeholder="Desa/Kelurahan" />
