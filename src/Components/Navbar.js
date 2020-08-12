@@ -1,6 +1,6 @@
 import React,{Component} from 'react'
 import {Link, NavLink} from 'react-router-dom'
-import PeriksaForm from '../Pages/Home/PeriksaForm'
+import PeriksaForm from './PeriksaForm'
 import API from '../ServiceApi/Index'
 import {Container, Form,Button, Navbar, Nav, NavItem, NavDropdown} from 'react-bootstrap'
 import {TextLeft, BoxArrowRight, PersonFill, QuestionCircle} from 'react-bootstrap-icons'
@@ -98,7 +98,7 @@ class Navigation extends Component{
         
 
             <Form inline>
-            <Button as={NavLink} type="button" className="btn btn-info btn-sm py-2" to='/login' activeClassName="active" style={{fontWeight: '600'}}>Daftar/Masuk</Button>
+            <Button as={NavLink} type="button" className="btn btn-info btn-sm" to='/login' activeClassName="active" style={{fontWeight: '600',paddingTop:'8px',paddingBottom:'8px'}}>Daftar/Masuk</Button>
             </Form>
             </>
            :

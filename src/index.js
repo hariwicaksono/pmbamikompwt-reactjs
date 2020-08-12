@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './bootstrap.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './theme.css';
 import './index.css';
 import 'react-notifications/lib/notifications.css';
 import 'spin.js/spin.css';

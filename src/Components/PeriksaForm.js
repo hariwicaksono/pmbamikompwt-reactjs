@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 //import {Redirect,Link} from 'react-router-dom'
-import API from '../../ServiceApi/Index'
+import API from '../ServiceApi/Index'
 import SearchResult from './SearchResult'
 //import { NotificationManager } from 'react-notifications'
 import { Form, Button, Spinner } from 'react-bootstrap'
@@ -49,11 +49,11 @@ class LoginForm extends Component {
 
         return (
             <>
-                <Form className="px-2 my-auto w-100" onSubmit={this.handlerSubmit}>
+                <Form className="px-3 my-auto w-100" onSubmit={this.handlerSubmit}>
                 <div className="input-group">
-                    <Form.Control className="border border-left-0" type="text" name="query" placeholder="Cari Nama atau Nomor Daftar..." onChange={this.handlerChange} required/>
+                    <Form.Control className="border" type="text" name="query" placeholder="Cari Nama atau Nomor Daftar..." onChange={this.handlerChange} required/>
                     <span className="input-group-append">
-                    <Button className="border border-left-0 text-dark" type="submit" variant="warning">
+                    <Button className="border text-dark py-1" type="submit" variant="warning">
                     {
                         this.state.loading
                         ?

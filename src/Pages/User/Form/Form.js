@@ -284,28 +284,139 @@ class Programstudi extends React.Component {
   }
 }
 
-export const App = () => {
-  const getRegions = country => {
-    // Simulate async call
-    return new Promise((resolve, reject) => {
-      switch (country) {
-        case "United States":
-          resolve([
-            { value: "Washington", label: "Washington" },
-            { value: "California", label: "California" }
-          ]);
-          break;
-        case "Canada":
-          resolve([
-            { value: "Alberta", label: "Alberta" },
-            { value: "NovaScotia", label: "Nova Scotia" }
-          ]);
-          break;
-        default:
-          resolve([]);
-      }
+const data = {
+  provinces: [
+    { id: 1, name: 'P1' },
+    { id: 2, name: 'P2' },
+    { id: 3, name: 'P3' },
+    { id: 4, name: 'P4' },
+  ],
+  cities: [
+    { id: 1, name: 'C1', provinceId: 1 },
+    { id: 2, name: 'C2', provinceId: 1 },
+    { id: 3, name: 'C3', provinceId: 1 },
+    { id: 4, name: 'C4', provinceId: 2 },
+    { id: 5, name: 'C5', provinceId: 2 },
+    { id: 6, name: 'C6', provinceId: 3 },
+    { id: 7, name: 'C7', provinceId: 4 },
+  ]
+};
+
+class City extends React.Component {
+  onSelect = (event) => {
+    this.props.onSelect(parseInt(event.target.value));
+  }
+  render() {
+    return (
+      <div>
+        <span>City: </span>
+        <select onClick={this.onSelect}>
+          <option>Select city</option>
+          {
+            this.props.data &&
+            this.props.data.map(city => (
+                <option
+                  key={city.KdKab}
+                  value={city.KdKab}
+                  selected={this.props.selectedId === city.KdKab}>
+                  {city.NamaKab}
+                </option>
+            ))
+          }
+        </select>
+      </div>
+    );
+  }
+}
+
+
+class Province extends React.Component {
+  
+  onSelect = (event) => {
+    this.props.onSelect(parseInt(event.target.value));
+  }
+  render() {
+    return (
+      <div>
+        <span>Province: </span>
+        <select onChange={this.onSelect} >
+          <option>Select province</option>
+          {
+            this.props.data.map(prov => (
+              <option
+                key={prov.kdProp}
+                value={prov.kdProp}
+                selected={this.props.selectedId === prov.kdProp}>
+                {prov.NamaProp}
+              </option>
+            ))
+          }
+        </select>
+      </div>
+    );
+  }
+}
+
+class Address extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      provinces: [],
+      provinceId: null,
+      cities: [],
+      cityId: null
+    };
+  }
+
+   
+  componentDidMount(){
+   
+    API.GetKabupaten().then(res=>{
+      this.setState({
+        cities: res
+      })
+    });  
+    API.GetProvinsi().then(res=>{
+      this.setState({
+        provinces: res
+      })
+    }); 
+   }
+
+
+   onSelectProvince = (provId) => {
+    const selCities = this.state.cities.filter(c => c.Kdprop === provId);
+    this.setState({
+      provinceId: provId,
+      cities: selCities
     });
-  };
+  }
+
+  onSelectCity = (city) => {
+    this.setState({
+      cityId: city.KdKab
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <Province
+          data={this.state.provinces}
+          selectedId={this.state.provinceId}
+          onSelect={this.onSelectProvince} />
+        <City
+          data={this.state.cities}
+          selectedId={this.state.cityId}
+          onSelect={this.onSelectCity} />
+        
+      </div>
+    );
+  }
+}
+
+export const App = () => {
+  
   return (
     <>
     
@@ -319,6 +430,71 @@ export const App = () => {
         }}
         
       >
+
+<Wizard.Page>
+          {props => {
+           
+           console.log(props, "this props 1");
+            return (
+              
+              <Fragment>
+                <h3 style={{fontWeight:"700"}} className="mb-1">Data Alamat</h3>
+              <h5 className="mb-3">Isikan data Alamat dan Orang tua anda. Semua kolom wajib diisi</h5>
+              <Row>
+
+              <Col>
+
+                <Row>
+                <Col md={12}>
+                <Field name="alamat" component={FormInput} type="text" label="Alamat Lengkap *" placeholder="Alamat lengkap anda" />
+                </Col>
+                </Row>
+
+                <Row>
+                <Col md={3}>
+                <Field name="rt" type="text" component={FormInput} label="RT *" placeholder="RT" maxLength="2" />   
+                </Col>
+                <Col md={3}>
+                <Field name="rw" type="text" component={FormInput} label="RW *" placeholder="RW" maxLength="2" />   
+                </Col>
+                <Col md={6}>      
+                <Field name="kelurahan" type="text" component={FormInput} label="Desa/Kelurahan *" placeholder="Desa/Kelurahan" />
+                </Col>
+                </Row>
+
+                <Row>
+                <Col md={6}>
+                <Field name="kecamatan" type="text" component={FormInput} label="Kecamatan *" placeholder="Kecamatan" />
+                </Col>
+                <Col md={6}>
+                <Field name="kodepos" type="text" component={FormInput} label="Kode Pos *" placeholder="Kode Pos" />
+                </Col>
+                </Row>
+
+              <Address/>
+
+                </Col>
+
+
+                <Col>
+
+                <Row>
+                <Col md={12}>
+                <Field name="ibu" component={FormInput} type="text" label="Nama Ibu Kandung *" placeholder="Nama Ibu Kandung" />
+                </Col>
+                </Row>
+                
+                
+             
+                </Col>
+
+                </Row>
+
+              </Fragment>
+            );
+          }}
+        </Wizard.Page>
+        
         <Wizard.Page>
           {props => {
             const {
@@ -370,115 +546,6 @@ export const App = () => {
             );
           }}
           </Wizard.Page>
-
-        <Wizard.Page>
-          {props => {
-            const {
-              values,
-              handleChange,
-              setFieldValue
-            } = props;
-           console.log(props, "this props 1");
-            return (
-              
-              <Fragment>
-                <h3 style={{fontWeight:"700"}} className="mb-1">Data Alamat</h3>
-              <h5 className="mb-3">Isikan data Alamat dan Orang tua anda. Semua kolom wajib diisi</h5>
-              <Row>
-
-              <Col>
-
-                <Row>
-                <Col md={12}>
-                <Field name="alamat" component={FormInput} type="text" label="Alamat Lengkap *" placeholder="Alamat lengkap anda" />
-                </Col>
-                </Row>
-
-                <Row>
-                <Col md={3}>
-                <Field name="rt" type="text" component={FormInput} label="RT *" placeholder="RT" maxLength="2" />   
-                </Col>
-                <Col md={3}>
-                <Field name="rw" type="text" component={FormInput} label="RW *" placeholder="RW" maxLength="2" />   
-                </Col>
-                <Col md={6}>      
-                <Field name="kelurahan" type="text" component={FormInput} label="Desa/Kelurahan *" placeholder="Desa/Kelurahan" />
-                </Col>
-                </Row>
-
-                <Row>
-                <Col md={6}>
-                <Field name="kecamatan" type="text" component={FormInput} label="Kecamatan *" placeholder="Kecamatan" />
-                </Col>
-                <Col md={6}>
-                <Field name="kodepos" type="text" component={FormInput} label="Kode Pos *" placeholder="Kode Pos" />
-                </Col>
-                </Row>
-
-                <Row>
-                <Col md={6}>
-                
-                </Col>
-                <Col md={6}>  
-               
-                </Col>
-                </Row>
-
-
-                </Col>
-
-
-                <Col>
-
-                <Row>
-                <Col md={12}>
-                <Field name="ibu" component={FormInput} type="text" label="Nama Ibu Kandung *" placeholder="Nama Ibu Kandung" />
-                </Col>
-                </Row>
-                
-                <label htmlFor="country">Country</label>
-              <Field
-                id="country"
-                name="country"
-                as="select"
-                value={values.country}
-                onChange={async e => {
-                  const { value } = e.target;
-                  const _regions = await getRegions(value);
-                  console.log(_regions);
-                  setFieldValue("country", value);
-                  setFieldValue("region", "");
-                  setFieldValue("regions", _regions);
-                }}
-              >
-                <option value="None">Select country</option>
-                <option value="United States">United States</option>
-                <option value="Canada">Canada</option>
-              </Field>
-              <label htmlFor="region">Region</label>
-              <Field
-                value={values.region}
-                id="region"
-                name="region"
-                as="select"
-                onChange={handleChange}
-              >
-                <option value="None">Select region</option>
-                {values.regions &&
-                  values.regions.map(r => (
-                    <option key={r.value} value={r.value}>
-                      {r.label}
-                    </option>
-                  ))}
-              </Field>
-                </Col>
-
-                </Row>
-
-              </Fragment>
-            );
-          }}
-        </Wizard.Page>
 
          <Wizard.Page>
           {props => {

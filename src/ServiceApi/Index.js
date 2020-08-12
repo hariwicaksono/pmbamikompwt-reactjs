@@ -131,6 +131,8 @@ const PutUserPassword = (data) => PUTUSER('UserPassword',data)
 const CheckUsername = (data) => Axios(RoothPath+`CheckUsername?id=${data}`)
 const GetJenisMhs = () => GET('JenisMhsController')
 const GetProdi = () => GET('ProdiController')
+const GetKabupaten = () => GET('KabupatenController')
+const GetProvinsi = () => GET('ProvinsiController')
 
 const API = {
     GetPageId,
@@ -149,7 +151,9 @@ const API = {
     PutUserPassword,
     CheckUsername,
     GetJenisMhs,
-    GetProdi
+    GetProdi,
+    GetKabupaten,
+    GetProvinsi
     
 }
 
