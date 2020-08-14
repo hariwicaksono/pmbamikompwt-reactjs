@@ -10,10 +10,11 @@ class Home extends Component {
         return (
             
             <>
-            
-            <Container fluid>
-                
-            <Carousel className="mb-2">
+            <Container className="my-3" fluid>
+
+            <Row className="mx-auto mb-3">
+            <Col md={8}>
+            <Carousel>
                 <Carousel.Item>
                     <img
                     className="d-block w-100"
@@ -51,23 +52,10 @@ class Home extends Component {
                 </Carousel.Item>
             </Carousel>
 
-            
-            
-            <Row className="pt-1 pb-3">
-            <Col md={8}>
-            <Card className="bg-white border-0 py-0">
-            <Card.Body>
-            <Card.Title><h3>Alur Pendaftaran</h3></Card.Title>
-
-            <img src="/images/alur_daftar.png" className="img-fluid" width="600" alt="" />
-
-            </Card.Body>
-            </Card>
-
             </Col>
-            <Col md={4}>
+            <Col md={4} className="bg-white">
 
-            <Card className="bg-white border-0 py-0">
+            <Card>
             <Card.Body>
             <Card.Title>Masuk</Card.Title>
 
@@ -76,8 +64,25 @@ class Home extends Component {
             </Card.Body>
             </Card>
 
+            </Col>
+
+            </Row>
+            
+            
+            
+            <Row className="mx-auto">
+            <Col md={12}>
+            <Card className="bg-white border-0 py-0">
+            <Card.Body>
+           
+
+          
+
+            </Card.Body>
+            </Card>
 
             </Col>
+
             </Row>
 
             </Container>

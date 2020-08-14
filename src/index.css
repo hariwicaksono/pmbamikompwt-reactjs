@@ -76,11 +76,10 @@ span.error {
 #appbar .navbar-nav a.nav-link{font-size: .875rem;font-weight: 400;}
 svg{margin-bottom: 3px !important;}
 #sidebar svg{margin-bottom: 6px !important;}
-.navbar-dark .navbar-nav .show > .nav-link,
-.navbar-dark .navbar-nav .active > .nav-link,
-.navbar-dark .navbar-nav .nav-link.show,
-.navbar-dark .navbar-nav .nav-link.active {
-  color: #2DCE89;
+#appbar .navbar-nav .active > .nav-link,
+#appbar .navbar-nav .nav-link.active {
+  color: #563d7c;
+  ;
 }
 #searchResult{
   position: absolute;
@@ -104,8 +103,8 @@ svg{margin-bottom: 3px !important;}
 }
 
 #sidebar {
-    min-width: 250px;
-    max-width: 250px;
+    min-width: 150px;
+    max-width: 150px;
     background: #482373;
     color: #f2f2f2;
     transition: all 0.3s;
@@ -127,13 +126,13 @@ svg{margin-bottom: 3px !important;}
 }
 
 #sidebar ul li a {
-    text-align: left;
+    text-align: center;
 }
 
 #sidebar.active ul li a {
     padding: 20px 10px;
     text-align: center;
-    font-size: 0.875em;
+    font-size: 12px;
 }
 
 #sidebar.active ul li a span {
@@ -243,7 +242,7 @@ svg{margin-bottom: 3px !important;}
         padding: 20px 10px;
     }
     #sidebar ul li a span {
-        font-size: 0.85em;
+        font-size: 12px;
     }
     #sidebar ul li a i {
         margin-right: 0;
