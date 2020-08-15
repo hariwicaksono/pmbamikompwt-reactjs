@@ -30,7 +30,7 @@ class Appbar extends Component{
         return(
             <div className="pt-4 mt-4 d-xs-block d-sm-block d-md-block d-lg-none d-xl-none">
               
-              <Navbar id="appbar" variant="light" fixed="bottom" sticky="bottom" style={{backgroundColor:'#fafafa',height:'60px'}}>
+              <Navbar id="appbar" className="border-top" variant="light" fixed="bottom" sticky="bottom" style={{backgroundColor:'#fafafa',height:'60px'}}>
               
               <Nav className="mx-auto text-center">
 

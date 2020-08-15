@@ -6,7 +6,7 @@ import { Container, Card} from 'react-bootstrap'
 import { Helmet } from 'react-helmet'
 //import Loader from 'react-loader'
 
-const TITLE = ' - PMB Universitas Amikom Purwokerto'
+const TITLE = ' Akreditasi - PMB Universitas Amikom Purwokerto'
 //var options = {
     //lines: 13,
     //length: 20,
@@ -28,43 +28,33 @@ const TITLE = ' - PMB Universitas Amikom Purwokerto'
     //hwaccel: false,
     //position: 'absolute'
 //};
-class Page extends Component {
+class Akreditasi extends Component {
     constructor(props){
         super(props)
         this.state = {
-            judul_tupoksi : '',
-            isi_tupoksi : '',
             loading: true
             
         }
     }
 
     componentDidMount = () => {
-        const id = this.props.match.params.id
-        //console.log(id)
-        API.GetPageId(id).then(res=>{
-           // console.log(res)
+        
            setTimeout(() => this.setState({
-                judul_tupoksi : res.judul_tupoksi,
-                isi_tupoksi :res.isi_tupoksi,
                 loading: false
                 //harga: res.harga_produk,
                 //des:res.desk_produk,
                 //foto : 'http://localhost/api_olsop_fix/server/asset/img/'+res.foto_produk
-            }), 200);
-        })
+        }), 200);
+     
     }
-    componentDidUpdate(prevProps) {
-        if (prevProps.location.pathname !== this.props.location.pathname) { window.location.reload();
-        }
-    }
+
     render() {
          
         return (
             <>
  
                 <Helmet>
-                <title>{ Parser(this.state.judul_tupoksi) + TITLE }</title>
+                <title>{ TITLE }</title>
                 </Helmet>
              
                 <Container fluid>
@@ -83,9 +73,7 @@ class Page extends Component {
                        
                         <>
                             
-                                <h1>{Parser(this.state.judul_tupoksi)}</h1>
-                                <hr/>
-                                {Parser(this.state.isi_tupoksi)}
+                                
                         </>
                    
                         
@@ -103,4 +91,4 @@ class Page extends Component {
     }
 }
 
-export default Page
+export default Akreditasi

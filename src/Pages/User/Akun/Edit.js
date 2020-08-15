@@ -89,14 +89,13 @@ API.GetUserId(id).then(res=>{
 
 render() {
 return (
-    <div>
+    <>
         <Helmet>
         <title>{ 'Edit Akun' + TITLE }</title>
         </Helmet>
 
-        <MainnavU />
-        <div className="my-3 mx-2">
         <Container fluid>
+        <MainnavU />
         <Card className="shadow">
             <Card.Body>
             <Row>
@@ -176,9 +175,9 @@ return (
             </Card.Body>
             </Card>
         </Container>
-        </div>
+       
     
-    </div>
+    </>
 )
 }
 }

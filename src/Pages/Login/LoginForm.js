@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-//import {Redirect,Link} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import API from '../../ServiceApi/Index'
 import { NotificationManager } from 'react-notifications'
-import { FormLabel, FormGroup, Spinner } from 'react-bootstrap'
-import {BoxArrowInRight} from 'react-bootstrap-icons'
+import { FormGroup, Spinner } from 'react-bootstrap'
+import {BoxArrowInRight,BoxArrowRight} from 'react-bootstrap-icons'
 import Form from 'react-formal'
 import * as yup from 'yup'
+import { logout, isLogin } from '../../Utils'
  
 const schema = yup.object({
     username: yup.string().required(),
@@ -20,14 +21,18 @@ class LoginForm extends Component {
             level: "USER",
             isLogin:false,
             idLogin:"",
-            loading: false
+            loading: false,
+            login:false,
+            id:"",
+            nama:"",
+            foto:"",
         }
         this.handlerChange = this.handlerChange.bind(this)
         this.handlerSubmit = this.handlerSubmit.bind(this)
         
     }
 
-
+ 
     handlerChange = (event) => {
         this.setState({
             [event.target.name]: event.target.value
@@ -66,20 +71,45 @@ class LoginForm extends Component {
         
     }
 
+    Logout = () => {
+        logout();
+    }
+
+    componentDidMount = () => {
+        if (isLogin()) {
+           //console.log('LOGIN')
+           const data = JSON.parse(sessionStorage.getItem('isLogin'))
+                const id = data[0].username
+                API.GetUserId(id).then(res=>{
+                    this.setState({
+                        id : res.username,
+                        nama: res.nama,
+                        foto: res.foto,
+                    })
+                })
+                
+        } else {
+            this.setState({
+                login:true
+            })
+        }
+    }
+
     render() {
     
         return (
             <>
-        
-                <Form onSubmit={this.handlerSubmit} schema={schema}>
+         {this.state.login ?
+            <>
+            <Form onSubmit={this.handlerSubmit} schema={schema}>
                     <input type="hidden" name="level" value="USER" />
                     <FormGroup>
-                    <FormLabel>Username*</FormLabel>
+                    
                         <Form.Field type="text" name="username" placeholder="Username" errorClass="error" onChange={this.handlerChange} />
                         <Form.Message for="username" className="error" />
                     </FormGroup>
                     <FormGroup>
-                    <FormLabel>Password*</FormLabel>
+                 
                         <Form.Field type="password" name="password" placeholder="Password" errorClass="error" onChange={this.handlerChange} />
                         <Form.Message for="password" className="error" />
                     </FormGroup>
@@ -97,7 +127,17 @@ class LoginForm extends Component {
                             /> Memuat...
                        </>
                         :  <><BoxArrowInRight size="20"/> Login</> }</Form.Submit>
-                </Form>                              
+                </Form>   
+            </>
+         :
+         <>
+            <h5>Anda Login sebagai: {this.state.nama}</h5>
+            <div className="mb-1"><Link className="btn btn-outline-primary" to='/user'>Dashboard</Link></div>
+            <div><Link className="btn btn-outline-danger" onClick={this.Logout} to=''><BoxArrowRight/> Keluar</Link></div>
+         </>
+
+        }
+                                
   
             </>
         )

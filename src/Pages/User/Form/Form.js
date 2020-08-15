@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
-import { Container, Row, Col, Alert, FormGroup, FormLabel, Button } from 'react-bootstrap';
+import { Container, Row, Col, Card, Alert, FormGroup, FormLabel, Button } from 'react-bootstrap';
 import {Check2Circle} from 'react-bootstrap-icons';
 import FormInput from '../../../Components/Form/FormInput';
 import FormCheck from '../../../Components/Form/FormCheck';
@@ -21,11 +21,6 @@ const Step1Schema = Yup.object().shape({
     }
   })
   .positive(),
-  //jenis_mhs: Yup.string().required("Jenis Mahasiswa harus dipilih"),
-  //pilihan1: Yup.string().required("Program Studi Pilihan 1 harus dipilih"),
-  //pilihan2: Yup.string().required("Program Studi Pilihan 2 harus dipilih"),
-  //pilihan3: Yup.string().required("Program Studi Pilihan 3 harus dipilih"),
-  //info: Yup.string().required("Info PMB harus dipilih")
 });
 
 const Step2Schema = Yup.object().shape({
@@ -36,17 +31,22 @@ const Step2Schema = Yup.object().shape({
   //pilihan3: Yup.string().required("Program Studi Pilihan 3 harus dipilih"),
   info: Yup.string().required("Info PMB harus dipilih")
 });
- 
+
 const Step3Schema = Yup.object().shape({
   nama: Yup.string().required("Nama Lengkap harus diisi"),
+  nama_ortu: Yup.string().required("Nama Ibu Kandung harus diisi"),
   nik: Yup.number().required("Nomor NIK/KTP harus diisi").typeError("Harus berupa angka"),
   tempatlahir: Yup.string().required("Tempat lahir harus diisi"),
-  tgllahir: Yup.string().required("Tanggal lahir harus diisi"),
+  tgl: Yup.string().required("Tanggal lahir harus diisi"),
+  bln: Yup.string().required("Bulan lahir harus diisi"),
+  thn: Yup.string().required("Tahun lahir harus diisi"),
   jk: Yup.string().required("Jenis kelamin harus dipilih"),
   agama: Yup.string().required("Agama harus dipilih"),
   telepon: Yup.number().required('Nomor Telepon atau HP harus diisi').typeError("Harus berupa angka"),
+  telp_ortu: Yup.number().required('Nomor Telepon atau HP harus diisi').typeError("Harus berupa angka"),
   email: Yup.string().email('Harus berupa email yang valid').required("Email harus diisi"),
 });
+
 const Step4Schema = Yup.object().shape({
   propinsi: Yup.string().required("Provinsi harus dipilih"), 
   kabupaten: Yup.string().required("Kabupaten harus dipilih"), 
@@ -66,6 +66,17 @@ const Step4Schema = Yup.object().shape({
   kodepos_ortu: Yup.string().required("Kodepos harus diisi"), 
 });
 
+const Step5Schema = Yup.object().shape({
+  sekolah: Yup.string().required("Nama Sekolah harus diisi"),
+  jurusan: Yup.string().required("Jurusan harus dipilih"),
+  nem: Yup.number().test(
+    'is-decimal',
+    'Format harus Decimal, contoh: 87.60',
+    value => (value + "").match(/^\d*\.{1}\d*$/),
+  ).typeError("Harus berupa angka, hanya boleh menggunakan titik."),
+  thn_lulus: Yup.string().required("Tahun Lulus harus dipilih"),
+});
+
 const initialValues = {
   jenis_mhs: "",
   status_registrasi: "",
@@ -77,7 +88,9 @@ const initialValues = {
   nama: "",
   nik: "",
   tempatlahir: "",
-  tgllahir: "",
+  tgl:"",
+  bln:"",
+  thn:"",
   jk:"",
   agama:"",
   email: "",
@@ -99,10 +112,14 @@ const initialValues = {
   kabupaten_ortu:"",
   propinsi_ortu:"",
   kodepos_ortu:"",
-  telp_ortu:""
+  telp_ortu:"",
+  sekolah:"",
+  jurusan:"",
+  nem:"",
+  thn_lulus:""
 };
 
-const schemaArray = [Step1Schema, Step2Schema, Step3Schema, Step4Schema];
+const schemaArray = [Step1Schema, Step2Schema, Step3Schema, Step4Schema, Step5Schema];
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -117,8 +134,7 @@ class Wizard extends React.Component {
     super(props);
     this.state = {
       page: 0,
-      values: props.initialValues,
-      nama: ""
+      values: props.initialValues
     };
   }
 
@@ -156,19 +172,28 @@ class Wizard extends React.Component {
 
   arrayProgress = [
     {
+      id: "1",
       title: "Jenis Daftar",
       //description: "Biodata Pendaftar",
     },
     {
+      id: "2",
       title: "Program Studi",
       //description: "Biodata Pendaftar",
     },
     {
+      id: "3",
       title: "Data Diri",
       //description: "Alamat Pendaftar dan Orang Tua",
     },
     {
-      title: "Data Pendidikan",
+      id: "4",
+      title: "Data Alamat",
+      //description: "Sekolah asal dan Jurusan Pilihan",
+    },
+    {
+      id: "5",
+      title: "Data Sekolah",
       //description: "Sekolah asal dan Jurusan Pilihan",
     },
   ];
@@ -203,7 +228,8 @@ class Wizard extends React.Component {
                     return (
                       <li className={page >= index ? "active" : ""}>
                         
-                          {item.title}
+                          <span className="d-block d-sm-none">{item.id}</span>
+                          <span className="d-none d-xs-none d-sm-block d-md-block">{item.title}</span>
                           {/*{item.description}*/}
 
                       </li>
@@ -272,7 +298,7 @@ class Jenismhs extends React.Component {
   render() {
     return <>
      <Field name="jenis_mhs" component={FormSelect} label="Jenis Pendaftaran *">
-       <option value="">Pilih Jenis</option>
+       <option>Pilih Jenis</option>
         <SelectJenismhs data={this.state.select} />  
       </Field>
 
@@ -303,19 +329,19 @@ class ProgramstudiReg extends React.Component {
     <Row>
     <Col>
     <Field name="pilihan1" component={FormSelect} label="Pilihan 1 *">
-       <option value="">Pilihan 1</option>
+       <option>Pilihan 1</option>
         <SelectProgramstudi data={this.state.select} />
       </Field>
     </Col>
     <Col>
     <Field name="pilihan2" component={FormSelect} label="Pilihan 2 *">
-       <option value="">Pilihan 2</option>
+       <option>Pilihan 2</option>
         <SelectProgramstudi data={this.state.select} />  
       </Field>
     </Col>
   <Col>
   <Field name="pilihan3" component={FormSelect} label="Pilihan 3 *">
-        <option value="">Pilihan 3</option>
+        <option>Pilihan 3</option>
           <SelectProgramstudi data={this.state.select} />  
         </Field>
   </Col>
@@ -350,14 +376,14 @@ class ProgramstudiBswa extends React.Component {
     <Row>
     <Col>
     <Field name="pilihan1" component={FormSelect} label="Pilihan 1 *">
-       <option value="">Pilihan 1</option>
+       <option>Pilihan 1</option>
        <option value="55201">INFORMATIKA</option>
        <option value="55701">SISTEM INFORMASI</option>
       </Field>
     </Col>
     <Col>
     <Field name="pilihan2" component={FormSelect} label="Pilihan 2 *">
-       <option value="">Pilihan 2</option>
+       <option>Pilihan 2</option>
        <option value="55201">INFORMATIKA</option>
       <option value="55701">SISTEM INFORMASI</option>
       </Field>
@@ -393,13 +419,13 @@ class ProgramstudiSore extends React.Component {
     <Row>
     <Col>
     <Field name="pilihan1" component={FormSelect} label="Pilihan 1 *">
-       <option value="">Pilihan 1</option>
+       <option>Pilihan 1</option>
        <option value="55201">INFORMATIKA</option>
       </Field>
     </Col>
     <Col>
     <Field name="pilihan2" component={FormSelect} label="Pilihan 2 *">
-       <option value="">Pilihan 2</option>
+       <option>Pilihan 2</option>
        <option value="55201">INFORMATIKA</option>
       </Field>
     </Col>
@@ -411,6 +437,68 @@ class ProgramstudiSore extends React.Component {
   }
 }
 
+function TanggalList(props) {
+  const numbers = props.numbers;
+  const listItems = numbers.map((number) =>
+    <option key={number.toString()} value={number.toString()}>
+      {number}
+    </option>
+  );
+  return (
+    <Field name="tgl" component={FormSelect} label="Tanggal *">
+      <option></option>
+      {listItems}
+    </Field>
+  );
+}
+function BulanList(props) {
+  const numbers = props.numbers;
+  const listItems = numbers.map((number) =>
+    <option key={number.toString()} value={number.toString()}>
+      {number}
+    </option>
+  );
+  return (
+    <Field name="bln" component={FormSelect} label="Bulan *">
+      <option></option>
+      {listItems}
+    </Field>
+  );
+}
+function TahunList(props) {
+  const numbers = props.numbers;
+  const listItems = numbers.map((number) =>
+    <option key={number.toString()} value={number.toString()}>
+      {number}
+    </option>
+  );
+  return (
+    <Field name="thn" component={FormSelect} label="Tahun *">
+      <option></option>
+      {listItems}
+    </Field>
+  );
+}
+
+function TahunLulus(props) {
+  const numbers = props.numbers;
+  const listItems = numbers.map((number) =>
+    <option key={number.toString()} value={number.toString()}>
+      {number}
+    </option>
+  );
+  return (
+    <Field name="thn_lulus" component={FormSelect} label="Tahun *">
+      <option>Pilih Tahun</option>
+      {listItems}
+    </Field>
+  );
+}
+
+const tanggal = ['01','02','03','04','05','06','07','08','09',10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31];
+const bulan = ['01','02','03','04','05','06','07','08','09',10,11,12];
+const tahun = [2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000,1999,1998,1997,1996,1995,1994,1993,1992,1991,1990,1989,1988,1987,1986,1985,1984,1983,1982,1981,1980];
+const tahunlulus = [2020,2019,2018,2017,2016,2015,2014,2013,2012,2011,2010,2009,2008,2007,2006,2005,2004,2003,2002,2001,2000];
 
 export const App = () => {
   
@@ -419,7 +507,8 @@ export const App = () => {
     
       <Wizard
         initialValues={initialValues}
-        onSubmit={(values, actions, { setSubmitting, resetForm }) => {
+        onSubmit={(values, actions) => {
+          //onSubmit={(values, actions, { setSubmitting, resetForm }) => {
           sleep(300).then(() => {
             window.alert(JSON.stringify(values, null, 2));
             actions.setSubmitting(true);
@@ -441,9 +530,8 @@ export const App = () => {
     
     <Fragment>
     <h3 style={{fontWeight:"700"}} className="mb-1">Jenis Pendaftaran</h3>
-    <h5 className="mb-5">Jenis Pendaftaran Reguler dan Beasiswa</h5>
-
-    <Container>
+    <h5 className="d-none d-xs-none d-sm-none d-md-block">Jenis Pendaftaran Reguler dan Beasiswa</h5>
+    <div className="mt-4">
       <FormGroup>
       <h4 className="text-center mb-3">Apakah anda memiliki Kartu KIP-Kuliah? *</h4>
       
@@ -474,7 +562,7 @@ export const App = () => {
       
       </FormGroup>
 
-      </Container>
+      </div>
     </Fragment>
 
   );
@@ -490,8 +578,8 @@ const {
     <Fragment>
    
     <h3 style={{fontWeight:"700"}} className="mb-1">Jenis Mahasiswa &amp; Program Studi</h3>
-    <h5 className="mb-3">Pilih Jenis Mahasiswa, Program Studi dan Sumber Informasi Amikom</h5>
-
+    <h5 className="d-none d-xs-none d-sm-none d-md-block">Pilih Jenis Mahasiswa, Program Studi dan Sumber Informasi Amikom</h5>
+    <div className="mt-3">
       <FormGroup>
      
       <Alert variant="warning" className="mb-0 mt-0">
@@ -518,7 +606,7 @@ const {
       <Col md={6}>
   
       <Field component={FormSelect} name="kelas" label="Kelas *">
-        <option value="">Pilih Kelas</option>
+        <option>Pilih Kelas</option>
       {(values.jenis_mhs === "1" || values.jenis_mhs === "2" ) &&
       <>
       <option value="Pagi">PAGI</option>
@@ -580,7 +668,7 @@ const {
       </FormGroup>
       </Col>
       </Row> 
-     
+      </div>
   </Fragment>
   );
 }}
@@ -589,37 +677,52 @@ const {
 <Wizard.Page>
 {props => {
   
- console.log(props, "this props 1");
+ //console.log(props, "this props 1");
   return (
     
     <Fragment>
       <h3 style={{fontWeight:"700"}} className="mb-1">Data Pribadi</h3>
-    <h5 className="mb-3">Isikan data pribadi anda. Semua kolom wajib diisi</h5>
-      <div className="row">
+    <h5 className="d-none d-xs-none d-sm-none d-md-block">Isikan data pribadi anda. Semua kolom wajib diisi</h5>
+    <div className="mt-3">
+      <Row>
       <Col md={7}>
       <Field name="nama" component={FormInput} type="text" label="Nama Lengkap" placeholder="Nama Lengkap anda" />
       </Col>
       <Col md={5}>
       <Field name="nik" component={FormInput} type="text" label="Nomor NIK/KTP" placeholder="Nomor NIK/KTP" />
       </Col>
+      </Row>
 
-      </div>
-      <div className="row">
+      <Row>
       <Col md={6}>
       <Field name="tempatlahir" type="text" component={FormInput} label="Tempat Lahir *" placeholder="Tempat Lahir" />   
       </Col>
-      <Col md={6}>      
-      <Field name="tgllahir" type="text" component={FormInput} label="Tanggal Lahir *" />
+      <Col md={6}> 
+        <Row>
+        <Col>
+        <TanggalList numbers={tanggal} />
+        </Col>
+        <Col>
+        <BulanList numbers={bulan} />
+        </Col>
+        <Col>
+        <TahunList numbers={tahun} />
+        </Col>
+        </Row>     
       </Col>
-      </div>
+      </Row>
 
-      <div className="row">
+      <Row>
       <Col md={6}>
-      <div className="form-group">
+      <FormGroup>
       <FormLabel style={{fontWeight:"600"}}>Jenis Kelamin *</FormLabel><br/>
+      <span className="pl-1">
       <Field name="jk" component={FormCheck} type="radio" value="Pria" label="Laki-Laki" />
+      </span>
+      <span className="pl-3">
       <Field name="jk" component={FormCheck} type="radio" value="Wanita" label="Perempuan"/>
-      </div>
+      </span>
+      </FormGroup>
       </Col>
       <Col md={6}>
       <Field name="agama" component={FormSelect} label="Agama *" >
@@ -632,32 +735,47 @@ const {
           <option value="L">Lainnya</option>
       </Field>
       </Col>
-      </div>
-      <div className="row">
+      </Row>
+
+      <Row>
       <Col md={6}>
       <Field name="telepon" type="text" component={FormInput} label="Telp/HP *" placeholder="Nomor Telepon/HP" />
       </Col>
       <Col md={6}>  
       <Field name="email" type="email" component={FormInput} label="Email *" placeholder="yourname@mail.com" />
       </Col>
+      </Row>
+      
+      <Card bg="light">
+        <Card.Body>
+      <Row>
+        <Col md={6}>
+        <Field name="nama_ortu" component={FormInput} type="text" label="Nama Ibu Kandung *" placeholder="Nama Ibu Kandung" />
+        </Col>
+        <Col md={6}>
+        <Field name="telp_ortu" component={FormInput} type="text" label="Nomor HP Orang Tua *" placeholder="Nomor HP Orang Tua" />
+        </Col>
+      </Row>
+      </Card.Body>
+      </Card>
       </div>
     </Fragment>
   );
 }}
 </Wizard.Page>
 
-      <Wizard.Page>
+<Wizard.Page>
           {props => {
            const {
             values
           } = props;
-           console.log(props, "this props 1");
+           //console.log(props, "this props 1");
             return (
               
               <Fragment>
                 <h3 style={{fontWeight:"700"}} className="mb-1">Data Alamat</h3>
-              <h5 className="mb-3">Isikan data Alamat dan Orang tua anda. Semua kolom wajib diisi</h5>
-              
+              <h5 className="d-none d-xs-none d-sm-none d-md-block">Isikan Data Alamat. Semua kolom wajib diisi</h5>
+              <div className="mt-3">
               <Row>
               <Col>
 
@@ -695,17 +813,7 @@ const {
                 </Col>
 
                
-                <Col>
-
-                <Row>
-                <Col md={12}>
-                <Field name="ibu" component={FormInput} type="text" label="Nama Ibu Kandung *" placeholder="Nama Ibu Kandung" />
-                
-                
-                <Field name="telp_ortu" component={FormInput} type="number" label="Nomor HP Orang Tua *" placeholder="Nomor HP Orang Tua" />
-                </Col>
-
-                </Row>
+                <Col> 
 
                 <FormGroup>
                   <PropKabOrtu/>
@@ -742,6 +850,7 @@ const {
 
                 </Col>
                 </Row>
+                </div>
               </Fragment>
             );
 
@@ -750,6 +859,60 @@ const {
        
       </Wizard.Page>
 
+
+<Wizard.Page>
+{props => {
+  
+ //console.log(props, "this props 1");
+  return (
+    
+    <Fragment>
+    <h3 style={{fontWeight:"700"}} className="mb-1">Data Sekolah</h3>
+    <h5 className="d-none d-xs-none d-sm-none d-md-block">Asal Sekolah SMK/SMA/PTS/PTN/DLL</h5>
+    <div className="mt-3">
+      <Row>
+      <Col>
+      <Field name="sekolah" component={FormInput} type="text" label="Asal Sekolah *" placeholder="Nama SMK/SMA/PTS/PTN/DLL" />
+      </Col>
+      </Row>
+
+      <Row>
+      <Col>
+      <Field name="jurusan" component={FormSelect} label="Jurusan *" >
+      <option>Pilih Jurusan</option>
+          <option value="IPA">IPA</option>
+          <option value="IPS">IPS</option>
+          <option value="BAHASA">BAHASA</option>
+          <option value="AKUNTANSI">AKUNTANSI</option>
+          <option value="PERKANTORAN">PERKANTORAN</option>
+          <option value="MESIN">MESIN</option>
+          <option value="LISTRIK">LISTRIK</option>
+          <option value="ELEKTRO">ELEKTRO</option>
+          <option value="TKJ">TKJ</option>
+          <option value="MULTIMEDIA">MULTIMEDIA</option>
+          <option value="RPL">RPL</option>
+          <option value="Lainnya">Lainnya</option>
+      </Field>
+      </Col>
+      </Row>
+
+      <Row>
+      <Col>
+      <Field name="nem" component={FormInput} type="text" label="Rata-rata Nem/UAN *" placeholder="00.00" maxLength="5"/>
+      </Col>
+      </Row>
+
+      <Row>
+      <Col>
+      <TahunLulus numbers={tahunlulus} />
+    </Col>
+    </Row>
+    </div>
+    </Fragment>
+  );
+}}
+</Wizard.Page>
+      
 
       </Wizard>
     </>

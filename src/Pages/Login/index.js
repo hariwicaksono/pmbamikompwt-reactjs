@@ -14,7 +14,7 @@ class Login extends Component {
             <div>
                 <Helmet>
                 <title>{ TITLE }</title>
-                <style type="text/css">{`
+                {/*<style type="text/css">{`
                 body {
                     background: url('') no-repeat center center fixed;-webkit-background-size: cover;
                     -moz-background-size: cover;
@@ -22,7 +22,7 @@ class Login extends Component {
                     background-size: cover;
                 }
                 `}
-                </style>
+                </style>*/}
                 </Helmet>
                 
                 <Container>
@@ -40,10 +40,10 @@ class Login extends Component {
                 </ul>
 
                     
-                    <Card className="bg-white border-0">
+                <Card className="shadow bg-white border-0">
                       
                     <Card.Body>
-                    <h4><strong>Masuk</strong> <small>PMB Univ. Amikom Purwokerto</small></h4>
+                    <Card.Title className="mb-3" style={{fontSize:"1.6rem"}}><strong>Login</strong> <small>PMB Univ. Amikom Purwokerto</small></Card.Title>
                     <FormLogin />
                     </Card.Body>
                     <Card.Footer className="text-muted"> Belum punya akun PMB? <Link to={'/register'}>Daftar Akun</Link></Card.Footer>

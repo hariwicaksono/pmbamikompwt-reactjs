@@ -7,25 +7,13 @@ import { Card, Container } from 'react-bootstrap'
 import Form from './Form'
 
 const TITLE = ' User - PMB Universitas Amikom Purwokerto'
-class Index extends Component {
+class Pendaftaran extends Component {
     constructor(props) {
         super(props)
         this.state = {
             //mhs: []
         }
     }
-
-    //componentDidMount = () => {
-        //if (sessionStorage.getItem('isLogin')) {
-           // console.log('Ok')
-           
-        //} else {
-            //this.setState({
-               // login:true
-           // })
-        //}
-        
-    //}
 
     render() {
         
@@ -35,13 +23,13 @@ class Index extends Component {
                 <title>{ TITLE }</title>
                 
                 </Helmet>
-                
+               
                 <Container fluid>
                 <MainnavU />
                 <Card className="shadow">
                 <Card.Body>
 
-               
+                <Form />
 
                 </Card.Body>
                 </Card>
@@ -54,4 +42,4 @@ class Index extends Component {
 }
 
 
-export default Index
+export default Pendaftaran

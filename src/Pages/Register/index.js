@@ -14,7 +14,7 @@ class Login extends Component {
             <div>
                 <Helmet>
                 <title>{ TITLE }</title>
-                <style type="text/css">{`
+                {/*<style type="text/css">{`
                 body {
                     background: url('') no-repeat center center fixed;-webkit-background-size: cover;
                     -moz-background-size: cover;
@@ -22,7 +22,7 @@ class Login extends Component {
                     background-size: cover;
                 }
                 `}
-                </style>
+                </style>*/}
                 </Helmet>
                 
                 <Container>
@@ -39,7 +39,7 @@ class Login extends Component {
                 </ul>
 
             
-                <Card className="bg-white border-0"> 
+                <Card className="shadow bg-white border-0"> 
                 <Card.Body>
                 <h4><strong>Daftar Akun</strong> <small>PMB Univ. Amikom Purwokerto</small></h4>
                 <RegisterForm />

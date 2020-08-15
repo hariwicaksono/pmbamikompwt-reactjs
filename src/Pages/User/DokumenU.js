@@ -7,7 +7,7 @@ import { Card, Container } from 'react-bootstrap'
 import Form from './Form'
 
 const TITLE = ' User - PMB Universitas Amikom Purwokerto'
-class Index extends Component {
+class Dokumen extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -54,4 +54,4 @@ class Index extends Component {
 }
 
 
-export default Index
+export default Dokumen

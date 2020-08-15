@@ -49,7 +49,7 @@ class LoginForm extends Component {
 
         return (
             <>
-                <Form className="px-3 my-auto w-100" onSubmit={this.handlerSubmit}>
+                <Form className="px-2 my-auto w-100" onSubmit={this.handlerSubmit}>
                 <div className="input-group">
                     <Form.Control className="border" type="text" name="query" placeholder="Cari Nama atau Nomor Daftar..." onChange={this.handlerChange} required/>
                     <span className="input-group-append">

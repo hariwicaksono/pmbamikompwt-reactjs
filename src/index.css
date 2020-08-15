@@ -1,5 +1,6 @@
+html, body{ height:100%; margin:0; } 
 body {
-background-color: #2C0E4C !important;
+background: linear-gradient(#2C0E4C 50%, transparent 50%) no-repeat;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -55,7 +56,7 @@ input[type='password']:focus {
   }   
 .error {
   color: red;
-  font-size: 1rem;
+  font-size: .9rem;
   display: block;
   margin-top: 1px;
 }
@@ -70,17 +71,14 @@ span.error {
     display: block;
     margin-top: 1px;
   }
-.navbar-brand img{height:100%;margin-top:-5px !important;margin-left: 10px;margin-right: 5px;}
+.navbar-brand img{height:100%;margin-top:-5px !important;margin-left: 10px;}
 .navbar-nav a.nav-link{font-family: 'Source Sans Pro', sans-serif;margin:0px 6px;font-weight: 600;}
 .dropdown-menu a.dropdown-item{font-size: 0.9rem;padding: 0.6rem 0.875rem}
-#appbar .navbar-nav a.nav-link{font-size: .875rem;font-weight: 400;}
+#appbar .navbar-nav a.nav-link{font-size: .875rem;font-weight: 600;color: #333333;}
+#appbar .navbar-nav .active > .nav-link,
+#appbar .navbar-nav .nav-link.active {color: #563d7c;}
 svg{margin-bottom: 3px !important;}
 #sidebar svg{margin-bottom: 6px !important;}
-#appbar .navbar-nav .active > .nav-link,
-#appbar .navbar-nav .nav-link.active {
-  color: #563d7c;
-  ;
-}
 #searchResult{
   position: absolute;
   z-index: 9999
@@ -142,7 +140,7 @@ svg{margin-bottom: 3px !important;}
 #sidebar.active ul li a i {
     margin-right: 0;
     display: block;
-    font-size: 1.8em;
+    font-size: 1.6em;
     margin-bottom: 5px;
 }
 
@@ -166,7 +164,7 @@ svg{margin-bottom: 3px !important;}
 
 #sidebar .sidebar-header strong {
     display: none;
-    font-size: 1.8em;
+    font-size: 1.6em;
 }
 
 #sidebar ul.components {
@@ -176,7 +174,7 @@ svg{margin-bottom: 3px !important;}
 
 #sidebar ul li a {
     padding: 10px;
-    font-size: 1.1em;
+    font-size: 1em;
     display: block;
 }
 
@@ -326,13 +324,13 @@ svg{margin-bottom: 3px !important;}
   background-color: #fff;
 }
 .progressbar li:after {
-  width: 240%;
+  width: 175%;
   height: 2px;
   content: '';
   position: absolute;
   background-color: #7d7d7d;
   top: 18px;
-  left: -220%;
+  left: -150%;
   z-index: 0;
 }
 

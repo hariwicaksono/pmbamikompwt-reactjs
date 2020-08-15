@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-//import {Redirect} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 import FormLogin from '../Login/LoginForm'
 //import { Helmet } from 'react-helmet'
-import {Container, Row, Col, Carousel, Card} from 'react-bootstrap'
+import {Container, Row, Col, Carousel, Card, CardDeck} from 'react-bootstrap'
+import { AwardFill } from 'react-bootstrap-icons'
 
 class Home extends Component {
 
@@ -10,10 +11,10 @@ class Home extends Component {
         return (
             
             <>
-            <Container className="my-3" fluid>
+            <Container className="my-2" fluid>
 
-            <Row className="mx-auto mb-3">
-            <Col md={8}>
+            <Row className="shadow mb-2" noGutters>
+            <Col md={9}>
             <Carousel>
                 <Carousel.Item>
                     <img
@@ -53,12 +54,13 @@ class Home extends Component {
             </Carousel>
 
             </Col>
-            <Col md={4} className="bg-white">
+            <Col md={3} className="bg-white">
 
-            <Card>
+            <Card className="border-light">
+                
             <Card.Body>
-            <Card.Title>Masuk</Card.Title>
-
+            <Card.Title style={{fontSize:"1.5rem"}}>Masuk</Card.Title>
+            <hr/>
             <FormLogin />
 
             </Card.Body>
@@ -70,12 +72,55 @@ class Home extends Component {
             
             
             
-            <Row className="mx-auto">
+            <Row>
             <Col md={12}>
-            <Card className="bg-white border-0 py-0">
+            <Card className="shadow">
             <Card.Body>
            
-
+            <CardDeck className="text-center">
+                <NavLink to={'/akreditasi'} className="text-decoration-none" title="Petunjuk" alt="Petunjuk">
+                <Card>
+                    
+                    <Card.Body>
+                    <AwardFill size={45} /><br/><span>Akreditasi B</span>
+                    
+                    </Card.Body>
+                
+                </Card>
+                </NavLink>
+                <Card>
+                
+                    <Card.Body>
+                    <Card.Title>Card title</Card.Title>
+                    
+                    </Card.Body>
+                
+                </Card>
+                <Card>
+                
+                    <Card.Body>
+                    <Card.Title>Card title</Card.Title>
+                    
+                    </Card.Body>
+                
+                </Card>
+                <Card>
+                
+                    <Card.Body>
+                    <Card.Title>Card title</Card.Title>
+                    
+                    </Card.Body>
+                
+                </Card>
+                <Card>
+                
+                    <Card.Body>
+                    <Card.Title>Card title</Card.Title>
+                    
+                    </Card.Body>
+                
+                </Card>
+            </CardDeck>
           
 
             </Card.Body>

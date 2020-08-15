@@ -10,8 +10,8 @@ class Sidebar extends Component {
     return(
         <>
      
-<nav id="sidebar" className={this.props.showMenu ? '' : 'active' }>
-<ul className="list-unstyled components">
+        <nav id="sidebar" className={this.props.showMenu ? '' : 'active' }>
+        <ul className="list-unstyled components">
     
                 <li>
                     <NavLink to={'/page/37'} title="Petunjuk" alt="Petunjuk">
@@ -45,7 +45,7 @@ class Sidebar extends Component {
                 </li>
                 
             </ul>
-</nav>
+        </nav>
       
         </>
 

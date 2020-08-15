@@ -13,6 +13,7 @@ class Navigation extends Component{
         login:false,
         id: '',
         nama: '',
+        foto:'',
         url: 'http://localhost/pmbamikompwt-server/assets/img/'
     }
     
@@ -27,7 +28,7 @@ class Navigation extends Component{
     
     //NotificationManager.success('Berhasil keluar sistem');
     
-}
+    }
   componentDidMount = () => {
     if (isLogin()) {
        console.log('LOGIN')
@@ -37,6 +38,7 @@ class Navigation extends Component{
                 this.setState({
                     id : res.username,
                     nama: res.nama, 
+                    foto: res.foto,
                 })
             })
             
@@ -66,7 +68,7 @@ class Navigation extends Component{
             <Navbar.Collapse id="basic-navbar-nav">
 
               <Nav>
-              {this.state.login ?
+              {/*this.state.login ?
              
                 <Nav.Link as={NavLink} to='/' activeClassName="active" exact>Home</Nav.Link>
               
@@ -74,7 +76,7 @@ class Navigation extends Component{
 
               <Nav.Link as={NavLink} to='/user' activeClassName="active" exact>Home</Nav.Link>
           
-              }
+              */}
 
              <NavDropdown title="Menu Utama" id="basic-nav-dropdown">
              <NavDropdown.Item as={Link} to='/page/14'>Jenis Pendaftaran</NavDropdown.Item>
