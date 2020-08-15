@@ -79,6 +79,12 @@ span.error {
 #appbar .navbar-nav .nav-link.active {color: #563d7c;}
 svg{margin-bottom: 3px !important;}
 #sidebar svg{margin-bottom: 6px !important;}
+.alert-primary{border-left: 4px solid #563d7c;}
+.alert-secondary{border-left: 4px solid #868e96;}
+.alert-danger{border-left: 4px solid #dc3545;}
+.alert-warning{border-left: 4px solid #ffc107;}
+.alert-info{border-left: 4px solid #17a2b8;}
+.alert-dark{border-left: 4px solid #343434;}
 #searchResult{
   position: absolute;
   z-index: 9999

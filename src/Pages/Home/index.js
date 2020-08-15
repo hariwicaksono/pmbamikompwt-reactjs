@@ -3,7 +3,7 @@ import {NavLink} from 'react-router-dom'
 import FormLogin from '../Login/LoginForm'
 //import { Helmet } from 'react-helmet'
 import {Container, Row, Col, Carousel, Card, CardDeck} from 'react-bootstrap'
-import { AwardFill } from 'react-bootstrap-icons'
+import { Award } from 'react-bootstrap-icons'
 
 class Home extends Component {
 
@@ -82,7 +82,7 @@ class Home extends Component {
                 <Card>
                     
                     <Card.Body>
-                    <AwardFill size={45} /><br/><span>Akreditasi B</span>
+                    <Award size={45} /><br/><span>Akreditasi B</span>
                     
                     </Card.Body>
                 

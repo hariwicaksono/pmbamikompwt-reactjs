@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {NavLink} from 'react-router-dom'
-import { ArrowUpRightCircle, Building, FileEarmarkText, Grid, Folder, Display } from 'react-bootstrap-icons'
+import { ArrowUpRightCircle, Building, FileEarmarkText, Signpost2, Grid, Folder, Display } from 'react-bootstrap-icons'
 
 class Sidebar extends Component {
 
@@ -15,7 +15,7 @@ class Sidebar extends Component {
     
                 <li>
                     <NavLink to={'/page/37'} title="Petunjuk" alt="Petunjuk">
-                    <Grid size={28} /><br/><span>Petunjuk</span>
+                    <Signpost2 size={28} /><br/><span>Petunjuk</span>
                     </NavLink>
                 </li>
                 <li>
