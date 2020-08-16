@@ -7,7 +7,7 @@ class Footer extends Component{
      
         return(  
                
-            <div className="text-white border-0 py-5" style={{backgroundColor:'#371260'}}>
+            <div className="text-white border-0 py-5" style={{backgroundColor:'#2C0E4C'}}>
               <Container>
             <Row>
             <Col md={3}>

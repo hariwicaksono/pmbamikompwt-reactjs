@@ -3,7 +3,7 @@ import {NavLink} from 'react-router-dom'
 import FormLogin from '../Login/LoginForm'
 //import { Helmet } from 'react-helmet'
 import {Container, Row, Col, Carousel, Card, CardDeck} from 'react-bootstrap'
-import { Award } from 'react-bootstrap-icons'
+import { Award,CalendarWeek } from 'react-bootstrap-icons'
 
 class Home extends Component {
 
@@ -14,7 +14,7 @@ class Home extends Component {
             <Container className="my-2" fluid>
 
             <Row className="shadow mb-2" noGutters>
-            <Col md={9}>
+            <Col md={12}>
             <Carousel>
                 <Carousel.Item>
                     <img
@@ -54,48 +54,40 @@ class Home extends Component {
             </Carousel>
 
             </Col>
-            <Col md={3} className="bg-white">
-
-            <Card className="border-light">
-                
-            <Card.Body>
-            <Card.Title style={{fontSize:"1.5rem"}}>Masuk</Card.Title>
-            <hr/>
-            <FormLogin />
-
-            </Card.Body>
-            </Card>
-
-            </Col>
+            
 
             </Row>
             
             
             
             <Row>
+        
             <Col md={12}>
             <Card className="shadow">
             <Card.Body>
            
             <CardDeck className="text-center">
-                <NavLink to={'/akreditasi'} className="text-decoration-none" title="Petunjuk" alt="Petunjuk">
+            <NavLink to={'/page/33'} className="text-decoration-none" title="Gelombang" alt="Gelombang">
                 <Card>
                     
                     <Card.Body>
-                    <Award size={45} /><br/><span>Akreditasi B</span>
+                    <CalendarWeek size={45} /><br/><span>Gelombang</span>
                     
                     </Card.Body>
                 
                 </Card>
                 </NavLink>
+                <NavLink to={'/akreditasi'} className="text-decoration-none" title="Akreditasi" alt="Akreditasi">
                 <Card>
-                
+                    
                     <Card.Body>
-                    <Card.Title>Card title</Card.Title>
+                    <Award size={45} /><br/><span>Akreditasi</span>
                     
                     </Card.Body>
                 
                 </Card>
+                </NavLink>
+                
                 <Card>
                 
                     <Card.Body>
@@ -127,6 +119,20 @@ class Home extends Component {
             </Card>
 
             </Col>
+
+            <Col md={3} className="bg-white">
+
+<Card className="border-light">
+    
+<Card.Body>
+<Card.Title style={{fontSize:"1.5rem"}}>Masuk</Card.Title>
+<hr/>
+<FormLogin />
+
+</Card.Body>
+</Card>
+
+</Col>
 
             </Row>
 

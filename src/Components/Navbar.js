@@ -54,7 +54,7 @@ class Navigation extends Component{
         return(  
         <Container className="px-0" fluid style={{backgroundColor:'#371260'}}>
 
-        <Navbar variant="dark" expand="lg" sticky="top">
+        <Navbar className="shadow-sm" variant="dark" expand="lg" sticky="top">
 
         <Button onClick={this.props.toggleMenu} type="button" className="btn btn-warning text-dark">
         <TextLeft size="20" />
