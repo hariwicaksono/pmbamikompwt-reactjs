@@ -9,38 +9,37 @@ class Sidebar extends Component {
       
     return(
         <>
-     
         <nav id="sidebar" className={this.props.showMenu ? '' : 'active' }>
         <ul className="list-unstyled components">
     
                 <li>
                     <NavLink to={'/page/37'} title="Petunjuk" alt="Petunjuk">
-                    <ListUl size={40} /><br/><span>Petunjuk</span>
+                    <ListUl size={35} /><br/><span>Petunjuk</span>
                     </NavLink>
                 </li>
                 <li>
                     <NavLink to={'/page/18'} title="Jalur Penerimaan" alt="Jalur Penerimaan">
-                    <ArrowUpRightCircle size={40} /><br/><span>Jalur Penerimaan</span>
+                    <ArrowUpRightCircle size={35} /><br/><span>Jalur Penerimaan</span>
                     </NavLink>
                 </li>
                 <li>
                     <NavLink to={'/page/36'} title="Fakultas &amp; Progdi" alt="Fakultas &amp; Progdi">
-                    <Building size={40} /><br/><span>Fakultas &amp; Prodi</span>
+                    <Building size={35} /><br/><span>Fakultas &amp; Prodi</span>
                     </NavLink>
                 </li>
                 <li>
                     <NavLink to={'/page/38'} title="Biaya Pendidikan" alt="Biaya Pendidikan">
-                    <FileEarmarkText size={40} /><br/><span>Biaya Pendidikan</span>
+                    <FileEarmarkText size={35} /><br/><span>Biaya Pendidikan</span>
                     </NavLink>
                 </li>
                 <li>
                     <NavLink to={'/page/30/'} title="Beasiswa" alt="Beasiswa">
-                    <Folder size={40} /><br/><span>Beasiswa</span>
+                    <Folder size={35} /><br/><span>Beasiswa</span>
                     </NavLink>
                 </li>
                 <li>
                     <NavLink to={'/page/35'} title="Fasilitas" alt="Fasilitas">
-                    <Display size={40} /><br/><span>Fasilitas</span>
+                    <Display size={35} /><br/><span>Fasilitas</span>
                     </NavLink>
                 </li>
                 

@@ -1,6 +1,7 @@
 import React,{Component} from 'react'
 //import {Link,Redirect } from 'react-router-dom'
 import { Container, Row, Col} from 'react-bootstrap'
+import {Chat} from 'react-bootstrap-icons'
  
 class Footer extends Component{
     render(){
@@ -19,7 +20,8 @@ class Footer extends Component{
                 <small>Jl. Letjen Pol Soemarto Watumas<br/>
                 Purwanegara, Purwokerto, Banyumas 53127<br/>
                 Telp: (0281) 623321<br/>
-                Whatsapp: 085848888445</small></h5>
+                Whatsapp: 0858 4888 8445</small></h5>
+                <a href="https://pesan.link/tanyaAmikom" target="_blank" className="btn btn-success" title="" alt=""><Chat/> Chat Kami</a>
                 </Col>
 
                 <Col md={3}>

@@ -113,8 +113,8 @@ svg{margin-bottom: 3px !important;}
     -webkit-column-gap: 0px;
     -moz-column-gap: 0px;
     column-gap: 0px;
-    min-width: 350px;
-    max-width: 350px;
+    min-width: 300px;
+    max-width: 300px;
     background: #371260;
     color: #f2f2f2;
     transition: all 0.3s;
@@ -143,7 +143,8 @@ svg{margin-bottom: 3px !important;}
     text-align: center;
     margin-bottom: 40px;
     padding: 20px;
-    font-size: 1em;
+    font-size: .875em;
+    font-weight: 600;
     display: block;
 }
 
@@ -155,6 +156,11 @@ svg{margin-bottom: 3px !important;}
 }
 
 #sidebar ul li a:hover {
+    color: #7386D5;
+    background: #fff;
+}
+
+#sidebar ul li a.active {
     color: #7386D5;
     background: #fff;
 }
@@ -229,6 +235,9 @@ svg{margin-bottom: 3px !important;}
 
 @media (max-width: 768px) {
     #sidebar {
+        -webkit-column-count: 1;
+        -moz-column-count: 1;
+         column-count: 1;
         min-width: 80px;
         max-width: 80px;
         text-align: center;
@@ -243,6 +252,9 @@ svg{margin-bottom: 3px !important;}
         transform: translateX(50%);
     }
     #sidebar.active {
+        -webkit-column-count: 1;
+        -moz-column-count: 1;
+         column-count: 1;
         margin-left: 0 !important;
     }
     #sidebar .sidebar-header h3{
@@ -255,7 +267,7 @@ svg{margin-bottom: 3px !important;}
         padding: 20px 10px;
     }
     #sidebar ul li a span {
-        font-size: 12px;
+        display: none;
     }
     #sidebar ul li a i {
         margin-right: 0;

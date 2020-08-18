@@ -56,18 +56,18 @@ class Navigation extends Component{
 
         <Navbar className="shadow-sm" variant="dark" expand="lg" sticky="top">
 
-        <Button onClick={this.props.toggleMenu} type="button" className="btn btn-warning text-dark">
-        <TextLeft size="20" />
+        <Button onClick={this.props.toggleMenu} type="button" className="btn btn-warning btn-sm text-dark">
+            <TextLeft size="20" />
         </Button>
     
-            <Navbar.Brand as={Link} to='/'> 
-            <img src="/logo.png" width="180" className="img-fluid" alt="Logo Amikom Purwokerto" />
-            </Navbar.Brand>
+        <Navbar.Brand as={Link} to='/'> 
+            <img src="/logo.png" width="200" className="img-fluid" alt="Logo Amikom Purwokerto" />
+        </Navbar.Brand>
 
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
 
-              <Nav>
+            <Nav>
               {/*this.state.login ?
              
                 <Nav.Link as={NavLink} to='/' activeClassName="active" exact>Home</Nav.Link>
@@ -100,7 +100,7 @@ class Navigation extends Component{
         
 
             <Form inline>
-            <Button as={NavLink} type="button" className="btn btn-info btn-sm" to='/login' activeClassName="active" style={{fontWeight: '600',paddingTop:'8px',paddingBottom:'8px'}}>Daftar/Masuk</Button>
+            <Button as={NavLink} variant="info" size="sm" to='/login' activeClassName="active" style={{fontWeight: '600',paddingTop:'8px',paddingBottom:'8px'}}>Daftar/Masuk</Button>
             </Form>
             </>
            :
@@ -130,8 +130,8 @@ class Navigation extends Component{
             }
             </Nav>
 
-            </Navbar.Collapse>
-            </Navbar>
+        </Navbar.Collapse>
+        </Navbar>
         
         </Container>
         )
