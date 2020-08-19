@@ -15,10 +15,10 @@ class TabProdi extends Component{
         <Col md={2}>
             <Nav variant="pills" className="flex-column pl-2">
               <Nav.Item>
-                <Nav.Link eventKey="first" style={{fontWeight: "600"}}>FIK<br/><small>Fakultas Ilmu Komputer</small></Nav.Link>
+                <Nav.Link eventKey="first" style={{fontWeight: "700"}}>FIK<br/><small style={{fontWeight: "600"}}>Fak. Ilmu Komputer</small></Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link eventKey="second" style={{fontWeight: "600"}}>FBIS<br/><small>Fakultas Bisnis &amp; Ilmu Sosial</small></Nav.Link>
+                <Nav.Link eventKey="second" style={{fontWeight: "700"}}>FBIS<br/><small style={{fontWeight: "600"}}>Fak. Bisnis &amp; Ilmu Sosial</small></Nav.Link>
               </Nav.Item>
             </Nav>
         </Col>

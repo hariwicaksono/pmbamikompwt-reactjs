@@ -12,9 +12,9 @@ class Home extends Component {
         return (
             
             <>
-            <Container className="my-2" fluid>
+            <Container className="my-3" fluid>
 
-            <Row className="shadow mb-2" noGutters>
+            <Row className="shadow mb-3" noGutters>
             <Col md={12}>
             <Carousel>
                 <Carousel.Item>
@@ -59,56 +59,111 @@ class Home extends Component {
 
             </Row>
             
-            
-            
-            <Row className="mb-2">
-            <Col md={12}>
-            <Card className="shadow">
+
+            <Row className="mb-3">
+            <Col md={8}>
+            <Card className="h-100 shadow">
             <Card.Body>
            
-            <CardDeck className="text-center">
-
-                <NavLink to={'/gelombang'} className="text-decoration-none" title="Gelombang" alt="Gelombang" style={{color: "#2E4F60"}}>
+            <Row className="text-center mb-3 row-cols-3 px-3" noGutters>
+                <Col>
+                <NavLink to={'/page/31'} className="text-decoration-none" title="Alur Pendaftaran" alt="Alur Pendaftaran">
                 <Card>
-                <Card.Body>
-                <CalendarWeek size={40} />
-                </Card.Body>
+               
+                <Card.Body className="p-2">
+                    <img src="/images/iconpack/left-right2.png" alt="" width="60" />
+                    </Card.Body>
                 </Card>
-                <small>Gelombang</small>
+                <small style={{color: "#2E4F60",fontWeight: "600"}}>Alur Pendaftaran</small>
                 </NavLink>
-                
-                <NavLink to={'/page/14'} className="text-decoration-none" title="Jenis Pendaftaran" alt="Jenis Pendaftaran" style={{color: "#2E4F60"}}>
-                <Card>
+                </Col>
+                <Col>
+                <NavLink to={'/page/14'} className="text-decoration-none" title="Jenis Pendaftaran" alt="Jenis Pendaftaran">
+                <Card bg="light">
                     
-                    <Card.Body>
-                    <UiChecks size={40} />
+                    <Card.Body className="p-2">
+                    <img src="/images/iconpack/checklist.png" alt="" width="60" />
                     </Card.Body>
                 
                 </Card>
-                <small>Jenis Pendaftaran</small>
+                <small style={{color: "#2E4F60",fontWeight: "600"}}>Jenis Pendaftaran</small>
                 </NavLink>
+                </Col>
+                <Col>
+                <NavLink to={'/page/34'} className="text-decoration-none" title="Akreditasi" alt="Akreditasi" >
+                <Card bg="light">
+                    
+                    <Card.Body className="p-2">
+                   <img src="/images/iconpack/041-folder-1.png" alt="" width="60" />
+                    </Card.Body>
+                
+                </Card>
+                <small style={{color: "#2E4F60",fontWeight: "600"}}>Syarat Pendaftaran</small>
+                </NavLink>
+                </Col>
+                
+            </Row>
 
+            <Row className="text-center row-cols-3 px-3" noGutters>
+            <Col>
+                <NavLink to={'/gelombang'} className="text-decoration-none" title="Gelombang" alt="Gelombang">
+                <Card bg="light">
+               
+                <Card.Body className="p-2">
+                    <img src="/images/iconpack/020-calendar.png" alt="" width="60" />
+                    </Card.Body>
+                </Card>
+                <small style={{color: "#2E4F60",fontWeight: "600"}}>Gelombang</small>
+                </NavLink>
+                </Col>
+                
+                <Col>
+                <NavLink to={'/perlengkapan-psu'} className="text-decoration-none" title="Perlengkapan PSU" alt="Perlengkapan PSU">
+                <Card>
+                    
+                    <Card.Body className="p-2">
+                    <img src="/images/iconpack/004-notebook.png" alt="" width="60" />
+                    </Card.Body>
+                
+                </Card>
+                <small style={{color: "#2E4F60",fontWeight: "600"}}>Perlengkapan PSU</small>
+                </NavLink>
+                </Col>
+                <Col>
                 <NavLink to={'/akreditasi'} className="text-decoration-none" title="Akreditasi" alt="Akreditasi" >
                 <Card>
                     
-                    <Card.Body>
-                    <Award size={40} style={{color: "#E15D1E"}}/>
+                    <Card.Body className="p-2">
+                   <img src="/images/iconpack/medal.png" alt="" width="60" />
                     </Card.Body>
                 
                 </Card>
-                <small style={{color: "#2E4F60"}}>Akreditasi B</small>
+                <small style={{color: "#2E4F60",fontWeight: "600"}}>Akreditasi</small>
                 </NavLink>
-                
-            </CardDeck>
+                </Col>
+            </Row>
           
 
             </Card.Body>
             </Card>
 
             </Col>
+
+            <Col md={4}>
+
+                <Card className="shadow h-100">
+                    
+                    <Card.Body>
+                    <Card.Title>Masuk</Card.Title>
+                    <hr className="my-2"/>
+                    <FormLogin />
+        
+                    </Card.Body>
+                    </Card>
+            </Col>
             </Row>
 
-            <Row className="mb-2">
+            <Row className="mb-3">
             <Col md={12}>
             <Card className="shadow">
             <Card.Body>
@@ -119,6 +174,7 @@ class Home extends Component {
             </Card>
 
             </Col>
+
             </Row>
 
             <Row className="mb-2">

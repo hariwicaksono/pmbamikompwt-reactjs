@@ -14,32 +14,32 @@ class Sidebar extends Component {
     
                 <li>
                     <NavLink to={'/page/37'} title="Petunjuk" alt="Petunjuk">
-                    <ListUl size={35} /><br/><span>Petunjuk</span>
+                    <img src="/images/iconpack/innovation.png" alt="" width="40" /><br/><span>Petunjuk</span>
                     </NavLink>
                 </li>
                 <li>
                     <NavLink to={'/page/18'} title="Jalur Penerimaan" alt="Jalur Penerimaan">
-                    <ArrowUpRightCircle size={35} /><br/><span>Jalur Penerimaan</span>
+                    <img src="/images/iconpack/paper-plane.png" alt="" width="40" /><br/><span>Jalur Penerimaan</span>
                     </NavLink>
                 </li>
                 <li>
                     <NavLink to={'/page/36'} title="Fakultas &amp; Progdi" alt="Fakultas &amp; Progdi">
-                    <Building size={35} /><br/><span>Fakultas &amp; Prodi</span>
+                    <img src="/images/iconpack/university.png" alt="" width="40" /><br/><span>Fakultas &amp; Prodi</span>
                     </NavLink>
                 </li>
                 <li>
                     <NavLink to={'/page/38'} title="Biaya Pendidikan" alt="Biaya Pendidikan">
-                    <FileEarmarkText size={35} /><br/><span>Biaya Pendidikan</span>
+                    <img src="/images/iconpack/005-money.png" alt="" width="40" /><br/><span>Biaya Pendidikan</span>
                     </NavLink>
                 </li>
                 <li>
                     <NavLink to={'/page/30/'} title="Beasiswa" alt="Beasiswa">
-                    <Folder size={35} /><br/><span>Beasiswa</span>
+                    <img src="/images/iconpack/student.png" alt="" width="40" /><br/><span>Beasiswa</span>
                     </NavLink>
                 </li>
                 <li>
                     <NavLink to={'/page/35'} title="Fasilitas" alt="Fasilitas">
-                    <Display size={35} /><br/><span>Fasilitas</span>
+                    <img src="/images/iconpack/045-computer.png" alt="" width="40" /><br/><span>Fasilitas</span>
                     </NavLink>
                 </li>
                 

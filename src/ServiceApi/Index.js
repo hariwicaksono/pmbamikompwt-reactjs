@@ -24,6 +24,18 @@ const GET_ID = (path,id) => {
     return promise
 }
 
+const GET2 = (path,data) =>{
+    const promise = new Promise((resolve,reject)=>{
+         Axios.get(RoothPath+path+data).then(res=>{
+             resolve(res.data)
+         },err=>{
+            console.log(err.response); 
+            return err.response;
+         })
+    })
+    return promise
+ }
+
 const LOGIN = (path,data) => {
     const promise = new Promise((resolve,reject)=>{
         Axios.post(RoothPath+path,data).then(res=>{
@@ -133,6 +145,7 @@ const GetJenisMhs = () => GET('JenisMhsController')
 const GetProdi = () => GET('ProdiController')
 const GetKabupaten = () => GET('KabupatenController')
 const GetProvinsi = () => GET('ProvinsiController')
+const GetCalonsiswa = (data) => GET2('GetCalonsiswa?id=',data)
 
 const API = {
     GetPageId,
@@ -153,7 +166,8 @@ const API = {
     GetJenisMhs,
     GetProdi,
     GetKabupaten,
-    GetProvinsi
+    GetProvinsi,
+    GetCalonsiswa
     
 }
 

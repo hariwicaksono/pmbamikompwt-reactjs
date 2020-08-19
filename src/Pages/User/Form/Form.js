@@ -256,10 +256,10 @@ class Wizard extends React.Component {
                         onClick={this.previous}
                         className="mr-2"
                       >
-                        « Previous
+                        « Kembali
                       </Button>}
 
-                    {!isLastPage && <Button variant="primary" className="float-right" type="submit">Next »</Button>}
+                    {!isLastPage && <Button variant="primary" className="float-right" type="submit">Lanjut »</Button>}
                     {isLastPage &&
                       <Button variant="primary" type="submit" disabled={isSubmitting}>
                         Submit
