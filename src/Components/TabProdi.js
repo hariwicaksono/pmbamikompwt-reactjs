@@ -1,6 +1,6 @@
 import React,{Component} from 'react'
 //import {Link } from 'react-router-dom'
-import { Badge, Tabs, Tab, Card, Row, Nav, Col, CardGroup, CardColumns} from 'react-bootstrap'
+import { Badge, Tab, Card, Row, Nav, Col, CardColumns} from 'react-bootstrap'
 
 class TabProdi extends Component{
     render(){
