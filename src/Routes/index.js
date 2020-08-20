@@ -22,7 +22,7 @@ const MyRouter = () => {
         <Route path="/" component={Home} exact />
         <PublicRoute restricted={true} component={Login} path="/login" exact />
         <Route path="/register" component={Register} />
-        <Route path="/user" component={User} exact />
+        <PrivateRoute path="/user" component={User} exact />
         <PrivateRoute path="/user/pendaftaran" component={Pendaftaran} />
         <PrivateRoute path="/user/dokumen" component={Dokumen} />
         <PrivateRoute path="/akun/edit/:id" component={Akun} exact />

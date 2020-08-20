@@ -3,8 +3,8 @@ import {NavLink, Link} from 'react-router-dom'
 import FormLogin from '../Login/LoginForm'
 import TabProdi from '../../Components/TabProdi'
 //import { Helmet } from 'react-helmet'
-import {Container, Row, Col, Carousel, Card, Button} from 'react-bootstrap'
-import { ChevronRight } from 'react-bootstrap-icons'
+import {Container, Row, Col, Carousel, Card, Button, CardDeck} from 'react-bootstrap'
+import { Award,CalendarWeek,ChevronRight,UiChecks } from 'react-bootstrap-icons'
 
 class Home extends Component {
 
@@ -183,7 +183,7 @@ class Home extends Component {
             <Card.Body>
             <Card.Title style={{fontSize: "2.4rem", fontWeight: "700"}}>Daftar Sekarang</Card.Title>
             <Card.Text>
-            Buruan gabung yuk sob, di kampus dengan tenaga pengajar yang kompeten di bidangnya.
+            Buruan gabung yuk sob, di kampus dengan tenaga pengajar yang kompeten di bidangnya. <span>🥳</span>
             <br/>JOIN AMIKOM PURWOKERTO NOW!
             </Card.Text>
             <Button as={Link} variant="outline-light" to='/register' className="rounded-pill" style={{fontWeight: '600',paddingTop:'10px',paddingBottom:'10px'}}>Daftar Sekarang <ChevronRight/></Button>

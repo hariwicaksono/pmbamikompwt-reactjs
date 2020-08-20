@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {NavLink} from 'react-router-dom'
-//import { ArrowUpRightCircle, Building, FileEarmarkText, ListUl, Folder, Display } from 'react-bootstrap-icons'
+import { ArrowUpRightCircle, Building, FileEarmarkText, ListUl, Folder, Display } from 'react-bootstrap-icons'
 
 class Sidebar extends Component {
 
