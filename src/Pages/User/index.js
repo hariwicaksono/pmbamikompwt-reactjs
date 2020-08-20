@@ -14,7 +14,8 @@ class Index extends Component {
         this.state = {
             daftar:false,
             loading: true,
-            mhs: []
+            mhs: [],
+            url: 'http://localhost/pmbamikompwt-server/assets/img/'
         }
     }
  
@@ -30,7 +31,7 @@ class Index extends Component {
                     mhs: res.data,
                     daftar: true,
                     loading: false
-                })
+                 })
                 }, 100);
                 
             })
@@ -54,7 +55,25 @@ class Index extends Component {
                 <MainnavU />
                 <Card className="shadow">
                 <Card.Body>
-
+                
+                
+                <Card className="mt-5">
+                <div className="mx-auto">
+                <img
+                alt="Foto"
+                width="120"
+                className="rounded-circle mx-auto"
+                src={this.state.url+'no-photo.jpg'} style={{marginTop: "-60px"}}/>
+                </div>
+  <Card.Body>
+    <Card.Title>Card Title</Card.Title>
+    <Card.Text>
+      Some quick example text to build on the card title and make up the bulk of
+      the card's content.
+    </Card.Text>
+    
+  </Card.Body>
+</Card>
                 {
                         this.state.loading
                         ?
