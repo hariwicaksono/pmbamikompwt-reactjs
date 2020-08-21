@@ -65,11 +65,11 @@ class Home extends Component {
             <Card className="h-100 shadow">
             <Card.Body>
            
-            <Row className="text-center mb-3 row-cols-3 px-3" noGutters>
+            <Row className="text-center mb-3 row-cols-3 px-4" noGutters>
                 <Col>
                 <NavLink to={'/page/31'} className="text-decoration-none" title="Alur Pendaftaran" alt="Alur Pendaftaran">
                 <Card>
-               
+                
                 <Card.Body className="p-2">
                     <img src="/images/iconpack/left-right2.png" alt="" width="60" />
                     </Card.Body>
@@ -104,7 +104,7 @@ class Home extends Component {
                 
             </Row>
 
-            <Row className="text-center row-cols-3 px-3" noGutters>
+            <Row className="text-center row-cols-3 px-4" noGutters>
             <Col>
                 <NavLink to={'/gelombang'} className="text-decoration-none" title="Gelombang" alt="Gelombang">
                 <Card bg="light">

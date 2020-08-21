@@ -72,24 +72,15 @@ class Page extends Component {
                     <Card.Body>
 
                     <div>
-                    {
-                        this.state.loading
-                        ?
+                    { this.state.loading ?
                         /*<Loader options={options} className="spinner" />*/
-                        
                         <ContentLoader />
-                   
-                        :
-                       
+                    :
                         <>
-                            
-                                <h1>{Parser(this.state.judul_tupoksi)}</h1>
-                                <hr/>
-                                {Parser(this.state.isi_tupoksi)}
+                            <h1>{Parser(this.state.judul_tupoksi)}</h1>
+                            <hr/>
+                            {Parser(this.state.isi_tupoksi)}
                         </>
-                   
-                        
-
                     }
 
                 </div>

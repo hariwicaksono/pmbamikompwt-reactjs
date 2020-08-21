@@ -9,6 +9,7 @@
     "formik": "^2.1.4",
     "framer-motion": "^1.11.0",
     "html-react-parser": "^0.10.3",
+    "moment": "^2.27.0",
     "offline-js": "^0.7.19",
     "react": "^16.11.0",
     "react-bootstrap": "^1.0.0",

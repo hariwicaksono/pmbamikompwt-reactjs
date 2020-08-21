@@ -6,13 +6,14 @@ import MainnavU from './MainnavU'
 import { Card, Container } from 'react-bootstrap'
 import { isLogin } from '../../Utils'
 import ContentLoader from '../../Components/Loader'
+import CardIndex from './CardIndexU'
+import { NotificationManager } from 'react-notifications'
 
 const TITLE = ' User - PMB Universitas Amikom Purwokerto'
 class Index extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            daftar:false,
             loading: true,
             mhs: [],
             url: 'http://localhost/pmbamikompwt-server/assets/img/'
@@ -20,30 +21,34 @@ class Index extends Component {
     }
  
     componentDidMount = () => {
-        if (isLogin()) {
-            const datas = JSON.parse(sessionStorage.getItem('isLogin'))
-            const id = datas[0].email
-            console.log(id)
+
+        const datas = JSON.parse(sessionStorage.getItem('isLogin'))
+        const id = datas[0].email
+        //console.log(id)
+        
+        API.GetCalonsiswa(id).then(res=>{
+            setTimeout(() => {
+                if (res.data.length > 0) {
+                    this.setState({
+                      mhs: res.data,
+                      loading: false
+                    })
+                    NotificationManager.success('Selamat datang Calon Mahasiswa Baru');
+                  } else {
+                    this.setState({
+                      mhs: res.data,
+                      loading: false
+                    })
+                    NotificationManager.warning('Perhatian, anda belum melakukan pendaftaran');
+                  }
+            }, 100);
             
-            API.GetCalonsiswa(id).then(res=>{
-                setTimeout(() => {
-                this.setState({
-                    mhs: res.data,
-                    daftar: true,
-                    loading: false
-                 })
-                }, 100);
-                
-            })
-           
-        } 
-        
-        
-        
+        })
+     
     }
 
     render() {
-        console.log(this.state.mhs)
+        
         return (
             <>
                 <Helmet>
@@ -55,48 +60,30 @@ class Index extends Component {
                 <MainnavU />
                 <Card className="shadow">
                 <Card.Body>
-                
-                
-                <Card className="mt-5">
-                <div className="mx-auto">
-                <img
-                alt="Foto"
-                width="120"
-                className="rounded-circle mx-auto"
-                src={this.state.url+'no-photo.jpg'} style={{marginTop: "-60px"}}/>
-                </div>
-  <Card.Body>
-    <Card.Title>Card Title</Card.Title>
-    <Card.Text>
-      Some quick example text to build on the card title and make up the bulk of
-      the card's content.
-    </Card.Text>
-    
-  </Card.Body>
-</Card>
-                {
-                        this.state.loading
-                        ?
-                        /*<Loader options={options} className="spinner" />*/
-                        
-                        <ContentLoader />
-                   
-                        :
-                        <>
-                {this.state.daftar ?
-                <>
 
-1
-     
-                </>
-            :
-            <>
-2
-            </>
-            }
-            </>
-                        }
+                {this.state.mhs.length > 0 ? (
+                    
+                    (this.state.loading
+                    ?
+                    <ContentLoader />
+                    :
+                    
+                    <CardIndex data={this.state.mhs} />
+                    )
+                    
+                ): (
 
+                (this.state.loading ?
+                    <ContentLoader />
+                    :
+                    <>
+                    Belum Daftar
+                    </>
+                )
+                    
+                )}
+
+                
                 </Card.Body>
                 </Card>
                 </Container>
