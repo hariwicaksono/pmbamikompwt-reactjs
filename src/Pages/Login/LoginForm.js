@@ -7,6 +7,7 @@ import {BoxArrowInRight,BoxArrowRight} from 'react-bootstrap-icons'
 import Form from 'react-formal'
 import * as yup from 'yup'
 import { logout, isLogin } from '../../Utils'
+import ContentLoader from '../../Components/Loader/Loader2'
  
 const schema = yup.object({
     username: yup.string().required(),
@@ -22,6 +23,7 @@ class LoginForm extends Component {
             isLogin:false,
             idLogin:"",
             loading: false,
+            isloading: true,
             login:false,
             id:"",
             nama:"",
@@ -85,6 +87,7 @@ class LoginForm extends Component {
                         id : res.username,
                         nama: res.nama,
                         foto: res.foto,
+                        isloading: false
                     })
                 })
                 
@@ -131,9 +134,21 @@ class LoginForm extends Component {
             </>
          :
          <>
-            <h5>Anda Login sebagai: {this.state.nama}</h5>
-            <div className="mb-1"><Link className="btn btn-outline-primary" to='/user'>Dashboard</Link></div>
-            <div><Link className="btn btn-outline-danger" onClick={this.Logout} to=''><BoxArrowRight/> Keluar</Link></div>
+            <h5>Anda Login sebagai:</h5>
+            { this.state.isloading ?
+                <>
+                <ContentLoader />
+                </>
+                :  
+                <>
+                <h5>{this.state.nama}</h5>
+                
+                <div className="mb-1"><Link className="btn btn-outline-primary btn-sm" to='/user'>Dashboard</Link></div>
+                <div><Link className="btn btn-outline-danger btn-sm" onClick={this.Logout} to=''><BoxArrowRight/> Keluar</Link></div>
+                </>    
+            }
+          
+            
          </>
 
         }

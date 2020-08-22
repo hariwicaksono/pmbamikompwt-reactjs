@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 //import {Redirect,NavLink,Link} from 'react-router-dom'
 //import API from '../../ServiceApi/Index'
 import { Helmet } from 'react-helmet'
-import MainnavU from './MainnavU'
 import { Card, Container } from 'react-bootstrap'
 import Form from './Form'
 
@@ -25,8 +24,8 @@ class Pendaftaran extends Component {
                 </Helmet>
                
                 <Container fluid>
-                <MainnavU />
-                <Card className="shadow">
+
+                <Card className="shadow my-3">
                 <Card.Body>
 
                 <Form />

@@ -3,8 +3,8 @@ import {NavLink, Link} from 'react-router-dom'
 import FormLogin from '../Login/LoginForm'
 import TabProdi from '../../Components/TabProdi'
 //import { Helmet } from 'react-helmet'
-import {Container, Row, Col, Carousel, Card, Button, CardDeck} from 'react-bootstrap'
-import { Award,CalendarWeek,ChevronRight,UiChecks } from 'react-bootstrap-icons'
+import {Container, Row, Col, Carousel, Card, Button} from 'react-bootstrap'
+import { ChevronRight } from 'react-bootstrap-icons'
 
 class Home extends Component {
 
@@ -71,7 +71,7 @@ class Home extends Component {
                 <Card>
                 
                 <Card.Body className="p-2">
-                    <img src="/images/iconpack/left-right2.png" alt="" width="60" />
+                    <img src="/images/iconpack/directions_216453.png" alt="" width="60" />
                     </Card.Body>
                 </Card>
                 <small style={{color: "#2E4F60",fontWeight: "600"}}>Alur Pendaftaran</small>
@@ -79,10 +79,10 @@ class Home extends Component {
                 </Col>
                 <Col>
                 <NavLink to={'/page/14'} className="text-decoration-none" title="Jenis Pendaftaran" alt="Jenis Pendaftaran">
-                <Card bg="light">
+                <Card>
                     
                     <Card.Body className="p-2">
-                    <img src="/images/iconpack/checklist.png" alt="" width="60" />
+                    <img src="/images/iconpack/list_240279.png" alt="" width="60" />
                     </Card.Body>
                 
                 </Card>
@@ -91,10 +91,10 @@ class Home extends Component {
                 </Col>
                 <Col>
                 <NavLink to={'/page/34'} className="text-decoration-none" title="Akreditasi" alt="Akreditasi" >
-                <Card bg="light">
+                <Card>
                     
                     <Card.Body className="p-2">
-                   <img src="/images/iconpack/041-folder-1.png" alt="" width="60" />
+                   <img src="/images/iconpack/smartphone.png" alt="" width="60" />
                     </Card.Body>
                 
                 </Card>
@@ -107,10 +107,10 @@ class Home extends Component {
             <Row className="text-center row-cols-3 px-4" noGutters>
             <Col>
                 <NavLink to={'/gelombang'} className="text-decoration-none" title="Gelombang" alt="Gelombang">
-                <Card bg="light">
+                <Card>
                
                 <Card.Body className="p-2">
-                    <img src="/images/iconpack/020-calendar.png" alt="" width="60" />
+                    <img src="/images/iconpack/calendar_243925.png" alt="" width="60" />
                     </Card.Body>
                 </Card>
                 <small style={{color: "#2E4F60",fontWeight: "600"}}>Gelombang</small>
@@ -122,7 +122,7 @@ class Home extends Component {
                 <Card>
                     
                     <Card.Body className="p-2">
-                    <img src="/images/iconpack/004-notebook.png" alt="" width="60" />
+                    <img src="/images/iconpack/agenda-1.png" alt="" width="60" />
                     </Card.Body>
                 
                 </Card>
@@ -134,7 +134,7 @@ class Home extends Component {
                 <Card>
                     
                     <Card.Body className="p-2">
-                   <img src="/images/iconpack/medal.png" alt="" width="60" />
+                   <img src="/images/iconpack/trophy_210728.png" alt="" width="60" />
                     </Card.Body>
                 
                 </Card>
@@ -183,7 +183,7 @@ class Home extends Component {
             <Card.Body>
             <Card.Title style={{fontSize: "2.4rem", fontWeight: "700"}}>Daftar Sekarang</Card.Title>
             <Card.Text>
-            Buruan gabung yuk sob, di kampus dengan tenaga pengajar yang kompeten di bidangnya. <span>🥳</span>
+            Buruan gabung yuk sob, di kampus dengan tenaga pengajar yang kompeten di bidangnya.
             <br/>JOIN AMIKOM PURWOKERTO NOW!
             </Card.Text>
             <Button as={Link} variant="outline-light" to='/register' className="rounded-pill" style={{fontWeight: '600',paddingTop:'10px',paddingBottom:'10px'}}>Daftar Sekarang <ChevronRight/></Button>

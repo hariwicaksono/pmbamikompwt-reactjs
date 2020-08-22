@@ -21,7 +21,7 @@ class Footer extends Component{
                 Purwanegara, Purwokerto, Banyumas 53127<br/>
                 Telp: (0281) 623321<br/>
                 Whatsapp: 0858 4888 8445</small></h5>
-                <a href="https://pesan.link/tanyaAmikom" target="_blank" className="btn btn-success" title="" alt=""><Chat/> Chat Kami</a>
+                <a href="https://pesan.link/tanyaAmikom" target="_blank" className="btn btn-success" title="Chat Kami" alt="Chat Kami" rel="noopener noreferrer"><Chat/> Chat Kami</a>
                 </Col>
 
                 <Col md={3}>

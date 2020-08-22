@@ -2,12 +2,12 @@ import React, { Component } from 'react'
 //import {Redirect,NavLink,Link} from 'react-router-dom'
 //import API from '../../ServiceApi/Index'
 import { Helmet } from 'react-helmet'
-import MainnavU from './MainnavU'
+
 import { Card, Container } from 'react-bootstrap'
-import Form from './Form'
+import Dokumen from './Dokumen'
 
 const TITLE = ' User - PMB Universitas Amikom Purwokerto'
-class Dokumen extends Component {
+class DokumenU extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -15,17 +15,7 @@ class Dokumen extends Component {
         }
     }
 
-    //componentDidMount = () => {
-        //if (sessionStorage.getItem('isLogin')) {
-           // console.log('Ok')
-           
-        //} else {
-            //this.setState({
-               // login:true
-           // })
-        //}
-        
-    //}
+
 
     render() {
         
@@ -37,11 +27,11 @@ class Dokumen extends Component {
                 </Helmet>
                 
                 <Container fluid>
-                <MainnavU />
-                <Card className="shadow">
+
+                <Card className="shadow my-3">
                 <Card.Body>
 
-               
+               <Dokumen />
 
                 </Card.Body>
                 </Card>
@@ -54,4 +44,4 @@ class Dokumen extends Component {
 }
 
 
-export default Dokumen
+export default DokumenU

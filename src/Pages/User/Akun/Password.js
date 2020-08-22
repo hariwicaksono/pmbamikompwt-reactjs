@@ -3,7 +3,6 @@ import {NavLink} from 'react-router-dom'
 import API from '../../../ServiceApi/Index'
 import { Helmet } from 'react-helmet'
 import ContentLoader from '../../../Components/Loader'
-import MainnavU from '../MainnavU'
 import { Nav,Container, Card, Form, Button, Row, Col } from 'react-bootstrap'
 import { NotificationManager } from 'react-notifications'
 
@@ -76,8 +75,8 @@ return (
         </Helmet>
       
         <Container fluid>
-        <MainnavU />
-        <Card className="shadow">
+ 
+        <Card className="shadow my-3">
             <Card.Body>
             <Row>
                 <Col md="3" className="border-right">

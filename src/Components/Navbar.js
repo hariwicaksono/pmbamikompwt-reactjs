@@ -5,7 +5,7 @@ import API from '../ServiceApi/Index'
 import {Container, Form,Button, Navbar, Nav, NavItem, NavDropdown} from 'react-bootstrap'
 import {TextLeft, BoxArrowRight, PersonFill, QuestionCircle} from 'react-bootstrap-icons'
 import { logout, isLogin } from '../Utils'
- 
+  
 class Navigation extends Component{
   constructor(props) {
     super(props)
@@ -16,7 +16,6 @@ class Navigation extends Component{
         foto:'',
         url: 'http://localhost/pmbamikompwt-server/assets/img/'
     }
-    
   }
   Logout = () => {
     logout();
@@ -29,7 +28,7 @@ class Navigation extends Component{
     //NotificationManager.success('Berhasil keluar sistem');
     
     }
-  componentDidMount = () => {
+    componentDidMount = () => {
     if (isLogin()) {
        console.log('LOGIN')
        const data = JSON.parse(sessionStorage.getItem('isLogin'))
@@ -47,7 +46,7 @@ class Navigation extends Component{
             login:true
         })
     }
-}
+    }
 
     render(){
         //const navDropdownTitle = (<> Test Dropdown </>);
@@ -67,18 +66,20 @@ class Navigation extends Component{
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
 
-            <Nav>
-              {/*this.state.login ?
-             
-                <Nav.Link as={NavLink} to='/' activeClassName="active" exact>Home</Nav.Link>
-              
-              :
+            <Nav>  
+            {this.state.login ?
+               <>
+               </>
+               :
+               <NavDropdown title={'Menu User'} id="basic-nav-dropdown">
+                <NavDropdown.Item as={Link} to='/user'>Dashboard</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to='/user/pendaftaran'>Form Pendaftaran</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to='/user/dokumen'>Upload Dokumen</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to={'/akun/edit/' + this.state.id}>Akun</NavDropdown.Item>
+           </NavDropdown>
+            }    
 
-              <Nav.Link as={NavLink} to='/user' activeClassName="active" exact>Home</Nav.Link>
-          
-              */}
-
-             <NavDropdown title="Menu Utama" id="basic-nav-dropdown">
+            <NavDropdown title="Menu Utama" id="basic-nav-dropdown">
              <NavDropdown.Item as={Link} to='/page/31'>Alur Pendaftaran</NavDropdown.Item>
              <NavDropdown.Item as={Link} to='/page/14'>Jenis Pendaftaran</NavDropdown.Item>
              <NavDropdown.Item as={Link} to='/page/34'>Syarat Pendaftaran</NavDropdown.Item>
@@ -87,19 +88,17 @@ class Navigation extends Component{
              <NavDropdown.Item as={Link} to='/page/30'>Beasiswa - Beasiswa</NavDropdown.Item>
              <NavDropdown.Item as={Link} to='/page/21'>Tata Tertib Penerimaan Mahasiswa Baru</NavDropdown.Item>
              <NavDropdown.Item as={Link} to='/page/19'>Kegiatan Pra Kuliah Mahasiswa Baru</NavDropdown.Item>
-           </NavDropdown>
-           </Nav>     
+            </NavDropdown>
+
+           </Nav>    
 
             <PeriksaForm />
     
             <Nav>
             
+            <Nav.Link as={NavLink} to='/page/33' activeClassName="active" title="Kenapa Amikom?" alt="Kenapa Amikom?" style={{paddingTop: '11px'}}><QuestionCircle size="22" /></Nav.Link>
             {this.state.login ?
             <>
-          
-            <Nav.Link as={NavLink} to='/page/33' activeClassName="active" title="Kenapa Amikom?" alt="Kenapa Amikom?"><QuestionCircle size="24" /></Nav.Link>
-        
-
             <Form inline>
             <Button as={NavLink} variant="info" size="sm" to='/login' activeClassName="active" style={{fontWeight: '600',paddingTop:'8px',paddingBottom:'8px'}}>Daftar/Masuk</Button>
             </Form>

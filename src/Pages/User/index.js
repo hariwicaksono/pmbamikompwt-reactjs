@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
-//import {Redirect,NavLink,Link} from 'react-router-dom'
+//import {Link} from 'react-router-dom'
 import API from '../../ServiceApi/Index'
 import { Helmet } from 'react-helmet'
-import MainnavU from './MainnavU'
 import { Card, Container } from 'react-bootstrap'
-import { isLogin } from '../../Utils'
 import ContentLoader from '../../Components/Loader'
 import CardIndex from './CardIndexU'
 import { NotificationManager } from 'react-notifications'
+import NoData from './NoDataU'
 
 const TITLE = ' User - PMB Universitas Amikom Purwokerto'
 class Index extends Component {
@@ -33,13 +32,13 @@ class Index extends Component {
                       mhs: res.data,
                       loading: false
                     })
-                    NotificationManager.success('Selamat datang Calon Mahasiswa Baru');
+                    NotificationManager.info('Selamat datang Calon Mahasiswa Baru');
                   } else {
                     this.setState({
                       mhs: res.data,
                       loading: false
                     })
-                    NotificationManager.warning('Perhatian, anda belum melakukan pendaftaran');
+                    NotificationManager.error('Perhatian, anda belum melakukan pendaftaran');
                   }
             }, 100);
             
@@ -57,8 +56,8 @@ class Index extends Component {
                 </Helmet>
                 
                 <Container fluid>
-                <MainnavU />
-                <Card className="shadow">
+
+                <Card className="shadow my-3">
                 <Card.Body>
 
                 {this.state.mhs.length > 0 ? (
@@ -77,7 +76,7 @@ class Index extends Component {
                     <ContentLoader />
                     :
                     <>
-                    Belum Daftar
+                    <NoData />
                     </>
                 )
                     

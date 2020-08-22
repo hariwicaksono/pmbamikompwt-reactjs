@@ -74,9 +74,10 @@ span.error {
 .navbar-brand img{height:100%;margin-top:-5px !important;margin-left: 10px;}
 .navbar-nav a.nav-link{font-family: 'Source Sans Pro', sans-serif;margin:0px 6px;font-weight: 600;}
 .dropdown-menu a.dropdown-item{font-size: 0.9rem;padding: 0.6rem 0.875rem}
-#appbar .navbar-nav a.nav-link{font-size: .875rem;font-weight: 600;color: #333333;}
-#appbar .navbar-nav .active > .nav-link,
-#appbar .navbar-nav .nav-link.active {color: #563d7c;}
+#appbar a.nav-link{color: #424242;font-weight: 600;}
+#appbar a div{margin-top:-5px}
+#appbar .active > .nav-link,
+#appbar .nav-link.active {color: #563d7c;}
 svg{margin-bottom: 3px !important;}
 #sidebar svg{margin-bottom: 6px !important;}
 .alert-primary{border-left: 4px solid #563d7c;}
@@ -141,7 +142,7 @@ svg{margin-bottom: 3px !important;}
 
 #sidebar ul li a {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     padding: 20px;
     font-size: .875em;
     font-weight: 600;
