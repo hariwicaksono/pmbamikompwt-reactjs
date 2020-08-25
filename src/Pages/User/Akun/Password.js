@@ -99,7 +99,7 @@ return (
                    
                         <Col sm={3}>
                         <a href="!#" onClick={e => e.preventDefault()}>
-                        {this.state.foto > 0 ? (
+                        {this.state.foto ? (
                           <><img
                           alt="Foto"
                           width="60"

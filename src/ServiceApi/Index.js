@@ -102,7 +102,7 @@ const POSTSOAL = (path,data) =>{
     return promise
 }
 
-const POSTIMAGE = (path,data,name) => {
+const POSTFOTO = (path,data,name) => {
     const promise = new Promise((resolve,reject)=>{
         const formdata = new FormData()
         formdata.append('foto',data,name)
@@ -138,7 +138,7 @@ const GetUserId = (data) => GET_ID('UserController?id=',data)
 const DeleteUser = (id) => Delete('UserController/index_delete?id=',id)
 const PutUser = (data) => PUTUSER('UserController',data)
 const CariOrang = (data) => GET_ID_VAL('SearchController?id=',data)
-const PostImageP = (data,name) => POSTIMAGE('ImageUpload',data,name)
+const PostFoto = (data,name) => POSTFOTO('ImageUpload',data,name)
 const PutUserPassword = (data) => PUTUSER('UserPassword',data)
 const CheckUsername = (data) => Axios(RoothPath+`CheckUsername?id=${data}`)
 const GetJenisMhs = () => GET('JenisMhsController')
@@ -160,7 +160,7 @@ const API = {
     DeleteUser,
     PutUser,
     CariOrang,
-    PostImageP,
+    PostFoto,
     PutUserPassword,
     CheckUsername,
     GetJenisMhs,

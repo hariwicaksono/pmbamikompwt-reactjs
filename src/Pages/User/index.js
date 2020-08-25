@@ -38,7 +38,7 @@ class Index extends Component {
                       mhs: res.data,
                       loading: false
                     })
-                    NotificationManager.error('Perhatian, anda belum melakukan pendaftaran');
+                    NotificationManager.error('Perhatian, anda belum melakukan Pendaftaran');
                   }
             }, 100);
             

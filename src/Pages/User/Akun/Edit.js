@@ -15,12 +15,11 @@ this.state = {
     nama : '',
     telp: '',
     email:'',
-    foto:'',
-    fotos: '',
-    //password :'',
+    foto: '',
     file: {
-        fto: ''
+        foto: ''
     },
+    imagePreviewUrl: '',
     loading: true,
     url: 'http://localhost/pmbamikompwt-server/assets/img/'
 }
@@ -37,31 +36,34 @@ this.setState({
 }
 
 handlerImage = (e)=>{
+
 this.setState({
     foto: e.target.files[0].name,
-    fotos: e.target.files[0].name,
     file: {
-        fto: e.target.files[0]
-    }
+        foto: e.target.files[0]
+    },
+    imagePreviewUrl: URL.createObjectURL(e.target.files[0])
 })
+
 }
 
 handlerSubmit = (e) =>{
 e.preventDefault()
-if (this.state.fotos === "") {
+if (this.state.avatar === "") {
     API.PutUser(this.state).then(res=>{
         if (res.status === 1) {
             //this.props.history.push('/akun/profil')
         }
     })
 } else {
-    API.PostImageP(this.state.file.fto, this.state.file.fto.name).then(res => {
+    API.PostFoto(this.state.file.foto, this.state.file.foto.name).then(res => {
         console.log('img_ok')
     })
     API.PutUser(this.state).then(res=>{
         console.log(res)
         if (res.status === 1) {
             //this.props.history.push('/akun/profil')
+            window.location.reload();
         }
     })
 }
@@ -87,6 +89,7 @@ API.GetUserId(id).then(res=>{
 
 
 render() {
+
 return (
     <>
         <Helmet>
@@ -113,29 +116,20 @@ return (
                 :
       
                 <Form onSubmit={this.handlerSubmit}>
+                    
                     <Form.Group as={Row}>
-                    <Form.Label column sm={3} className="text-md-right font-weight-bold">Foto</Form.Label>
+                    <Form.Label column sm={3} className="text-md-right font-weight-bold">Avatar</Form.Label>
+                   
                         <Col sm={9}>
-                        <a href="!#" onClick={e => e.preventDefault()}>
-                        {this.state.foto > 0 ? (
-                          <><img
-                          alt="Foto"
-                          width="60"
-                          className="rounded-circle mb-1"
-                          src={this.state.url+this.state.foto}
-                          
-                        /></>
-                         ) : (
-                        <><img
-                        alt="Foto"
-                        width="60"
-                        className="rounded-circle mb-1"
-                        src={this.state.url+'no-photo.jpg'}
-                        
-                        /></>
-                         )}
-                        </a>
-                        <Form.File name="fotos" onChange={this.handlerImage} />
+                        <Form.File name="foto" onChange={this.handlerImage} />
+                        {this.state.imagePreviewUrl ? 
+                        <>
+                        <img src={this.state.imagePreviewUrl} width="200" alt="" className="mt-2 img-fluid" />    
+                        </>
+                        :
+                        <>
+                        </>
+                        }
                         </Col>
                     </Form.Group>
                     <Form.Group as={Row}>

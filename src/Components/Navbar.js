@@ -106,7 +106,7 @@ class Navigation extends Component{
            :
            <NavItem>
            <NavDropdown title=
-           {this.state.foto > 0 ? (
+           {this.state.foto ? (
             <>
             <img
                 alt="Foto"
